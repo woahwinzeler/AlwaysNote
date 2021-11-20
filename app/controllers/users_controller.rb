@@ -4,14 +4,14 @@ class UsersController < ApplicationController
     
     if user.save
       login(user)
-      redirect_to cats_url
+      redirect_to '/'
     else
       render :new
     end
   end
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :email, :password)
   end
 
 end
