@@ -28,7 +28,8 @@ export const clearSessionErrors = () => (dispatch) => {
 }
 
 export const signupUser = user => dispatch => (
-  SessionApiUtil.createUser(user).then(user => dispatch(receiveCurrentUser(user)))
+  SessionApiUtil.createUser(user).then(user => dispatch(receiveCurrentUser(user)),
+  errors => dispatch(receiveErrors(errors)))
 )
 
 export const loginUser = user => dispatch => (

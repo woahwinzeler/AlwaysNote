@@ -1,15 +1,5 @@
 
 .DS_Store
-
-/public/assets
-
-bundle.js* 
-
-/config/master.key
-
-/tmp/*
-/log/*
-
 # Ignore bundler config.
 /.bundle
 

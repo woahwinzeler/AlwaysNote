@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { withRouter } from "react-router";
+import {Link} from 'react-router-dom';
 
 class SessionForm extends React.Component {
   constructor(props){
@@ -13,36 +12,102 @@ class SessionForm extends React.Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.renderSwitch = this.renderSwitch.bind(this)
+    this.loginDemoUser = this.loginDemoUser.bind(this)
   }
 
   update(field) {
     return e => this.setState({[field]: e.currentTarget.value});
   }
 
+  renderErrors(){
+    if (Object.keys(this.props.errors).length === 0){
+      console.log('hit no errors')
+      return []; 
+    } else {
+      //errors log for login, not for signup 
+      console.log('hit errors')
+      let errors = this.props.errors.responseJSON.map((error, index) => <li key={index}> 
+        {error}
+      </li>)
+      return (
+        <div className="Errors">
+          <ul>
+            {errors}
+          </ul>
+        </div>
+      )
+    }
+  }
+  
+  componentDidMount(){
+    this.props.clearErrors()
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     this.props.processAction(this.state)
-}
+  }
+
+  loginDemoUser(){
+    let demoUser = {
+      username: 'demo',
+      email: 'demo@demo.com',
+      password: 'password'
+    } 
+    this.props.processAction(demoUser)
+  }
+
+  renderSwitch(){
+    if (this.props.formType === 'signup'){
+      //return link to login
+      return (
+        <Link to='/login'>Already have an account?</Link>
+      )
+    } else {
+      //return link to signup 
+      return (
+        <div>
+          <Link to='/signup'>Don't have an account?</Link>
+          <button onClick={this.loginDemoUser}>
+            Login as a demo user 
+          </button>
+        </div>
+      )
+
+    }
+  }
 
 
   //
   render(){
+    return (
     <div>
       <header>
-        
+
       </header>
-      <h2>Log In!</h2>
+      <h2>{this.props.formType}</h2>
       <form className="session-form" onSubmit={this.handleSubmit}>
-      <label>
-        Username 
-        <input type="text" value={this.state.username} onChange={this.update('username')} />
-      </label>
-      <label>
-        Password  
-        <input type="password" value={this.state.password} onChange={this.update('password')} />
-      </label>
+        <label>
+          Username 
+          <input type="text" value={this.state.username} onChange={this.update('username')} />
+        </label>
+         <label>
+          Email 
+          <input type="text" value={this.state.email} onChange={this.update('email')} />
+        </label>
+        <label>
+          Password  
+          <input type="password" value={this.state.password} onChange={this.update('password')} />
+        </label>
+        <label>
+          <input className="session-form-continue" type="submit" value="Continue"/>
+        </label>
+        {this.renderSwitch()}
+        {this.renderErrors()}
       </form>
     </div>
+    )
   }
 
 
