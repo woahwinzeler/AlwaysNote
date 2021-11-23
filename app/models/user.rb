@@ -7,7 +7,10 @@ class User < ApplicationRecord
   validates :password_digest, presence: true
   validates :password, length: { minimum: 6 }, allow_nil: true
 
-  def self.find_under_by_credentials(username, password)
+  has_many :notebooks,
+    foreign_key: :author_id
+
+  def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     if user && user.is_password?(password)
       user
