@@ -1,18 +1,20 @@
 import React from 'react'
-import UserSymbol from './shelf/user_symbol';
 
-class Home extends React.Component {
+class UserSymbol extends React.Component{
   constructor(props){
     super(props)
   }
 
   render(){
+    console.log(this.props)
     return(
+
       <div>
-        <UserSymbol /> 
+
       </div>
+
     )
   }
 }
 
-export default Home; 
+export default UserSymbol; 

@@ -3,3 +3,9 @@ commit 86ab39fd4f883800df2021e1bd67e3c6d3aa2630
 
 fixed a double request that resulted in a 200 and 401 to Api::SessionsController#create
 had a button that was nested in a form that didn't prevent the default behavior. Unnested the button. 
+
+11/27/2021
+
+TODO: loggedIn is passed down as false after logging in as a demo user, causing a immediate redirect
+after hitting home 
+RESOLVED: naming issue 
