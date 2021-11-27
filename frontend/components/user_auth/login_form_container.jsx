@@ -13,7 +13,8 @@ const mSTP = ({errors}) => ({
 
 const mDTP = dispatch => ({
   clearErrors: () => dispatch(clearSessionErrors()),
-  processAction: (user) => dispatch(loginUser(user))
+  processAction: (user) => dispatch(loginUser(user)),
+  login: (user) => dispatch(loginUser(user))
 })
 
 export default connect(mSTP, mDTP)(SessionForm)

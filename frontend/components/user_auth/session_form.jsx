@@ -21,7 +21,7 @@ class SessionForm extends React.Component {
   }
 
   renderErrors(){
-    if (Object.keys(this.props.errors).length === 0){
+    if (!(this.props.errors.responseJSON)){
       console.log('hit no errors')
       return []; 
     } else {
@@ -55,7 +55,7 @@ class SessionForm extends React.Component {
       email: 'demo@demo.com',
       password: 'password'
     } 
-    this.props.processAction(demoUser)
+    this.props.login(demoUser)
   }
 
   renderSwitch(){
@@ -63,6 +63,7 @@ class SessionForm extends React.Component {
       //return link to login
       return (
         <Link to='/login'>Already have an account?</Link>
+        
       )
     } else {
       //return link to signup 
@@ -103,9 +104,9 @@ class SessionForm extends React.Component {
         <label>
           <input className="session-form-continue" type="submit" value="Continue"/>
         </label>
-        {this.renderSwitch()}
-        {this.renderErrors()}
       </form>
+      {this.renderSwitch()}
+      {this.renderErrors()}
     </div>
     )
   }

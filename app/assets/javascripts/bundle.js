@@ -436,6 +436,9 @@ var mDTP = function mDTP(dispatch) {
     },
     processAction: function processAction(user) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["loginUser"])(user));
+    },
+    login: function login(user) {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["loginUser"])(user));
     }
   };
 };
@@ -517,7 +520,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderErrors",
     value: function renderErrors() {
-      if (Object.keys(this.props.errors).length === 0) {
+      if (!this.props.errors.responseJSON) {
         console.log('hit no errors');
         return [];
       } else {
@@ -552,7 +555,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         email: 'demo@demo.com',
         password: 'password'
       };
-      this.props.processAction(demoUser);
+      this.props.login(demoUser);
     }
   }, {
     key: "renderSwitch",
@@ -594,7 +597,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         className: "session-form-continue",
         type: "submit",
         value: "Continue"
-      })), this.renderSwitch(), this.renderErrors()));
+      }))), this.renderSwitch(), this.renderErrors());
     }
   }]);
 
