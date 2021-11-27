@@ -550,21 +550,27 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "loginDemoUser",
     value: function loginDemoUser() {
+      var _this3 = this;
+
       var demoUser = {
         username: 'demo',
         email: 'demo@demo.com',
         password: 'password'
       };
-      this.props.login(demoUser);
+      this.props.login(demoUser).then(function () {
+        return _this3.props.history.push('/home');
+      });
     }
   }, {
     key: "renderSwitch",
     value: function renderSwitch() {
       if (this.props.formType === 'signup') {
         //return link to login
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/login"
-        }, "Already have an account?");
+        }, "Already have an account?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.loginDemoUser
+        }, "Login as a demo user"));
       } else {
         //return link to signup 
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -909,14 +915,7 @@ var Protected = function Protected(_ref2) {
 };
 
 var mSTP = function mSTP(state) {
-  var loggedIn;
-
-  if (typeof state.session === 'undefined') {
-    loggedIn = false;
-  } else {
-    loggedIn = true;
-  }
-
+  var loggedIn = Boolean(state.session);
   return {
     loggedIn: loggedIn
   };

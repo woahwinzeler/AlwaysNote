@@ -55,14 +55,20 @@ class SessionForm extends React.Component {
       email: 'demo@demo.com',
       password: 'password'
     } 
-    this.props.login(demoUser)
+    this.props.login(demoUser).then(
+      () => this.props.history.push('/home'))
   }
 
   renderSwitch(){
     if (this.props.formType === 'signup'){
       //return link to login
       return (
-        <Link to='/login'>Already have an account?</Link>
+        <div>
+          <Link to='/login'>Already have an account?</Link>
+          <button onClick={this.loginDemoUser}>
+            Login as a demo user 
+          </button>
+        </div>
         
       )
     } else {

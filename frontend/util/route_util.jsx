@@ -12,12 +12,7 @@ const Protected = ({ path, loggedIn, component: Component}) => (
 )
 
 const mSTP = state => {
-  let loggedIn; 
-  if (typeof state.session === 'undefined'){
-    loggedIn = false;
-  } else { 
-    loggedIn = true; 
-  }
+  let loggedIn = Boolean(state.session)
   return {
     loggedIn
   }
