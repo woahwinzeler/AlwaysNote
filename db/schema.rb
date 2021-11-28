@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2021_11_28_053248) do
   create_table "notes", force: :cascade do |t|
     t.integer "notebook_id", null: false
     t.string "title", null: false
-    t.string "body"
+    t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["notebook_id", "title"], name: "index_notes_on_notebook_id_and_title", unique: true
