@@ -326,6 +326,7 @@ var UserSymbol = /*#__PURE__*/function (_React$Component) {
   _createClass(UserSymbol, [{
     key: "render",
     value: function render() {
+      console.log('userbar');
       console.log(this.props);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
     }
@@ -438,10 +439,12 @@ var Splash = function Splash() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/signup"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "splashButton",
     id: "bigGreenButton"
   }, "Sign up for free")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/login"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "splashButton",
     id: "smallButton"
   }, "Already have an account? Login")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "imageContainer"
@@ -960,7 +963,7 @@ var Auth = function Auth(_ref) {
   var path = _ref.path,
       loggedIn = _ref.loggedIn,
       Component = _ref.component;
-  console.log(loggedIn, 'auth');
+  // console.log(loggedIn, 'auth')
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: path,
     render: function render(props) {
@@ -975,7 +978,7 @@ var Protected = function Protected(_ref2) {
   var path = _ref2.path,
       loggedIn = _ref2.loggedIn,
       Component = _ref2.component;
-  console.log(loggedIn, 'Protected');
+  // console.log(loggedIn,'Protected')
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: path,
     render: function render(props) {

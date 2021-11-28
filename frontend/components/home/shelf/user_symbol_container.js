@@ -3,7 +3,8 @@ import { logoutCurrentUser } from "../../../actions/session_actions";
 import  UserSymbol from './user_symbol'
 
 const mSTP = state => {
-  console.log(state, 'mSTP')
+  console.log( 'mSTP')
+  console.log(state)
   return {
     state
   }

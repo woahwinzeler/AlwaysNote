@@ -13,11 +13,11 @@ const Splash = () => (
           </div>
           <div className="firstRowSignUp">
             <Link to="/signup">
-              <button id='bigGreenButton'>Sign up for free</button>
+              <button className='splashButton' id='bigGreenButton'>Sign up for free</button>
             </Link>
             <br/>
             <Link to="/login">
-              <button id='smallButton'>Already have an account? Login</button>
+              <button className='splashButton'id='smallButton'>Already have an account? Login</button>
             </Link>
           </div>
         </div>

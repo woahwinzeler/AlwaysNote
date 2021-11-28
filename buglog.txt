@@ -9,3 +9,5 @@ had a button that was nested in a form that didn't prevent the default behavior.
 TODO: loggedIn is passed down as false after logging in as a demo user, causing a immediate redirect
 after hitting home 
 RESOLVED: naming issue 
+
+.gitignore isn't working

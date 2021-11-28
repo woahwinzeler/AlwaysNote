@@ -6,6 +6,7 @@ class UserSymbol extends React.Component{
   }
 
   render(){
+    console.log('userbar')
     console.log(this.props)
     return(
 
