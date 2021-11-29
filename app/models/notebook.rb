@@ -6,4 +6,6 @@ class Notebook < ApplicationRecord
     foreign_key: :author_id
 
   has_many :notes 
+
+  #TODO: ensure title. 
 end
