@@ -35,3 +35,9 @@ export const removeNotebook = id => dispatch => (
     () => dispatch(deleteNotebook(id))
   )
 )
+
+export const updateNotebook = notebook => dispatch => (
+  NotebookApiUtil.updateNotebook(notebook).then(
+    notebook => dispatch(updateNotebook(notebook))
+  )
+)

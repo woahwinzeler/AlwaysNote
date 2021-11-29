@@ -5,6 +5,7 @@ class SessionForm extends React.Component {
   constructor(props){
     super(props)
 
+
     this.state = {
       username: "",
       email: "",
@@ -47,7 +48,7 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.processAction(this.state).then(
-      () => this.props.history.push('/home'))
+      () => this.props.history.push('/home/notebooks'))
   }
 
   loginDemoUser(){
@@ -57,7 +58,7 @@ class SessionForm extends React.Component {
       password: 'password'
     } 
     this.props.login(demoUser).then(
-      () => this.props.history.push('/home'))
+      () => this.props.history.push('/home/notebooks'))
   }
 
   renderSwitch(){

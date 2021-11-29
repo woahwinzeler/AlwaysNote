@@ -1,5 +1,5 @@
 import React from 'react'
-import UserSymbol from './shelf/user_symbol';
+import NotebookIndex from '../notebooks/notebook_index';
 
 class Home extends React.Component {
   constructor(props){
@@ -9,7 +9,7 @@ class Home extends React.Component {
   render(){
     return(
       <div>
-        <UserSymbol /> 
+        <NotebookIndex /> 
       </div>
     )
   }
