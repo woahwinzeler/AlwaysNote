@@ -11,3 +11,7 @@ after hitting home
 RESOLVED: naming issue 
 
 .gitignore isn't working
+
+notebooks state is like 0: {
+  id: 1 ....
+}
