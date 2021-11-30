@@ -11,16 +11,14 @@ class NotebookIndex extends React.Component{
       setModalOpen: false
     }
 
-    this.newNotebookForm = this.newNotebookForm.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
   }
 
   componentDidMount(){
     this.props.getAllNotebooks(); 
 
-    // let ele = document.getElementsByTagName('body')
-    // console.log(ele)
-    // ele[0].setAttribute('style', 'background-color:black')
+    let ele = document.getElementById('body')
+    ele.setAttribute('style', 'background-color:#525252')
   }
 
   toggleModal(){
@@ -35,27 +33,13 @@ class NotebookIndex extends React.Component{
     }
   }
 
-  newNotebookForm(){
-    return(
-      <form>
-        <label>
-          Title 
-          <input type="text" name="title"/>
-        </label>
-        <label>
-          Description
-          <input type="text" name="description"/>
-        </label>
-      </form>
-    )
-  }
-
   render(){
+    console.log(this.props.notebooks)
     let notebooks = this.props.notebooks.map((notebook, index) => <li key={index}>
       <h5> {notebook.title} </h5>
       <a> {notebook.description} </a>
     </li>)
-    if (this.state.modalOpen){console.log('open the modal')}
+    // if (this.state.modalOpen){console.log('open the modal')}
     return(
       <div className="notebooks">
         <ul className="NotebookIndex">

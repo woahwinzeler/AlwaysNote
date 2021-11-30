@@ -29,11 +29,11 @@ class NotebookForm extends React.Component{
       <form onSubmit={this.handleSubmit}>
         <label>
           Title 
-          <input type="text" name="title" onChange={this.update('title')} value={this.state.title}/>
+          <input type="text" name="notebook[title]" onChange={this.update('title')} value={this.state.title}/>
         </label>
         <label>
           Description
-          <input type="text" name="description" onChange={this.update('description')} value={this.state.description}/>
+          <input type="text" name="notebook[description]" onChange={this.update('description')} value={this.state.description}/>
         </label>
         <label htmlFor="Create"></label>
         <input className="session-form-continue" type="submit" value="Create"/>

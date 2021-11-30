@@ -6,11 +6,10 @@ export const fetchNotebooks = () => (
 )
 
 export const createNotebook = notebook => {
-  console.log(notebook)
   return $.ajax({
     url: '/api/notebooks',
     method: 'POST',
-    data: {notebook}
+    data: {notebooks: notebook}
   })
 }
 
