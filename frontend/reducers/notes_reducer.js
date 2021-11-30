@@ -1,6 +1,6 @@
 import { DELETE_NOTE, RECEIVE_NOTE } from "../actions/note_actions";
 
-const notesReducer = (oldState, action) => {
+const notesReducer = (oldState={}, action) => {
   Object.freeze(oldState)
 
   switch (action.type) {

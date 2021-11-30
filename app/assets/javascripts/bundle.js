@@ -321,6 +321,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _backdrop_backdrop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../backdrop/backdrop */ "./frontend/components/backdrop/backdrop.jsx");
+/* harmony import */ var _notebooks_notebook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../notebooks/notebook_form */ "./frontend/components/notebooks/notebook_form.jsx");
+
 
 
 
@@ -347,19 +349,19 @@ var dropIn = {
 
 var Modal = function Modal(_ref) {
   var handleClose = _ref.handleClose,
-      children = _ref.children;
+      modalOpen = _ref.modalOpen;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_backdrop_backdrop__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onClick: handleClose
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_0__["motion"].div, {
+    drag: true,
     onClick: function onClick(e) {
       return e.stopPropagation();
     },
     className: "Modal",
     variants: dropIn,
-    initial: "hidden",
     animate: "visible",
     exit: "exit"
-  }, children));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_notebooks_notebook_form__WEBPACK_IMPORTED_MODULE_3__["NotebookForm"], null)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Modal);
@@ -479,6 +481,28 @@ var Main = function Main() {
 
 /***/ }),
 
+/***/ "./frontend/components/notebooks/notebook_form.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/components/notebooks/notebook_form.jsx ***!
+  \*********************************************************/
+/*! exports provided: NotebookForm */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotebookForm", function() { return NotebookForm; });
+var NotebookForm = function NotebookForm() {
+  return /*#__PURE__*/React.createElement("form", null, /*#__PURE__*/React.createElement("label", null, "Title", /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    name: "title"
+  })), /*#__PURE__*/React.createElement("label", null, "Description", /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    name: "description"
+  })));
+};
+
+/***/ }),
+
 /***/ "./frontend/components/notebooks/notebook_index.jsx":
 /*!**********************************************************!*\
   !*** ./frontend/components/notebooks/notebook_index.jsx ***!
@@ -541,15 +565,16 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(NotebookIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.getAllNotebooks();
+      this.props.getAllNotebooks(); // let ele = document.getElementsByTagName('body')
+      // console.log(ele)
+      // ele[0].setAttribute('style', 'background-color:black')
     }
   }, {
     key: "toggleModal",
     value: function toggleModal() {
       if (this.state.modalOpen) {
         this.setState({
-          setModalOpen: false,
-          modalOpen: false
+          setModalOpen: false
         });
       } else {
         this.setState({
@@ -577,6 +602,11 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
           key: index
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, " ", notebook.description, " "));
       });
+
+      if (this.state.modalOpen) {
+        console.log('open the modal');
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notebooks"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
@@ -1192,7 +1222,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_note_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/note_actions */ "./frontend/actions/note_actions.js");
 
 
-var notesReducer = function notesReducer(oldState, action) {
+var notesReducer = function notesReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(oldState);
 
   switch (action.type) {

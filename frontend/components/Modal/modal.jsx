@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import Backdrop from "../backdrop/backdrop";
+import { NotebookForm } from "../notebooks/notebook_form";
 
 
 const dropIn = {
@@ -24,20 +25,21 @@ const dropIn = {
   }
 }
 
-const Modal = ({handleClose, children}) => {
-
+const Modal = ({handleClose, modalOpen}) => {
   return (
     <Backdrop onClick={handleClose}>
       <motion.div
+
+        drag 
+        
         onClick={(e) => e.stopPropagation()}
         className="Modal"
         variants={dropIn}
-        initial="hidden"
         animate="visible"
         exit="exit"
 
       >
-        {children}
+        <NotebookForm /> 
       </motion.div>
     </Backdrop>
   )

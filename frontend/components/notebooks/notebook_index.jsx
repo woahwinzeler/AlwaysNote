@@ -17,13 +17,15 @@ class NotebookIndex extends React.Component{
 
   componentDidMount(){
     this.props.getAllNotebooks(); 
+
+    // let ele = document.getElementsByTagName('body')
+    // console.log(ele)
+    // ele[0].setAttribute('style', 'background-color:black')
   }
 
   toggleModal(){
     if (this.state.modalOpen){
-      this.setState({setModalOpen: false,
-        modalOpen: false
-      })
+      this.setState({setModalOpen: false})
     }
     else {
       this.setState({setModalOpen: true, 
@@ -52,7 +54,7 @@ class NotebookIndex extends React.Component{
       <h5> {notebook.title} </h5>
       <a> {notebook.description} </a>
     </li>)
-
+    if (this.state.modalOpen){console.log('open the modal')}
     return(
       <div className="notebooks">
         <ul className="NotebookIndex">
@@ -60,7 +62,7 @@ class NotebookIndex extends React.Component{
         </ul>
         <motion.button className="newNotebookButton" onClick={this.toggleModal}
         whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>Create new notebook</motion.button>
-
+        {/* first argument is a boolean, second is the compenet to render */}
         {this.state.modalOpen && <Modal modalOpen={this.state.modalOpen} handleClose={this.toggleModal} />}
       </div>
 
