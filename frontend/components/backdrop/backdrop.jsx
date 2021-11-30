@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 
-const Backdrop = ({childern, onClick}) => (
+const Backdrop = ({children, onClick}) => (
  <motion.div
   className="backdrop"
   onClick={onClick}
@@ -9,7 +9,7 @@ const Backdrop = ({childern, onClick}) => (
   animate={{opacity: 1}}
   exit={{opacity: 0}}
  >
-   {childern}
+   {children}
  </motion.div>
 )
 

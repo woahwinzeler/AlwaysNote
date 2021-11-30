@@ -350,7 +350,7 @@ var dropIn = {
 var Modal = function Modal(_ref) {
   var handleClose = _ref.handleClose,
       modalOpen = _ref.modalOpen;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_backdrop_backdrop__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_backdrop_backdrop__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onClick: handleClose
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_0__["motion"].div, {
     drag: true,
@@ -361,7 +361,7 @@ var Modal = function Modal(_ref) {
     variants: dropIn,
     animate: "visible",
     exit: "exit"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_notebooks_notebook_form__WEBPACK_IMPORTED_MODULE_3__["NotebookForm"], null)));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_notebooks_notebook_form__WEBPACK_IMPORTED_MODULE_3__["NotebookForm"], null))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Modal);
@@ -430,7 +430,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Backdrop = function Backdrop(_ref) {
-  var childern = _ref.childern,
+  var children = _ref.children,
       onClick = _ref.onClick;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_0__["motion"].div, {
     className: "backdrop",
@@ -444,7 +444,7 @@ var Backdrop = function Backdrop(_ref) {
     exit: {
       opacity: 0
     }
-  }, childern);
+  }, children);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Backdrop);
@@ -491,11 +491,14 @@ var Main = function Main() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotebookForm", function() { return NotebookForm; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
 var NotebookForm = function NotebookForm() {
-  return /*#__PURE__*/React.createElement("form", null, /*#__PURE__*/React.createElement("label", null, "Title", /*#__PURE__*/React.createElement("input", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
     name: "title"
-  })), /*#__PURE__*/React.createElement("label", null, "Description", /*#__PURE__*/React.createElement("input", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
     name: "description"
   })));
@@ -620,7 +623,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         whileTap: {
           scale: 0.9
         }
-      }, "Create new notebook"), this.state.modalOpen && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Modal_modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, "Create new notebook"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Modal_modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
         modalOpen: this.state.modalOpen,
         handleClose: this.toggleModal
       }));

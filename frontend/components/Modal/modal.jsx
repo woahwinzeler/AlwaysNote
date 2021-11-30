@@ -27,21 +27,23 @@ const dropIn = {
 
 const Modal = ({handleClose, modalOpen}) => {
   return (
-    <Backdrop onClick={handleClose}>
-      <motion.div
+    <div>
+      <Backdrop onClick={handleClose}>
+        <motion.div
 
-        drag 
-        
-        onClick={(e) => e.stopPropagation()}
-        className="Modal"
-        variants={dropIn}
-        animate="visible"
-        exit="exit"
+          drag={true}
+          
+          onClick={(e) => e.stopPropagation()}
+          className="Modal"
+          variants={dropIn}
+          animate="visible"
+          exit="exit"
 
-      >
-        <NotebookForm /> 
-      </motion.div>
-    </Backdrop>
+        > 
+          <NotebookForm />
+        </motion.div> 
+      </Backdrop>
+    </div>
   )
 }
 
