@@ -3,7 +3,7 @@
 /.bundle
 
 /log/*
-/tmp/*
+/tmp
 !/log/.keep
 !/tmp/.keep
 
@@ -15,5 +15,3 @@
 
 /public/assets
 .byebug_history
-
-tmp
