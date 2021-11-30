@@ -16,9 +16,11 @@ class Api::NotebooksController < ApplicationController
 
   def create
     @notebook = Notebook.new(notebook_params)
+    @notebook.author_id = current_user.id
     if @notebook.save
       render json: @notebook
     else
+      debugger
       render json: @notebook.errors.full_messages, status: 422
     end
   end
@@ -43,6 +45,6 @@ class Api::NotebooksController < ApplicationController
   private
 
   def notebook_params
-    params.require(:notebooks).permit(:title, :description)
+    params.require(:notebook).permit(:title, :description, :author_id)
   end
 end

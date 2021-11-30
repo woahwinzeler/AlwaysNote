@@ -155,7 +155,7 @@ var createNote = function createNote(note) {
 /*!**********************************************!*\
   !*** ./frontend/actions/notebook_actions.js ***!
   \**********************************************/
-/*! exports provided: RECEIVE_NOTEBOOK, RECEIVE_ALL_NOTEBOOKS, DELETE_NOTEBOOK, getNotebook, getAllNotebooks, removeNotebook, updateNotebook */
+/*! exports provided: RECEIVE_NOTEBOOK, RECEIVE_ALL_NOTEBOOKS, DELETE_NOTEBOOK, getNotebook, getAllNotebooks, removeNotebook, updateNotebook, createNotebook */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -167,6 +167,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllNotebooks", function() { return getAllNotebooks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeNotebook", function() { return removeNotebook; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateNotebook", function() { return updateNotebook; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNotebook", function() { return createNotebook; });
 /* harmony import */ var _util_notebook_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/notebook_api_util */ "./frontend/util/notebook_api_util.js");
 
 var RECEIVE_NOTEBOOK = 'RECEIVE_NOTEBOOK';
@@ -219,6 +220,13 @@ var updateNotebook = function updateNotebook(notebook) {
   return function (dispatch) {
     return _util_notebook_api_util__WEBPACK_IMPORTED_MODULE_0__["updateNotebook"](notebook).then(function (notebook) {
       return dispatch(updateNotebook(notebook));
+    });
+  };
+};
+var createNotebook = function createNotebook(notebook) {
+  return function (dispatch) {
+    return _util_notebook_api_util__WEBPACK_IMPORTED_MODULE_0__["createNotebook"](notebook).then(function (notebook) {
+      return dispatch(receiveNotebook(notebook));
     });
   };
 };
@@ -322,6 +330,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _backdrop_backdrop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../backdrop/backdrop */ "./frontend/components/backdrop/backdrop.jsx");
 /* harmony import */ var _notebooks_notebook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../notebooks/notebook_form */ "./frontend/components/notebooks/notebook_form.jsx");
+/* harmony import */ var _notebooks_notebook_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../notebooks/notebook_form_container */ "./frontend/components/notebooks/notebook_form_container.js");
+
 
 
 
@@ -361,7 +371,7 @@ var Modal = function Modal(_ref) {
     variants: dropIn,
     animate: "visible",
     exit: "exit"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_notebooks_notebook_form__WEBPACK_IMPORTED_MODULE_3__["NotebookForm"], null))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_notebooks_notebook_form_container__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Modal);
@@ -485,24 +495,139 @@ var Main = function Main() {
 /*!*********************************************************!*\
   !*** ./frontend/components/notebooks/notebook_form.jsx ***!
   \*********************************************************/
-/*! exports provided: NotebookForm */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotebookForm", function() { return NotebookForm; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var NotebookForm = function NotebookForm() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "text",
-    name: "title"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "text",
-    name: "description"
-  })));
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var NotebookForm = /*#__PURE__*/function (_React$Component) {
+  _inherits(NotebookForm, _React$Component);
+
+  var _super = _createSuper(NotebookForm);
+
+  function NotebookForm(props) {
+    var _this;
+
+    _classCallCheck(this, NotebookForm);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      title: "",
+      description: "",
+      author_id: _this.props.currentUserId
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(NotebookForm, [{
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.createNotebook(this.state);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "title",
+        onChange: this.update('title'),
+        value: this.state.title
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "description",
+        onChange: this.update('description'),
+        value: this.state.description
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "Create"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "session-form-continue",
+        type: "submit",
+        value: "Create"
+      }));
+    }
+  }]);
+
+  return NotebookForm;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (NotebookForm);
+
+/***/ }),
+
+/***/ "./frontend/components/notebooks/notebook_form_container.js":
+/*!******************************************************************!*\
+  !*** ./frontend/components/notebooks/notebook_form_container.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _notebook_form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./notebook_form */ "./frontend/components/notebooks/notebook_form.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_notebook_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/notebook_actions */ "./frontend/actions/notebook_actions.js");
+
+
+
+
+var mSTP = function mSTP(_ref) {
+  var sessions = _ref.sessions;
+  return {
+    currentUserId: sessions.currentUserId
+  };
 };
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    createNotebook: function createNotebook(notebook) {
+      return dispatch(Object(_actions_notebook_actions__WEBPACK_IMPORTED_MODULE_2__["createNotebook"])(notebook));
+    }
+  };
+};
+
+var NotebookFormContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mDTP)(_notebook_form__WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (NotebookFormContainer);
 
 /***/ }),
 
@@ -577,7 +702,8 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     value: function toggleModal() {
       if (this.state.modalOpen) {
         this.setState({
-          setModalOpen: false
+          setModalOpen: false,
+          modalOpen: false
         });
       } else {
         this.setState({
@@ -623,7 +749,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         whileTap: {
           scale: 0.9
         }
-      }, "Create new notebook"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Modal_modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, "Create new notebook"), this.state.modalOpen && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Modal_modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
         modalOpen: this.state.modalOpen,
         handleClose: this.toggleModal
       }));
@@ -1392,6 +1518,7 @@ var fetchNotebooks = function fetchNotebooks() {
   });
 };
 var createNotebook = function createNotebook(notebook) {
+  console.log(notebook);
   return $.ajax({
     url: '/api/notebooks',
     method: 'POST',

@@ -25,7 +25,8 @@ class NotebookIndex extends React.Component{
 
   toggleModal(){
     if (this.state.modalOpen){
-      this.setState({setModalOpen: false})
+      this.setState({setModalOpen: false,
+      modalOpen: false})
     }
     else {
       this.setState({setModalOpen: true, 
@@ -63,7 +64,7 @@ class NotebookIndex extends React.Component{
         <motion.button className="newNotebookButton" onClick={this.toggleModal}
         whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>Create new notebook</motion.button>
         {/* first argument is a boolean, second is the compenet to render */}
-        <Modal modalOpen={this.state.modalOpen} handleClose={this.toggleModal} />
+        {this.state.modalOpen && <Modal modalOpen={this.state.modalOpen} handleClose={this.toggleModal} />}
       </div>
 
     )

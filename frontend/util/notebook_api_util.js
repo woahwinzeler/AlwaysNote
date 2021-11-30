@@ -5,13 +5,14 @@ export const fetchNotebooks = () => (
   })
 )
 
-export const createNotebook = notebook => (
-  $.ajax({
+export const createNotebook = notebook => {
+  console.log(notebook)
+  return $.ajax({
     url: '/api/notebooks',
     method: 'POST',
     data: {notebook}
   })
-)
+}
 
 export const fetchNotebook = id => (
   $.ajax({

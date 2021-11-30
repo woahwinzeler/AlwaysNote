@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import React from "react";
 import Backdrop from "../backdrop/backdrop";
-import { NotebookForm } from "../notebooks/notebook_form";
+import NotebookForm  from "../notebooks/notebook_form";
+import NotebookFormContainer from "../notebooks/notebook_form_container";
 
 
 const dropIn = {
@@ -40,7 +41,7 @@ const Modal = ({handleClose, modalOpen}) => {
           exit="exit"
 
         > 
-          <NotebookForm />
+          <NotebookFormContainer />
         </motion.div> 
       </Backdrop>
     </div>

@@ -41,3 +41,9 @@ export const updateNotebook = notebook => dispatch => (
     notebook => dispatch(updateNotebook(notebook))
   )
 )
+
+export const createNotebook = notebook => dispatch => (
+  NotebookApiUtil.createNotebook(notebook).then(
+    notebook => dispatch(receiveNotebook(notebook))
+  )
+)
