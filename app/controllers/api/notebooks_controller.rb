@@ -38,11 +38,14 @@ class Api::NotebooksController < ApplicationController
     # debugger 
     @notebook = Notebook.find(params[:id])
     @notebook.destroy! 
-    @notebook = nil
-    render json: @notebook
+    render json: nil
   end 
 
   private
+
+  def formatTime
+
+  end 
 
   def notebook_params
     params.require(:notebooks).permit(:title, :description)

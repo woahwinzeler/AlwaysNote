@@ -47,3 +47,9 @@ export const createNotebook = notebook => dispatch => (
     notebook => dispatch(receiveNotebook(notebook))
   )
 )
+
+export const getNotebooksNotes = id => dispatch => (
+  NotebookApiUtil.fetchNotebook(id).then(
+    notes => dispatch(receiveNotebook(notes))
+  )
+)

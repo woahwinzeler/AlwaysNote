@@ -155,7 +155,7 @@ var createNote = function createNote(note) {
 /*!**********************************************!*\
   !*** ./frontend/actions/notebook_actions.js ***!
   \**********************************************/
-/*! exports provided: RECEIVE_NOTEBOOK, RECEIVE_ALL_NOTEBOOKS, DELETE_NOTEBOOK, getNotebook, getAllNotebooks, removeNotebook, updateNotebook, createNotebook */
+/*! exports provided: RECEIVE_NOTEBOOK, RECEIVE_ALL_NOTEBOOKS, DELETE_NOTEBOOK, getNotebook, getAllNotebooks, removeNotebook, updateNotebook, createNotebook, getNotebooksNotes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -168,6 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeNotebook", function() { return removeNotebook; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateNotebook", function() { return updateNotebook; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNotebook", function() { return createNotebook; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNotebooksNotes", function() { return getNotebooksNotes; });
 /* harmony import */ var _util_notebook_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/notebook_api_util */ "./frontend/util/notebook_api_util.js");
 
 var RECEIVE_NOTEBOOK = 'RECEIVE_NOTEBOOK';
@@ -227,6 +228,13 @@ var createNotebook = function createNotebook(notebook) {
   return function (dispatch) {
     return _util_notebook_api_util__WEBPACK_IMPORTED_MODULE_0__["createNotebook"](notebook).then(function (notebook) {
       return dispatch(receiveNotebook(notebook));
+    });
+  };
+};
+var getNotebooksNotes = function getNotebooksNotes(id) {
+  return function (dispatch) {
+    return _util_notebook_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchNotebook"](id).then(function (notes) {
+      return dispatch(receiveNotebook(notes));
     });
   };
 };
@@ -689,10 +697,14 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     };
     _this.toggleModal = _this.toggleModal.bind(_assertThisInitialized(_this));
     _this.deleteNotebook = _this.deleteNotebook.bind(_assertThisInitialized(_this));
+    _this.showNotesIndex = _this.showNotesIndex.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(NotebookIndex, [{
+    key: "showNotesIndex",
+    value: function showNotesIndex() {}
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.getAllNotebooks();
@@ -729,9 +741,17 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       var notebooks = this.props.notebooks.map(function (notebook, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: index
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: _this2.showNotesIndex
+        }, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
           onClick: function onClick() {
             return _this2.deleteNotebook(notebook.id);
+          },
+          whileHover: {
+            scale: 1.1
+          },
+          whileTap: {
+            scale: 0.9
           }
         }, "-"));
       }); // if (this.state.modalOpen){console.log('open the modal')}
@@ -1339,8 +1359,8 @@ var notebookReducer = function notebookReducer() {
 
   switch (action.type) {
     case _actions_notebook_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_NOTEBOOKS"]:
-      // not putting in old state, just what the action gives us from the backend
-      return Object.assign({}, action.notebooks);
+      console.log(action.notebooks);
+      return Object.assign({}, oldState, action.notebooks);
 
     case _actions_notebook_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_NOTEBOOK"]:
       return Object.assign({}, _defineProperty({}, action.notebook.id, action.notebook), oldState);

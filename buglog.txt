@@ -15,3 +15,5 @@ RESOLVED: naming issue
 notebooks state is like 0: {
   id: 1 ....
 }
+
+On refresh ids may change. 

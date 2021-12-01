@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import Modal from '../Modal/modal'
 
+
 class NotebookIndex extends React.Component{
   constructor(props){
     super(props)
@@ -13,6 +14,11 @@ class NotebookIndex extends React.Component{
 
     this.toggleModal = this.toggleModal.bind(this)
     this.deleteNotebook = this.deleteNotebook.bind(this)
+    this.showNotesIndex = this.showNotesIndex.bind(this)
+  }
+
+  showNotesIndex(){
+    
   }
 
   componentDidMount(){
@@ -42,10 +48,10 @@ class NotebookIndex extends React.Component{
   render(){
     console.log(this.props.notebooks)
     let notebooks = this.props.notebooks.map((notebook, index) => <li key={index}>
-      <h5> {notebook.title} </h5>
+      <button onClick={this.showNotesIndex}> {notebook.title} </button>
       {/* <a> {notebook.description} </a> */}
       <br /> 
-      <motion.button onClick={() => this.deleteNotebook(notebook.id)}>-</motion.button>
+      <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>-</motion.button>
     </li>)
     // if (this.state.modalOpen){console.log('open the modal')}
     return(
