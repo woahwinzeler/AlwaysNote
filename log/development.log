@@ -14654,3 +14654,95 @@ Processing by Api::NotebooksController#index as JSON
 Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.5ms)
 
 
+Started DELETE "/api/notebooks/undefined" for ::1 at 2021-12-01 09:52:44 -0800
+Processing by Api::NotebooksController#destroy as JSON
+  Parameters: {"id"=>"undefined"}
+  [1m[36mNotebook Load (0.3ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+  ↳ app/controllers/api/notebooks_controller.rb:39
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Notebook with 'id'=undefined):
+  
+app/controllers/api/notebooks_controller.rb:39:in `destroy'
+Started GET "/" for ::1 at 2021-12-01 09:53:00 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 14ms (Views: 13.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/api/session" for ::1 at 2021-12-01 09:53:02 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"demo", "email"=>"demo@demo.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "demo"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:14
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:28
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["username", "demo"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "lTMnLZoPnuQJQ4ZgPjTyDQ"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@demo.com"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28
+  [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "lTMnLZoPnuQJQ4ZgPjTyDQ"], ["updated_at", "2021-12-01 17:53:03.040918"], ["id", 1]]
+  ↳ app/models/user.rb:28
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:28
+Completed 200 OK in 272ms (Views: 0.2ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/api/notebooks" for ::1 at 2021-12-01 09:53:03 -0800
+Processing by Api::NotebooksController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "lTMnLZoPnuQJQ4ZgPjTyDQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering api/notebooks/index.json.jbuilder
+  [1m[36mNotebook Load (0.5ms)[0m  [1m[34mSELECT "notebooks".* FROM "notebooks" WHERE "notebooks"."author_id" = $1[0m  [["author_id", 1]]
+  ↳ app/views/api/notebooks/index.json.jbuilder:1
+  Rendered api/notebooks/index.json.jbuilder (1.6ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.8ms)
+
+
+Started DELETE "/api/notebooks/22" for ::1 at 2021-12-01 09:53:04 -0800
+Processing by Api::NotebooksController#destroy as JSON
+  Parameters: {"id"=>"22"}
+  [1m[36mNotebook Load (0.5ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 22], ["LIMIT", 1]]
+  ↳ app/controllers/api/notebooks_controller.rb:39
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/notebooks_controller.rb:40
+  [1m[36mNotebook Destroy (0.5ms)[0m  [1m[31mDELETE FROM "notebooks" WHERE "notebooks"."id" = $1[0m  [["id", 22]]
+  ↳ app/controllers/api/notebooks_controller.rb:40
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/notebooks_controller.rb:40
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 1.7ms)
+
+
+Started DELETE "/api/notebooks/21" for ::1 at 2021-12-01 09:53:04 -0800
+Processing by Api::NotebooksController#destroy as JSON
+  Parameters: {"id"=>"21"}
+  [1m[36mNotebook Load (0.8ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/notebooks_controller.rb:39
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/notebooks_controller.rb:40
+  [1m[36mNotebook Destroy (0.9ms)[0m  [1m[31mDELETE FROM "notebooks" WHERE "notebooks"."id" = $1[0m  [["id", 21]]
+  ↳ app/controllers/api/notebooks_controller.rb:40
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/notebooks_controller.rb:40
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 2.5ms)
+
+
+Started DELETE "/api/notebooks/23" for ::1 at 2021-12-01 09:53:05 -0800
+Processing by Api::NotebooksController#destroy as JSON
+  Parameters: {"id"=>"23"}
+  [1m[36mNotebook Load (0.3ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 23], ["LIMIT", 1]]
+  ↳ app/controllers/api/notebooks_controller.rb:39
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/notebooks_controller.rb:40
+  [1m[36mNotebook Destroy (0.3ms)[0m  [1m[31mDELETE FROM "notebooks" WHERE "notebooks"."id" = $1[0m  [["id", 23]]
+  ↳ app/controllers/api/notebooks_controller.rb:40
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/notebooks_controller.rb:40
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 1.3ms)
+
+
