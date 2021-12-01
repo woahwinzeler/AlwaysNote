@@ -688,6 +688,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       setModalOpen: false
     };
     _this.toggleModal = _this.toggleModal.bind(_assertThisInitialized(_this));
+    _this.deleteNotebook = _this.deleteNotebook.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -697,6 +698,12 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       this.props.getAllNotebooks();
       var ele = document.getElementById('body');
       ele.setAttribute('style', 'background-color:#525252');
+    }
+  }, {
+    key: "deleteNotebook",
+    value: function deleteNotebook(id) {
+      console.log(id);
+      this.props.removeNotebook(id);
     }
   }, {
     key: "toggleModal",
@@ -716,11 +723,17 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       console.log(this.props.notebooks);
       var notebooks = this.props.notebooks.map(function (notebook, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: index
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, " ", notebook.description, " "));
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
+          onClick: function onClick() {
+            return _this2.deleteNotebook(notebook.id);
+          }
+        }, "-"));
       }); // if (this.state.modalOpen){console.log('open the modal')}
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

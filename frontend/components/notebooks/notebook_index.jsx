@@ -12,6 +12,7 @@ class NotebookIndex extends React.Component{
     }
 
     this.toggleModal = this.toggleModal.bind(this)
+    this.deleteNotebook = this.deleteNotebook.bind(this)
   }
 
   componentDidMount(){
@@ -19,6 +20,11 @@ class NotebookIndex extends React.Component{
 
     let ele = document.getElementById('body')
     ele.setAttribute('style', 'background-color:#525252')
+  }
+
+  deleteNotebook(id){
+    console.log(id)
+    this.props.removeNotebook(id)
   }
 
   toggleModal(){
@@ -37,7 +43,9 @@ class NotebookIndex extends React.Component{
     console.log(this.props.notebooks)
     let notebooks = this.props.notebooks.map((notebook, index) => <li key={index}>
       <h5> {notebook.title} </h5>
-      <a> {notebook.description} </a>
+      {/* <a> {notebook.description} </a> */}
+      <br /> 
+      <motion.button onClick={() => this.deleteNotebook(notebook.id)}>-</motion.button>
     </li>)
     // if (this.state.modalOpen){console.log('open the modal')}
     return(
