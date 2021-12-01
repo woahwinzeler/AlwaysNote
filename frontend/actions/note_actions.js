@@ -1,7 +1,9 @@
 import * as NoteApiUtil from '../util/notes_api_util'
+import { RECEIVE_ALL_NOTEBOOKS } from './notebook_actions'
 
 export const RECEIVE_NOTE = 'RECEIVE_NOTE'
 export const DELETE_NOTE = 'DELETE_NOTE'
+export const RECEIVE_ALL_NOTES = 'RECEIVE_ALL_NOTES'
 
 const receiveNote = note => ({
   type: RECEIVE_NOTE,
@@ -13,9 +15,20 @@ const deleteNote = id => ({
   id
 })
 
+const receiveAllNotes = notes => ({
+  type: RECEIVE_ALL_NOTES,
+  notes
+})
+
 export const getNote = note => dispatch => (
   NoteApiUtil.fetchNote(note).then(
     note => dispatch(receiveNote(note))
+  )
+)
+
+export const getAllNotes = notebookId => dispatch => (
+  NoteApiUtil.fetchNotes(notebookId).then(
+    notes => dispatch(receiveAllNotes(notes))
   )
 )
 

@@ -1,4 +1,4 @@
-import { DELETE_NOTE, RECEIVE_NOTE } from "../actions/note_actions";
+import { DELETE_NOTE, RECEIVE_ALL_NOTES, RECEIVE_NOTE } from "../actions/note_actions";
 
 const notesReducer = (oldState={}, action) => {
   Object.freeze(oldState)
@@ -9,8 +9,9 @@ const notesReducer = (oldState={}, action) => {
       delete newState[action.id]
       return newState
     case RECEIVE_NOTE:
-      //only one note will be show at a time hence no oldState
-      return Object.assign({}, action.note)
+      return Object.assign({}, action.note, oldState)
+    case RECEIVE_ALL_NOTES:
+      return Object.assign({}, action.notes)
     default:
       return oldState
   }

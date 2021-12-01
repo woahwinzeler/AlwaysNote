@@ -5,10 +5,10 @@ class Api::NotebooksController < ApplicationController
   end
 
   def show
-    @notebook = Notebook.find(params[:notebook][:id])
+    @notebook = Notebook.find(params[:id])
     if !@notebook.nil?
       @notes = @notebook.notes
-      render json: @notes 
+      render :show 
     else
       render json: @notes.errors.full_messages, status: 404
     end

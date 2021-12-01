@@ -6,6 +6,13 @@ export const updateNote = note => (
   })
 )
 
+export const fetchNotes = NotebookId => (
+  $.ajax({
+    url: `/api/notebooks/${NotebookId}/notes`,
+    method: 'GET'
+  })
+)
+
 export const deleteNote = note => (
   $.ajax({
     url: `/api/notebooks/${note.notebook_id}/notes/${note.id}`,
