@@ -18,7 +18,7 @@ class NotebookIndex extends React.Component{
   }
 
   showNotesIndex(){
-    
+
   }
 
   componentDidMount(){
@@ -46,7 +46,6 @@ class NotebookIndex extends React.Component{
   }
 
   render(){
-    console.log(this.props.notebooks)
     let notebooks = this.props.notebooks.map((notebook, index) => <li key={index}>
       <button onClick={this.showNotesIndex}> {notebook.title} </button>
       {/* <a> {notebook.description} </a> */}

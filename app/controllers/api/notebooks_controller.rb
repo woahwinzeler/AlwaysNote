@@ -1,7 +1,7 @@
 class Api::NotebooksController < ApplicationController
   def index
     @user = current_user
-    render json: @user.notebooks.all 
+    render :index  
   end
 
   def show

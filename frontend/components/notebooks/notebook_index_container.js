@@ -4,7 +4,7 @@ import { logoutCurrentUser } from "../../actions/session_actions";
 import  NotebookIndex from './notebook_index'
 
 
-const mSTP = ({sessions, entities : {notebooks, users}}) => {
+const mSTP = ({sessions, entities: {notebooks, users}}) => {
   return {
     notebooks: Object.values(notebooks),
     currentUser: users[sessions.id]
