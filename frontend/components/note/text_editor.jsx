@@ -53,9 +53,11 @@ class TextEditor extends React.Component{
   }
 
   render(){
-    console.log(this.props)
-    if (this.props.noteToOpen && this.state.title === ""){
-      this.setState({title: this.props.notes.title, body: this.props.notes.body, intialBody: this.props.notes.body})
+    let title = "Your Note"
+    let body = "Starts here"
+    if(!!this.props.note){
+      title = this.props.note.title
+      body = this.props.note.body 
     }
     return (
       <div>

@@ -5,7 +5,7 @@ import TextEditor from "./text_editor";
 const mSTP = ({entities: {notes}}, ownProps) => {
   return ({
     notes: notes,
-    noteToOpen: ownProps
+    note: notes[ownProps.noteToOpen]
   })
 }
 

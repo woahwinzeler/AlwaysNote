@@ -638,14 +638,12 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props);
+      var title = "Your Note";
+      var body = "Starts here";
 
-      if (this.props.noteToOpen && this.state.title === "") {
-        this.setState({
-          title: this.props.notes.title,
-          body: this.props.notes.body,
-          intialBody: this.props.notes.body
-        });
+      if (!!this.props.note) {
+        title = this.props.note.title;
+        body = this.props.note.body;
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.state.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
@@ -684,7 +682,7 @@ var mSTP = function mSTP(_ref, ownProps) {
   var notes = _ref.entities.notes;
   return {
     notes: notes,
-    noteToOpen: ownProps
+    note: notes[ownProps.noteToOpen]
   };
 };
 
