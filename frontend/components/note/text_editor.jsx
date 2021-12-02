@@ -44,9 +44,6 @@ class TextEditor extends React.Component{
     this.handleBody = this.handleBody.bind(this)
   }
 
-  componentDidMount(){
-    this.setState({note: this.props.notes})
-  }
 
   handleBody(e){
     this.setState({body: e})
@@ -61,7 +58,7 @@ class TextEditor extends React.Component{
     }
     return (
       <div>
-        <h2>{this.state.title}</h2>
+        <h2>{title}</h2>
         <ReactQuill 
           placeholder="Start note here..."
           modules={this.modules}

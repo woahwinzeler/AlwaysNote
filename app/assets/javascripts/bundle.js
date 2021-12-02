@@ -622,13 +622,6 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(TextEditor, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.setState({
-        note: this.props.notes
-      });
-    }
-  }, {
     key: "handleBody",
     value: function handleBody(e) {
       this.setState({
@@ -646,7 +639,7 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
         body = this.props.note.body;
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.state.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
         placeholder: "Start note here...",
         modules: this.modules,
         formats: this.formats,
