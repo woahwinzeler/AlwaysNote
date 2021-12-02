@@ -1,9 +1,11 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Modal from '../Modal/modal'
-import TextEditor from '../note/text_editor'
 import findById from '../../util/find_by_id'
 import TextEditorContainer from '../note/text_editor_container'
+import NotebookFormContainer from './notebook_form_container'
+import NoteForm from './note_form'
+import NotebookIndexContainer from './notebook_index_container'
 
 
 class NotebookIndex extends React.Component{
@@ -15,6 +17,7 @@ class NotebookIndex extends React.Component{
       setModalOpen: false,
       notes: [],
       noteToOpen: null,
+      noteFormToOpen: false,
       note: {
         title: "",
         body: "",
@@ -30,7 +33,9 @@ class NotebookIndex extends React.Component{
 
   showNote(e){
     let note = this.props.getNote(findById(this.props.notes, e.currentTarget.value))
-    this.setState({note: note, noteToOpen: e.currentTarget.value})
+    this.setState({note: note, 
+      noteToOpen: e.currentTarget.value,
+      noteFormToOpen: true})
   }
 
   showNotesIndex(e){
@@ -70,6 +75,7 @@ class NotebookIndex extends React.Component{
       <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>-</motion.button>
     </li>)
 
+    console.log(this.props.notes)
     let notes = this.props.notes.map((note, index) => <li key={index} onClick={this.showNote} value={note.id}>{note.title}</li>)
     // notes.unshift(<li> <button onClick> Add a new note</button></li>)
 
@@ -87,10 +93,11 @@ class NotebookIndex extends React.Component{
         <div className="Notes">
           <ul>
             {notes}
+           <NoteForm notebookId={this.state.note.notebookId} createNote={this.props.createNote}/>
           </ul>
         </div>
         <div>
-          <TextEditorContainer  noteToOpen={this.state.noteToOpen}/>
+          <TextEditorContainer noteToOpen={this.state.noteToOpen} />
         </div>
       </div>
 

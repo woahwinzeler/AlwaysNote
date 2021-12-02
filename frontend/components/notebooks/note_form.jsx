@@ -6,8 +6,10 @@ class NoteForm extends React.Component{
 
     this.state = {
       title: "",
-      notebook_id: 0
+      notebook_id: ""
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   
   update(field) {
@@ -16,10 +18,17 @@ class NoteForm extends React.Component{
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.createNotebook(this.state)
+    this.setState({notebook_id: this.props.notebookId}, () => this.props.createNote(this.state))
   }
   render(){
-
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          <input type="text" name="note[title]" onChange={this.update("title")} />
+        </label>
+        <input type="submit"/>
+      </form>
+    )
   }
 }
 

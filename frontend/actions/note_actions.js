@@ -1,5 +1,4 @@
 import * as NoteApiUtil from '../util/notes_api_util'
-import { RECEIVE_ALL_NOTEBOOKS } from './notebook_actions'
 
 export const RECEIVE_NOTE = 'RECEIVE_NOTE'
 export const DELETE_NOTE = 'DELETE_NOTE'

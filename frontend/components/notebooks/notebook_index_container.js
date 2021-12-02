@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { getAllNotebooks, getNotebook, removeNotebook, updateNotebook  } from "../../actions/notebook_actions"
-import {getAllNotes} from '../../actions/note_actions'
+import {createNote, getAllNotes} from '../../actions/note_actions'
 import { logoutCurrentUser } from "../../actions/session_actions";
 import  NotebookIndex from './notebook_index'
 import {updateNote, getNote} from '../../actions/note_actions'
@@ -21,7 +21,8 @@ const mDTP = dispatch => ({
   updateNotebook: notebook => dispatch(updateNotebook(notebook)),
   getAllNotes: notebookId => dispatch(getAllNotes(notebookId)),
   updateNote: note => dispatch(updateNote(note)),
-  getNote: note => dispatch(getNote(note))
+  getNote: note => dispatch(getNote(note)),
+  createNote: note => dispatch(createNote(note))
 })
 
 const NotebookIndexContainer = connect(mSTP, mDTP)(NotebookIndex);
