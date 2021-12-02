@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Modal from '../Modal/modal'
+import TextEditor from '../note/text_editor'
 
 
 class NotebookIndex extends React.Component{
@@ -16,6 +17,11 @@ class NotebookIndex extends React.Component{
     this.toggleModal = this.toggleModal.bind(this)
     this.deleteNotebook = this.deleteNotebook.bind(this)
     this.showNotesIndex = this.showNotesIndex.bind(this)
+    this.showNote = this.showNote.bind(this)
+  }
+
+  showNote(e){
+    console.log(e.currentTarget.value)
   }
 
   showNotesIndex(e){
@@ -54,7 +60,8 @@ class NotebookIndex extends React.Component{
       <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>-</motion.button>
     </li>)
 
-    let notes = this.props.notes.map((note, index) => <li key={index}>{note.title}</li>)
+    let notes = this.props.notes.map((note, index) => <li key={index} onClick={this.showNote} value={note.id}>{note.title}</li>)
+    // notes.unshift(<li> <button onClick> Add a new note</button></li>)
     // if (this.state.modalOpen){console.log('open the modal')}
     return(
       <div className="notesAndBooks">
@@ -71,6 +78,9 @@ class NotebookIndex extends React.Component{
           <ul>
             {notes}
           </ul>
+        </div>
+        <div>
+          <TextEditor />
         </div>
       </div>
 

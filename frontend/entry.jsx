@@ -5,20 +5,21 @@ import Root from './components/root';
 
 document.addEventListener('DOMContentLoaded', () => {
     const main = document.getElementById('main');
-    const preloadedState = {};
-
+    let store;
+    
     if (window.currentUser) {
       const preloadedState = {
+        session: { id: window.currentUser.id },
         entities: {
-          users: {[window.currentUser.id]: window.currentUser}
-        },
-        session: {id: window.currentUser.id}
-      }
-      delete window.currentUser; 
-      console.log(preloadedState)
-    } 
-    console.log(preloadedState)
-    const store = configureStore(preloadedState);
+          users: { [window.currentUser.id]: window.currentUser }
+        }
+      };
+      store = configureStore(preloadedState);
+      delete window.currentUser;
+    } else {
+      store = configureStore();
+    }
+
     ReactDOM.render(<Root store={store} />, main);
 
     //functions added to the window for debugging 
