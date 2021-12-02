@@ -2,6 +2,8 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import Modal from '../Modal/modal'
 import TextEditor from '../note/text_editor'
+import findById from '../../util/find_by_id'
+import TextEditorContainer from '../note/text_editor_container'
 
 
 class NotebookIndex extends React.Component{
@@ -11,7 +13,13 @@ class NotebookIndex extends React.Component{
     this.state = {
       modalOpen: false,
       setModalOpen: false,
-      notes: []
+      notes: [],
+      noteToOpen: null,
+      note: {
+        title: "",
+        body: "",
+        notebookId: ""
+      }
     }
 
     this.toggleModal = this.toggleModal.bind(this)
@@ -21,11 +29,13 @@ class NotebookIndex extends React.Component{
   }
 
   showNote(e){
-    console.log(e.currentTarget.value)
+    let note = this.props.getNote(findById(this.props.notes, e.currentTarget.value))
+    this.setState({note: note, noteToOpen: e.currentTarget.value})
   }
 
   showNotesIndex(e){
     let notebookId = e.currentTarget.value; 
+    this.setState({note: {notebookId: e.currentTarget.value }})
     this.props.getAllNotes(notebookId)
   }
 
@@ -62,7 +72,7 @@ class NotebookIndex extends React.Component{
 
     let notes = this.props.notes.map((note, index) => <li key={index} onClick={this.showNote} value={note.id}>{note.title}</li>)
     // notes.unshift(<li> <button onClick> Add a new note</button></li>)
-    // if (this.state.modalOpen){console.log('open the modal')}
+
     return(
       <div className="notesAndBooks">
         <div className="notebooks">
@@ -80,7 +90,7 @@ class NotebookIndex extends React.Component{
           </ul>
         </div>
         <div>
-          <TextEditor />
+          <TextEditorContainer  noteToOpen={this.state.noteToOpen}/>
         </div>
       </div>
 

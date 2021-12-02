@@ -35,30 +35,36 @@ class TextEditor extends React.Component{
       "video",
       "code-block"
     ]
-
     this.state = {
+      title: "",
       body: "",
-      setBody: ""
+      intialBody: ""
     }
 
     this.handleBody = this.handleBody.bind(this)
   }
 
+  componentDidMount(){
+    this.setState({note: this.props.notes})
+  }
+
   handleBody(e){
-    console.log(e)
     this.setState({body: e})
   }
 
   render(){
+    console.log(this.props)
+    if (this.props.noteToOpen && this.state.title === ""){
+      this.setState({title: this.props.notes.title, body: this.props.notes.body, intialBody: this.props.notes.body})
+    }
     return (
       <div>
-        <h2>Text Editor</h2>
+        <h2>{this.state.title}</h2>
         <ReactQuill 
           placeholder="Start note here..."
           modules={this.modules}
           formats={this.formats}
           onChange={this.handleBody}
-          value={this.state.body}
         />
       </div>
     )

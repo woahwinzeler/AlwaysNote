@@ -6,7 +6,7 @@ class NoteForm extends React.Component{
 
     this.state = {
       title: "",
-      notebook_id: 
+      notebook_id: 0
     }
   }
   

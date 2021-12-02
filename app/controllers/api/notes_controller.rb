@@ -2,7 +2,19 @@ class Api::NotesController < ApplicationController
   def index 
     notebook = Notebook.find(params[:notebook_id])
     @notes = notebook.notes
+    render :index 
   end
+
+  def show 
+    @note = Note.find(params[:id])
+    if !@note.nil?
+      render :show 
+    else 
+      render json: @note.errors.full_messages, status: 404
+    end 
+
+  end
+
   def create 
     @note = Note.new(note_params)
     if @note.save

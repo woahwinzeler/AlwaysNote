@@ -21,6 +21,7 @@ const receiveAllNotes = notes => ({
 })
 
 export const getNote = note => dispatch => (
+  //needs to have notebook_id and id 
   NoteApiUtil.fetchNote(note).then(
     note => dispatch(receiveNote(note))
   )

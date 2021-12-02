@@ -4,7 +4,6 @@ const notebookReducer = (oldState={}, action) => {
   Object.freeze(oldState)
   switch (action.type) {
     case RECEIVE_ALL_NOTEBOOKS:
-      console.log(action.notebooks);
       return Object.assign({}, oldState, action.notebooks)
     case RECEIVE_NOTEBOOK:
       return Object.assign({}, {[action.notebook.id]: action.notebook}, oldState)

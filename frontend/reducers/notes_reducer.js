@@ -9,7 +9,7 @@ const notesReducer = (oldState={}, action) => {
       delete newState[action.id]
       return newState
     case RECEIVE_NOTE:
-      return Object.assign({}, action.note, oldState)
+      return Object.assign({}, oldState, action.note)
     case RECEIVE_ALL_NOTES:
       return Object.assign({}, action.notes)
     default:

@@ -28,9 +28,9 @@ export const createNote = note => (
   })
 )
 
-export const fetchNote = note => (
-  $.ajax({
+export const fetchNote = note => {
+  return $.ajax({
     url: `/api/notebooks/${note.notebook_id}/notes/${note.id}`,
     method: "GET"
   })
-)
+}
