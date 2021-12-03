@@ -32,10 +32,10 @@ class NotebookIndex extends React.Component{
   }
 
   showNote(e){
-    let note = this.props.getNote(findById(this.props.notes, e.currentTarget.value))
-    this.setState({note: note, 
-      noteToOpen: e.currentTarget.value,
-      noteFormToOpen: true})
+    let val = e.currentTarget.value
+    let note = this.props.getNote(findById(this.props.notes, val)).then(() =>  this.setState({note: note, 
+      noteToOpen: val,
+      noteFormToOpen: true}))
   }
 
   showNotesIndex(e){
@@ -75,8 +75,8 @@ class NotebookIndex extends React.Component{
       <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>-</motion.button>
     </li>)
 
-    console.log(this.props.notes)
-    let notes = this.props.notes.map((note, index) => <li key={index} onClick={this.showNote} value={note.id}>{note.title}</li>)
+
+    let notes = this.props.notes.map((note, index) => <li key={index} onClick={this.showNote} value={note.id} className="NotesItem">{note.title}</li>)
     // notes.unshift(<li> <button onClick> Add a new note</button></li>)
 
     return(
@@ -97,7 +97,7 @@ class NotebookIndex extends React.Component{
           </ul>
         </div>
         <div>
-          <TextEditorContainer noteToOpen={this.state.noteToOpen} />
+          <TextEditorContainer noteToOpen={this.state.noteToOpen} notebookId={this.state.note.notebookId}  note={this.state.note}/>
         </div>
       </div>
 

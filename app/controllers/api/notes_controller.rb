@@ -10,9 +10,9 @@ class Api::NotesController < ApplicationController
     if !@note.nil?
       render :show 
     else 
+      debugger 
       render json: @note.errors.full_messages, status: 404
     end 
-
   end
 
   def create 
@@ -20,7 +20,6 @@ class Api::NotesController < ApplicationController
     if @note.save
       render :create 
     else 
-      debugger 
       # may want to add functionality to the model that adds a title automatically 
       render json: @note.errors.full_messages, status: 422
     end

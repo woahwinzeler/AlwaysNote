@@ -612,38 +612,97 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
       }], ["link", "image", "video"], ["clean"], ["code-block"]]
     };
     _this.formats = ["header", "font", "size", "bold", "italic", "underline", "strike", "blockquote", "list", "bullet", "link", "image", "video", "code-block"];
-    _this.state = {
-      title: "",
-      body: "",
-      intialBody: ""
-    };
+
+    if (!!_this.props.note) {
+      _this.state = _this.props.note;
+    } else {
+      _this.state = {
+        note: {
+          id: _this.props.noteId,
+          title: "",
+          body: "",
+          notebook_id: _this.props.notebookId
+        }
+      };
+    }
+
     _this.handleBody = _this.handleBody.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(TextEditor, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.state.note.id = _this2.props.noteId;
+        _this2.state.note.notebook_id = _this2.props.notebookId;
+
+        _this2.props.getNote(_this2.state.note).then(function () {
+          return _this2.setState({
+            note: _this2.props.note
+          }, console.log(_this2.state));
+        });
+      }, 10000);
+    } //Somwhere need to setState to this.props.note 
+    // shouldComponentUpdate(nextProps, nextState){
+    // }
+
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (typeof this.props.note !== 'undefined') {
+        if (typeof this.props.note.id !== 'undefined') {
+          if (Number.isInteger(this.props.note.id) && typeof prevProps.note === 'undefined') {
+            console.log("CDU hit");
+            this.setState({
+              note: this.props.note
+            });
+          } else if (typeof prevProps.note.id !== 'undefined' && this.props.note.id !== prevProps.note.id) {
+            console.log("CDU hit");
+            this.setState({
+              note: this.props.note
+            });
+          }
+        }
+      }
+    }
+  }, {
     key: "handleBody",
     value: function handleBody(e) {
       this.setState({
-        body: e
-      });
+        note: {
+          id: this.props.note.id,
+          title: this.props.note.title,
+          body: e,
+          notebook_id: this.props.note.notebook_id
+        }
+      }); //Call to save update Note, need to fetch note first though
+      // if (!!this.state.body){
+      //   console.log(this.state)
+      //   this.props.updateNote(this.state)
+      // }
     }
   }, {
     key: "render",
     value: function render() {
-      var title = "Your Note";
-      var body = "Starts here";
+      var body;
+      console.log(this.state.note);
+      this.title = this.state.note.title;
 
-      if (!!this.props.note) {
-        title = this.props.note.title;
-        body = this.props.note.body;
+      if (this.state.note.body === undefined) {
+        body = '';
+      } else {
+        body = this.state.note.body;
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
         placeholder: "Start note here...",
         modules: this.modules,
         formats: this.formats,
-        onChange: this.handleBody
+        onChange: this.handleBody,
+        value: body
       }));
     }
   }]);
@@ -675,7 +734,9 @@ var mSTP = function mSTP(_ref, ownProps) {
   var notes = _ref.entities.notes;
   return {
     notes: notes,
-    note: notes[ownProps.noteToOpen]
+    note: notes[ownProps.noteToOpen],
+    noteId: ownProps.noteId,
+    notebookId: ownProps.notebookId
   };
 };
 
@@ -1018,11 +1079,15 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(NotebookIndex, [{
     key: "showNote",
     value: function showNote(e) {
-      var note = this.props.getNote(Object(_util_find_by_id__WEBPACK_IMPORTED_MODULE_3__["default"])(this.props.notes, e.currentTarget.value));
-      this.setState({
-        note: note,
-        noteToOpen: e.currentTarget.value,
-        noteFormToOpen: true
+      var _this2 = this;
+
+      var val = e.currentTarget.value;
+      var note = this.props.getNote(Object(_util_find_by_id__WEBPACK_IMPORTED_MODULE_3__["default"])(this.props.notes, val)).then(function () {
+        return _this2.setState({
+          note: note,
+          noteToOpen: val,
+          noteFormToOpen: true
+        });
       });
     }
   }, {
@@ -1067,17 +1132,17 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var notebooks = this.props.notebooks.map(function (notebook, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: index
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: _this2.showNotesIndex,
+          onClick: _this3.showNotesIndex,
           value: notebook.id
         }, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
           onClick: function onClick() {
-            return _this2.deleteNotebook(notebook.id);
+            return _this3.deleteNotebook(notebook.id);
           },
           whileHover: {
             scale: 1.1
@@ -1087,12 +1152,12 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
           }
         }, "-"));
       });
-      console.log(this.props.notes);
       var notes = this.props.notes.map(function (note, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: index,
-          onClick: _this2.showNote,
-          value: note.id
+          onClick: _this3.showNote,
+          value: note.id,
+          className: "NotesItem"
         }, note.title);
       }); // notes.unshift(<li> <button onClick> Add a new note</button></li>)
 
@@ -1120,7 +1185,9 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         notebookId: this.state.note.notebookId,
         createNote: this.props.createNote
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_text_editor_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        noteToOpen: this.state.noteToOpen
+        noteToOpen: this.state.noteToOpen,
+        notebookId: this.state.note.notebookId,
+        note: this.state.note
       })));
     }
   }]);
