@@ -627,40 +627,20 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
     }
 
     _this.handleBody = _this.handleBody.bind(_assertThisInitialized(_this));
+    _this.userEditCount = 0;
     return _this;
   }
 
   _createClass(TextEditor, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      setTimeout(function () {
-        _this2.state.note.id = _this2.props.noteId;
-        _this2.state.note.notebook_id = _this2.props.notebookId;
-
-        _this2.props.getNote(_this2.state.note).then(function () {
-          return _this2.setState({
-            note: _this2.props.note
-          }, console.log(_this2.state));
-        });
-      }, 10000);
-    } //Somwhere need to setState to this.props.note 
-    // shouldComponentUpdate(nextProps, nextState){
-    // }
-
-  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (typeof this.props.note !== 'undefined') {
         if (typeof this.props.note.id !== 'undefined') {
           if (Number.isInteger(this.props.note.id) && typeof prevProps.note === 'undefined') {
-            console.log("CDU hit");
             this.setState({
               note: this.props.note
             });
           } else if (typeof prevProps.note.id !== 'undefined' && this.props.note.id !== prevProps.note.id) {
-            console.log("CDU hit");
             this.setState({
               note: this.props.note
             });
@@ -671,12 +651,19 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleBody",
     value: function handleBody(e) {
+      var _this2 = this;
+
+      this.userEditCount += 1;
       this.setState({
         note: {
           id: this.props.note.id,
           title: this.props.note.title,
           body: e,
           notebook_id: this.props.note.notebook_id
+        }
+      }, function () {
+        if (_this2.userEditCount % 10 === 0) {
+          _this2.props.updateNote(_this2.state.note);
         }
       }); //Call to save update Note, need to fetch note first though
       // if (!!this.state.body){
@@ -688,7 +675,6 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var body;
-      console.log(this.state.note);
       this.title = this.state.note.title;
 
       if (this.state.note.body === undefined) {
