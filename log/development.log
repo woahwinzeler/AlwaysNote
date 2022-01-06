@@ -20052,3 +20052,1005 @@ Processing by Api::NotesController#create as JSON
 Completed 200 OK in 5ms (Views: 1.4ms | ActiveRecord: 1.6ms)
 
 
+Started GET "/" for ::1 at 2021-12-16 18:20:04 -0800
+  
+PG::ConnectionBad (connection to server on socket "/tmp/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
+):
+  
+pg (1.2.3) lib/pg.rb:58:in `initialize'
+pg (1.2.3) lib/pg.rb:58:in `new'
+pg (1.2.3) lib/pg.rb:58:in `connect'
+activerecord (5.2.6) lib/active_record/connection_adapters/postgresql_adapter.rb:692:in `connect'
+activerecord (5.2.6) lib/active_record/connection_adapters/postgresql_adapter.rb:223:in `initialize'
+activerecord (5.2.6) lib/active_record/connection_adapters/postgresql_adapter.rb:48:in `new'
+activerecord (5.2.6) lib/active_record/connection_adapters/postgresql_adapter.rb:48:in `postgresql_connection'
+activerecord (5.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:830:in `new_connection'
+activerecord (5.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:874:in `checkout_new_connection'
+activerecord (5.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:853:in `try_to_checkout_new_connection'
+activerecord (5.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:814:in `acquire_connection'
+activerecord (5.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:538:in `checkout'
+activerecord (5.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:382:in `connection'
+activerecord (5.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:1033:in `retrieve_connection'
+activerecord (5.2.6) lib/active_record/connection_handling.rb:118:in `retrieve_connection'
+activerecord (5.2.6) lib/active_record/connection_handling.rb:90:in `connection'
+activerecord (5.2.6) lib/active_record/migration.rb:554:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.6) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.6) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for ::1 at 2021-12-16 18:20:19 -0800
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/williamwinzeler/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 6484ms (Views: 6480.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/api/session" for ::1 at 2021-12-16 18:20:44 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"demo", "email"=>"demo@demo.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "demo"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:28
+  [1m[36mUser Exists (1.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["username", "demo"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "vSa5JyRsucG0pG3QNrbR4w"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@demo.com"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28
+  [1m[36mUser Update (1.8ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "vSa5JyRsucG0pG3QNrbR4w"], ["updated_at", "2021-12-17 02:20:45.299435"], ["id", 1]]
+  ↳ app/models/user.rb:28
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:28
+Completed 200 OK in 330ms (Views: 0.3ms | ActiveRecord: 23.0ms)
+
+
+Started GET "/api/notebooks" for ::1 at 2021-12-16 18:20:45 -0800
+Processing by Api::NotebooksController#index as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "vSa5JyRsucG0pG3QNrbR4w"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering api/notebooks/index.json.jbuilder
+  [1m[36mNotebook Load (2.2ms)[0m  [1m[34mSELECT "notebooks".* FROM "notebooks" WHERE "notebooks"."author_id" = $1[0m  [["author_id", 1]]
+  ↳ app/views/api/notebooks/index.json.jbuilder:1
+  Rendered api/notebooks/index.json.jbuilder (21.1ms)
+Completed 200 OK in 25ms (Views: 12.3ms | ActiveRecord: 11.1ms)
+
+
+Started GET "/api/notebooks/17/notes" for ::1 at 2021-12-16 18:20:47 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"17"}
+  [1m[36mNotebook Load (0.5ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 17], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (63.6ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 17]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (91.8ms)
+Completed 200 OK in 101ms (Views: 24.3ms | ActiveRecord: 71.0ms)
+
+
+Started GET "/api/notebooks/18/notes" for ::1 at 2021-12-16 18:20:49 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"18"}
+  [1m[36mNotebook Load (0.7ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 18], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (0.7ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 18]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (4.2ms)
+Completed 200 OK in 11ms (Views: 7.3ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/api/notebooks/20/notes" for ::1 at 2021-12-16 18:20:50 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"20"}
+  [1m[36mNotebook Load (0.6ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (1.0ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 20]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (5.0ms)
+Completed 200 OK in 13ms (Views: 9.4ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/api/notebooks/25/notes" for ::1 at 2021-12-16 18:20:51 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"25"}
+  [1m[36mNotebook Load (0.7ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (0.4ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 25]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (2.9ms)
+Completed 200 OK in 8ms (Views: 5.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/api/notebooks/25/notes/13" for ::1 at 2021-12-16 18:20:52 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"25", "id"=>"13"}
+  [1m[36mNote Load (0.7ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (1.2ms)
+Completed 200 OK in 11ms (Views: 6.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/api/notebooks/25/notes/14" for ::1 at 2021-12-16 18:20:53 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"25", "id"=>"14"}
+  [1m[36mNote Load (0.8ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (1.5ms)
+Completed 200 OK in 10ms (Views: 6.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/api/notebooks/25/notes/15" for ::1 at 2021-12-16 18:20:53 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"25", "id"=>"15"}
+  [1m[36mNote Load (0.8ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (1.4ms)
+Completed 200 OK in 9ms (Views: 5.5ms | ActiveRecord: 0.8ms)
+
+
+Started PATCH "/api/notebooks/25/notes/15" for ::1 at 2021-12-16 18:20:58 -0800
+Processing by Api::NotesController#update as JSON
+  Parameters: {"note"=>{"id"=>"15", "title"=>"Note 8", "body"=>"<p>Autosave b</p>", "notebook_id"=>"25"}, "notebook_id"=>"25", "id"=>"15"}
+  [1m[36mNote Load (0.7ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:40
+Unpermitted parameter: :id
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/notes_controller.rb:41
+  [1m[36mNote Exists (1.2ms)[0m  [1m[34mSELECT  1 AS one FROM "notes" WHERE "notes"."title" = $1 AND "notes"."id" != $2 AND "notes"."notebook_id" = $3 LIMIT $4[0m  [["title", "Note 8"], ["id", 15], ["notebook_id", 25], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:41
+  [1m[36mNotebook Load (0.7ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:41
+  [1m[36mNote Update (0.9ms)[0m  [1m[33mUPDATE "notes" SET "body" = $1, "updated_at" = $2 WHERE "notes"."id" = $3[0m  [["body", "<p>Autosave b</p>"], ["updated_at", "2021-12-17 02:20:58.421308"], ["id", 15]]
+  ↳ app/controllers/api/notes_controller.rb:41
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/notes_controller.rb:41
+Completed 200 OK in 141ms (Views: 0.8ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/api/notebooks/25/notes/14" for ::1 at 2021-12-16 18:21:01 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"25", "id"=>"14"}
+  [1m[36mNote Load (1.0ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (1.2ms)
+Completed 200 OK in 9ms (Views: 5.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/api/notebooks/25/notes/15" for ::1 at 2021-12-16 18:21:02 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"25", "id"=>"15"}
+  [1m[36mNote Load (0.7ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (1.3ms)
+Completed 200 OK in 9ms (Views: 6.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/api/notebooks/25/notes/15" for ::1 at 2021-12-16 18:21:03 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"25", "id"=>"15"}
+  [1m[36mNote Load (0.6ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (1.5ms)
+Completed 200 OK in 25ms (Views: 21.7ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/api/notebooks/24" for ::1 at 2021-12-16 18:24:11 -0800
+Processing by Api::NotebooksController#destroy as JSON
+  Parameters: {"id"=>"24"}
+  [1m[36mNotebook Load (0.7ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  ↳ app/controllers/api/notebooks_controller.rb:39
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/notebooks_controller.rb:40
+  [1m[36mNotebook Destroy (0.6ms)[0m  [1m[31mDELETE FROM "notebooks" WHERE "notebooks"."id" = $1[0m  [["id", 24]]
+  ↳ app/controllers/api/notebooks_controller.rb:40
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/notebooks_controller.rb:40
+Completed 200 OK in 7ms (Views: 0.4ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/api/notebooks/25/notes/13" for ::1 at 2021-12-16 18:26:02 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"25", "id"=>"13"}
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (0.7ms)
+Completed 200 OK in 5ms (Views: 3.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2021-12-29 10:43:10 -0800
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/williamwinzeler/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.2.6) lib/active_record/migration.rb:579:in `check_pending!'
+activerecord (5.2.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.6) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.6) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/" for ::1 at 2021-12-29 10:43:50 -0800
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/williamwinzeler/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.2.6) lib/active_record/migration.rb:579:in `check_pending!'
+activerecord (5.2.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.6) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.6) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for ::1 at 2021-12-29 10:43:55 -0800
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/williamwinzeler/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.2.6) lib/active_record/migration.rb:579:in `check_pending!'
+activerecord (5.2.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.6) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.6) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for ::1 at 2021-12-29 10:43:56 -0800
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/williamwinzeler/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.2.6) lib/active_record/migration.rb:579:in `check_pending!'
+activerecord (5.2.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.6) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.6) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTags (20211217022922)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (27.0ms)[0m  [1m[35mCREATE TABLE "tags" ("id" bigserial primary key, "user_id" integer NOT NULL, "color" character varying NOT NULL, "title" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20211217022922_create_tags.rb:3
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_tags_on_note_id" ON "tags"  ("note_id")[0m
+  ↳ db/migrate/20211217022922_create_tags.rb:11
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTags (20211217022922)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "tags" ("id" bigserial primary key, "user_id" integer NOT NULL, "color" character varying NOT NULL, "title" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20211217022922_create_tags.rb:3
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_tags_on_title" ON "tags"  ("title")[0m
+  ↳ db/migrate/20211217022922_create_tags.rb:11
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20211217022922"]]
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (5.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/" for ::1 at 2021-12-29 10:58:06 -0800
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/williamwinzeler/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 889ms (Views: 884.6ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/" for ::1 at 2022-01-02 21:49:57 -0800
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/williamwinzeler/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 595ms (Views: 589.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/api/session" for ::1 at 2022-01-03 00:05:22 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"demo", "email"=>"demo@demo.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "demo"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:28
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["username", "demo"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "vzohTz3mU-qGPYjzzUAm6A"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@demo.com"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28
+  [1m[36mUser Update (0.7ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "vzohTz3mU-qGPYjzzUAm6A"], ["updated_at", "2022-01-03 08:05:22.998049"], ["id", 1]]
+  ↳ app/models/user.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:28
+Completed 200 OK in 318ms (Views: 0.3ms | ActiveRecord: 24.4ms)
+
+
+Started GET "/api/notebooks" for ::1 at 2022-01-03 00:05:23 -0800
+Processing by Api::NotebooksController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "vzohTz3mU-qGPYjzzUAm6A"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering api/notebooks/index.json.jbuilder
+  [1m[36mNotebook Load (3.4ms)[0m  [1m[34mSELECT "notebooks".* FROM "notebooks" WHERE "notebooks"."author_id" = $1[0m  [["author_id", 1]]
+  ↳ app/views/api/notebooks/index.json.jbuilder:1
+  Rendered api/notebooks/index.json.jbuilder (23.9ms)
+Completed 200 OK in 29ms (Views: 14.6ms | ActiveRecord: 12.3ms)
+
+
+Started GET "/api/notebooks/20/notes" for ::1 at 2022-01-03 00:05:24 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"20"}
+  [1m[36mNotebook Load (0.9ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (2.6ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 20]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (23.6ms)
+Completed 200 OK in 36ms (Views: 16.5ms | ActiveRecord: 11.4ms)
+
+
+Started GET "/api/notebooks/20/notes/3" for ::1 at 2022-01-03 00:05:25 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"20", "id"=>"3"}
+  [1m[36mNote Load (0.8ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (1.2ms)
+Completed 200 OK in 12ms (Views: 7.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/api/notebooks/20/notes/4" for ::1 at 2022-01-03 00:05:27 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"20", "id"=>"4"}
+  [1m[36mNote Load (0.8ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (1.2ms)
+Completed 200 OK in 8ms (Views: 4.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/api/notebooks/20/notes/5" for ::1 at 2022-01-03 00:05:27 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"20", "id"=>"5"}
+  [1m[36mNote Load (0.8ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (1.2ms)
+Completed 200 OK in 8ms (Views: 5.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/api/notebooks/20/notes/4" for ::1 at 2022-01-03 00:05:28 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"20", "id"=>"4"}
+  [1m[36mNote Load (1.3ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (1.1ms)
+Completed 200 OK in 9ms (Views: 4.8ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/api/notebooks/20/notes" for ::1 at 2022-01-03 00:06:54 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"20"}
+  [1m[36mNotebook Load (0.9ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (0.9ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 20]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (4.4ms)
+Completed 200 OK in 12ms (Views: 7.1ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/api/notebooks/17/notes" for ::1 at 2022-01-03 00:06:54 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"17"}
+  [1m[36mNotebook Load (1.4ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 17], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (80.7ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 17]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (95.9ms)
+Completed 200 OK in 102ms (Views: 18.0ms | ActiveRecord: 82.1ms)
+
+
+Started GET "/api/notebooks/18/notes" for ::1 at 2022-01-03 00:06:55 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"18"}
+  [1m[36mNotebook Load (0.5ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 18], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (0.7ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 18]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (3.4ms)
+Completed 200 OK in 8ms (Views: 5.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/api/notebooks/25/notes" for ::1 at 2022-01-03 00:06:56 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"25"}
+  [1m[36mNotebook Load (0.4ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 25]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (1.9ms)
+Completed 200 OK in 6ms (Views: 3.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/api/notebooks/25/notes" for ::1 at 2022-01-03 00:06:57 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"25"}
+  [1m[36mNotebook Load (1.3ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (1.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 25]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (7.8ms)
+Completed 200 OK in 50ms (Views: 13.9ms | ActiveRecord: 2.5ms)
+
+
+Started POST "/api/notebooks/25/notes/" for ::1 at 2022-01-03 00:07:00 -0800
+Processing by Api::NotesController#create as JSON
+  Parameters: {"note"=>{"title"=>"His Second note ", "notebook_id"=>"25"}, "notebook_id"=>"25"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/notes_controller.rb:20
+  [1m[36mNote Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "notes" WHERE "notes"."title" = $1 AND "notes"."notebook_id" = $2 LIMIT $3[0m  [["title", "His Second note "], ["notebook_id", 25], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:20
+  [1m[36mNotebook Load (0.4ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:20
+  [1m[36mNote Create (3.0ms)[0m  [1m[32mINSERT INTO "notes" ("notebook_id", "title", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["notebook_id", 25], ["title", "His Second note "], ["created_at", "2022-01-03 08:07:00.834075"], ["updated_at", "2022-01-03 08:07:00.834075"]]
+  ↳ app/controllers/api/notes_controller.rb:20
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/notes_controller.rb:20
+  Rendering api/notes/create.json.jbuilder
+  Rendered api/notes/create.json.jbuilder (1.4ms)
+Completed 200 OK in 22ms (Views: 5.6ms | ActiveRecord: 5.5ms)
+
+
+  [1m[35m (5.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to NoteTags (20220103082004)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (20.0ms)[0m  [1m[35mCREATE TABLE "note_tags" ("notes_id" bigint NOT NULL, "tags_id" bigint NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20220103082004_note_tags.rb:3
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE  INDEX  "index_note_tags_on_notes_id" ON "note_tags"  ("notes_id")[0m
+  ↳ db/migrate/20220103082004_note_tags.rb:3
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_note_tags_on_tags_id" ON "note_tags"  ("tags_id")[0m
+  ↳ db/migrate/20220103082004_note_tags.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220103082004"]]
+  ↳ bin/rails:9
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (5.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mNote Load (0.4ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mNote Load (0.6ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mNote Load (0.7ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to NoteTags (20220103082004)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.2ms)[0m  [1m[35mDROP TABLE "note_tags"[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.6ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20220103082004"]]
+  ↳ bin/rails:9
+  [1m[35m (6.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to NoteTags (20220103082004)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "note_tags" ("notes_id" bigint, "tags_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20220103082004_note_tags.rb:3
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX  "index_note_tags_on_notes_id" ON "note_tags"  ("notes_id")[0m
+  ↳ db/migrate/20220103082004_note_tags.rb:3
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_note_tags_on_tags_id" ON "note_tags"  ("tags_id")[0m
+  ↳ db/migrate/20220103082004_note_tags.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220103082004"]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mNote Load (0.9ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mNote Load (0.7ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mNote Load (0.4ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mNote Load (0.5ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to NotesTags (20220103083637)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "notes_tags" ("notes_id" bigint NOT NULL, "tags_id" bigint NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20220103083637_notes_tags.rb:3
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_notes_tags_on_notes_id" ON "notes_tags"  ("notes_id")[0m
+  ↳ db/migrate/20220103083637_notes_tags.rb:3
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_notes_tags_on_tags_id" ON "notes_tags"  ("tags_id")[0m
+  ↳ db/migrate/20220103083637_notes_tags.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220103083637"]]
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mNote Load (0.4ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mNote Load (0.6ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mNote Load (0.5ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/" for ::1 at 2022-01-05 16:54:44 -0800
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/williamwinzeler/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 994ms (Views: 990.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/api/session" for ::1 at 2022-01-05 16:55:03 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"demo", "email"=>"demo@demo.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "demo"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:28
+  [1m[36mUser Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["username", "demo"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "wFPpHjgpIeWOS2zCS3ws5A"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@demo.com"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28
+  [1m[36mUser Update (2.7ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "wFPpHjgpIeWOS2zCS3ws5A"], ["updated_at", "2022-01-06 00:55:03.883393"], ["id", 1]]
+  ↳ app/models/user.rb:28
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:28
+Completed 200 OK in 333ms (Views: 0.2ms | ActiveRecord: 24.0ms)
+
+
+Started GET "/api/notebooks" for ::1 at 2022-01-05 16:55:03 -0800
+Processing by Api::NotebooksController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "wFPpHjgpIeWOS2zCS3ws5A"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering api/notebooks/index.json.jbuilder
+  [1m[36mNotebook Load (1.4ms)[0m  [1m[34mSELECT "notebooks".* FROM "notebooks" WHERE "notebooks"."author_id" = $1[0m  [["author_id", 1]]
+  ↳ app/views/api/notebooks/index.json.jbuilder:1
+  Rendered api/notebooks/index.json.jbuilder (19.9ms)
+Completed 200 OK in 23ms (Views: 11.7ms | ActiveRecord: 10.2ms)
+
+
+Started GET "/api/notebooks/17/notes" for ::1 at 2022-01-05 16:55:06 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"17"}
+  [1m[36mNotebook Load (0.9ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 17], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (115.4ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 17]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (149.8ms)
+Completed 200 OK in 169ms (Views: 31.4ms | ActiveRecord: 122.7ms)
+
+
+Started GET "/api/notebooks/18/notes" for ::1 at 2022-01-05 16:55:07 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"18"}
+  [1m[36mNotebook Load (0.6ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 18], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (0.4ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 18]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (3.4ms)
+Completed 200 OK in 10ms (Views: 6.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/api/notebooks/20/notes" for ::1 at 2022-01-05 16:55:08 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"20"}
+  [1m[36mNotebook Load (0.8ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (1.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 20]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (5.6ms)
+Completed 200 OK in 14ms (Views: 8.6ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/api/notebooks/25/notes" for ::1 at 2022-01-05 16:55:08 -0800
+Processing by Api::NotesController#index as JSON
+  Parameters: {"notebook_id"=>"25"}
+  [1m[36mNotebook Load (0.6ms)[0m  [1m[34mSELECT  "notebooks".* FROM "notebooks" WHERE "notebooks"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:3
+  Rendering api/notes/index.json.jbuilder
+  [1m[36mNote Load (0.7ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."notebook_id" = $1[0m  [["notebook_id", 25]]
+  ↳ app/views/api/notes/index.json.jbuilder:1
+  Rendered api/notes/index.json.jbuilder (4.6ms)
+Completed 200 OK in 11ms (Views: 7.6ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/api/notebooks/25/notes/13" for ::1 at 2022-01-05 16:55:12 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"25", "id"=>"13"}
+  [1m[36mNote Load (0.7ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (0.8ms)
+Completed 200 OK in 28ms (Views: 6.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/api/notebooks/25/notes/14" for ::1 at 2022-01-05 16:55:13 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"25", "id"=>"14"}
+  [1m[36mNote Load (1.0ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (1.0ms)
+Completed 200 OK in 8ms (Views: 4.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/api/notebooks/25/notes/15" for ::1 at 2022-01-05 16:55:14 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"25", "id"=>"15"}
+  [1m[36mNote Load (0.5ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (0.8ms)
+Completed 200 OK in 7ms (Views: 3.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/api/notebooks/25/notes/17" for ::1 at 2022-01-05 16:55:15 -0800
+Processing by Api::NotesController#show as JSON
+  Parameters: {"notebook_id"=>"25", "id"=>"17"}
+  [1m[36mNote Load (1.8ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = $1 LIMIT $2[0m  [["id", 17], ["LIMIT", 1]]
+  ↳ app/controllers/api/notes_controller.rb:9
+  Rendering api/notes/show.json.jbuilder
+  Rendered api/notes/show.json.jbuilder (1.2ms)
+Completed 200 OK in 12ms (Views: 7.6ms | ActiveRecord: 1.8ms)
+
+
+  [1m[36mNote Load (0.4ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mNote Load (0.6ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mNote Load (0.5ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mNote Load (0.5ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mNote Load (0.4ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mNote Load (0.5ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tags" INNER JOIN "notes_tags" ON "tags"."id" = "notes_tags"."tag_id" WHERE "notes_tags"."note_id" = $1[0m  [["note_id", 1]]
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeNoteTags (20220106005820)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "notes_tags" ALTER COLUMN "tags_id" TYPE tag_id[0m
+  ↳ db/migrate/20220106005820_change_note_tags.rb:3
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeNoteTags (20220106005820)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeNotesTags (20220106010120)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "notes_tags" ALTER COLUMN "notes_id" TYPE note_id[0m
+  ↳ db/migrate/20220106010120_change_notes_tags.rb:3
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeNotesTags (20220106010120)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.9ms)[0m  [1m[35mDROP TABLE "notes_tags"[0m
+  ↳ db/migrate/20220106010120_change_notes_tags.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220106010120"]]
+  ↳ bin/rails:9
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to NoteTags (20220106010423)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "notes_tags" ("note_id" bigint NOT NULL, "tag_id" bigint NOT NULL)[0m
+  ↳ db/migrate/20220106010423_note_tags.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220106010423"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5793743813879392245)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mNote Load (0.8ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (6.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "tags" INNER JOIN "notes_tags" ON "tags"."id" = "notes_tags"."tag_id" WHERE "notes_tags"."note_id" = $1[0m  [["note_id", 1]]

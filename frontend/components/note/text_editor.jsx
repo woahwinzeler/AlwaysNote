@@ -78,12 +78,6 @@ class TextEditor extends React.Component{
         this.props.updateNote(this.state.note)
       }
     })
-
-    //Call to save update Note, need to fetch note first though
-    // if (!!this.state.body){
-    //   console.log(this.state)
-    //   this.props.updateNote(this.state)
-    // }
   }
 
   render(){

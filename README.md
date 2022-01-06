@@ -1,24 +1,5 @@
-# README
+# AlwaysNote 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+AlwaysNote is an evernote clone that empashizes a simple and elegant user experience. [Here](https://alwaysandforevernote.herokuapp.com/#/) is the livelink to the website. To make the app, I used react-redux, framer-motion, and react-quill. 
 
-Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

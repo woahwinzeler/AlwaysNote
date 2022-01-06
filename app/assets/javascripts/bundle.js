@@ -665,11 +665,7 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
         if (_this2.userEditCount % 10 === 0) {
           _this2.props.updateNote(_this2.state.note);
         }
-      }); //Call to save update Note, need to fetch note first though
-      // if (!!this.state.body){
-      //   console.log(this.state)
-      //   this.props.updateNote(this.state)
-      // }
+      });
     }
   }, {
     key: "render",
