@@ -80,6 +80,10 @@ class TextEditor extends React.Component{
     })
   }
 
+  componentDidUnmount(){
+    this.props.updateNote(this.state.note)
+  }
+
   render(){
     let body;
     this.title = this.state.note.title

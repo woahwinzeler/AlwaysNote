@@ -1,6 +1,7 @@
 import React from "react"
 import Navbar from './navbar'
 import { Link } from 'react-router-dom'
+import './splash.css'
 
 const Splash = () => (
   <div className="splash">
@@ -12,13 +13,21 @@ const Splash = () => (
             <h5> Remember everything and tackle any project with your notes, tasks, and schedule all in one place.</h5>
           </div>
           <div className="firstRowSignUp">
-            <Link to="/signup">
-              <button className='splashButton' id='bigGreenButton'>Sign up for free</button>
-            </Link>
+            <div className="button-signup-container">
+              <div className="vertical-center">
+              <Link to="/signup" >
+                <button className='splashButton' id='bigGreenButton'>Sign up for free</button>
+              </Link>
+              </div>
+            </div>
             <br/>
-            <Link to="/login">
-              <button className='splashButton'id='smallButton'>Already have an account? Login</button>
-            </Link>
+            <div className="button-login-container">
+              <div className="login-vertical-center">
+                <Link to="/login">
+                  <a className='splashButton'id='smallButton'>Already have an account? Login</a>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
         <div id="imageContainer">

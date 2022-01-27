@@ -5,6 +5,10 @@
   --evergreen-color:#4BA541;
 }
 
+.Notebooks{
+  background-color: black; 
+  
+}
 
 
 
@@ -16,7 +20,7 @@
   margin-left: auto;
   margin-right: auto;
   justify-content: space-between;
-  box-shadow: lightslategray;
+  border-bottom: 2px solid var(--evergreen-color);
 }
 
 h2 {
@@ -50,21 +54,38 @@ h5 {
   margin: 0;
 }
 
+.button-signup-container{
+
+
+}
+
 #smallButton{
-  
-}
-
-.firstRowSignUp {
- 
-}
-
-.splashButton{
- 
+  color: black; 
 }
 
 #bigGreenButton{
-  
+  color: White;
+  background-color: var(--evergreen-color);
+  border: none;
+  padding: 1rem 2rem; 
+  margin: 0;
+  font-size: xx-large; 
+
 }
+
+#bigGreenButton:hover{
+  filter: brightness(110%);
+}
+
+.vertical-center{
+ padding-left: 43%;
+}
+
+.login-vertical-center{
+  padding-left: 45%;
+  padding-bottom: 20px;
+ }
+
 img {
   width: 60%;
   height: auto;
@@ -73,6 +94,10 @@ img {
 .topnav-right{
   margin: 10px;
   padding: 20px; 
+}
+
+.navbar-links{
+  color: black; 
 }
 
 .topnav-left {

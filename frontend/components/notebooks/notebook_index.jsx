@@ -52,7 +52,6 @@ class NotebookIndex extends React.Component{
   }
 
   deleteNotebook(id){
-    console.log(id)
     this.props.removeNotebook(id)
   }
 
@@ -70,7 +69,7 @@ class NotebookIndex extends React.Component{
 
   render(){
     let notebooks = this.props.notebooks.map((notebook, index) => <li key={index}>
-      <button onClick={this.showNotesIndex} value={notebook.id}> {notebook.title} </button>
+      <button className="Notebooks"onClick={this.showNotesIndex} value={notebook.id}> {notebook.title} </button>
       <br /> 
       <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>-</motion.button>
     </li>)
