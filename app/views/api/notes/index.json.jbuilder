@@ -1,3 +1,4 @@
+
 @notes.each do |note|
   json.set! note.id do 
     json.id note.id

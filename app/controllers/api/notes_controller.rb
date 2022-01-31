@@ -7,10 +7,17 @@ class Api::NotesController < ApplicationController
 
   def show 
     @note = Note.find(params[:id])
+
+    note_tags = @note.tags
+    @tags = []
+    note_tags.each do |note_tag|
+      tag = Tag.find(note_tag.tag_id)
+      @tags.push(tag)
+    end
+    
     if !@note.nil?
       render :show 
     else 
-      debugger 
       render json: @note.errors.full_messages, status: 404
     end 
   end
