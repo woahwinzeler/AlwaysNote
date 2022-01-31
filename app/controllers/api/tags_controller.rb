@@ -1,18 +1,32 @@
 class Api::TagsController < ApplicationController
   #note_ids is how to pass down 
-  def new
-    #this should really be index
+  def index
+    #returns a users tags
+    #http://localhost:3000/api/notebooks/18/notes/6/tags?tag[user_id]=1
+    #working
     @tags = Tag.where(user_id: params[:tag][:user_id])
     render json: @tags 
   end
+  
 
   def update
-    @tag = Tag.find(params.require([:tag]).permit([:id]))
+    #tested and working
+    # http://localhost:3000/api/notebooks/18/notes/6/tags/2?tag[id]=10&tag[title]=Another updated tag. Again.&tag[color]=green&tag[user_id]=1&tag[note_ids]=8,9,2
+    @tag = Tag.find(params[:tag][:id].to_i)
     if !@tag.nil?
-      if @tag.update(tag_params)
+
+      note_ids = params[:tag][:note_ids].split(",").map{|str| str.to_i}
+      title = params[:tag][:title]
+      color = params[:tag][:color]
+
+      @tag.color = color
+      @tag.title = title
+      @tag.note_ids = note_ids
+
+      if @tag.save 
         render json: @tag
       else
-        render json: @tag.errors.full_messages
+        render json: @tag.errors.full_messages, status: 422
       end
     else
       render json: @tag.errors.full_messages, status: 404
@@ -21,6 +35,7 @@ class Api::TagsController < ApplicationController
 
   def show
     #displays notes of a given tag
+    #working  http://localhost:3000/api/notebooks/18/notes/6/tags/2?tag[id]=10
     @tag = Tag.find(params[:tag][:id].to_i) 
     if !@tag.nil?
       render json: @tag.notes
@@ -30,10 +45,11 @@ class Api::TagsController < ApplicationController
 
   end
 
-  def create
-    debugger 
+  def create 
+    #is working
+    #http://localhost:3000/api/notebooks/18/notes/6/tags?tag[user_id]=1&tag[color]=burgundy&tag[title]=Id is divisible by 3&tag[note_ids]=9, 3, 6
     @tag = Tag.new(tag_params)
-    if @note.save 
+    if @tag.save 
       render json: @tag
     else 
       render json: @tag.errors.full_messages, status: 422; 
@@ -41,11 +57,13 @@ class Api::TagsController < ApplicationController
   end
 
   def destroy
-    @tag = Tag.find(params[:tag][:id])
+    #is working
+    #http://localhost:3000/api/notebooks/24/notes/9/tags/18
+    @tag = Tag.find(params[:id].to_i)
     if !@tag.nil? 
       @tag.destroy!
       @tag = nil
-      render json: @tag
+      render json: true 
     else
       render json: @tag.errors.full_messages, status: 404; 
     end 

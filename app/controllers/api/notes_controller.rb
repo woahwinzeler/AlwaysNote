@@ -8,13 +8,8 @@ class Api::NotesController < ApplicationController
   def show 
     @note = Note.find(params[:id])
 
-    note_tags = @note.tags
-    @tags = []
-    note_tags.each do |note_tag|
-      tag = Tag.find(note_tag.tag_id)
-      @tags.push(tag)
-    end
-    
+    @tags = @note.tags
+
     if !@note.nil?
       render :show 
     else 

@@ -4,9 +4,6 @@ class Note < ApplicationRecord
 
   has_and_belongs_to_many :tags
 
-  def tags 
-    return NotesTag.where(note_id: self.id)
-  end
         
   #TODO: ensure title 
 end
