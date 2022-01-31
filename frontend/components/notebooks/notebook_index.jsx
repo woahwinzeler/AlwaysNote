@@ -4,7 +4,7 @@ import Modal from '../Modal/modal'
 import findById from '../../util/find_by_id'
 import TextEditorContainer from '../note/text_editor_container'
 import NotebookFormContainer from './notebook_form_container'
-import NoteForm from './note_form'
+import NoteFormContainer from './note_form_container'
 import NotebookIndexContainer from './notebook_index_container'
 
 
@@ -92,7 +92,7 @@ class NotebookIndex extends React.Component{
         <div className="Notes">
           <ul>
             {notes}
-           <NoteForm notebookId={this.state.note.notebookId} createNote={this.props.createNote}/>
+           <NoteFormContainer notebookId={this.state.note.notebookId}/>
           </ul>
         </div>
         <div>

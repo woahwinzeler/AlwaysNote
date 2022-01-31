@@ -6,8 +6,9 @@ class NoteForm extends React.Component{
 
     this.state = {
       title: "",
-      notebook_id: ""
+      notebook_id: this.props.notebookId
     }
+
 
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -18,9 +19,14 @@ class NoteForm extends React.Component{
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({notebook_id: this.props.notebookId}, () => this.props.createNote(this.state))
+    if(this.props.notebookId){
+      this.setState({notebook_id: this.props.notebookId}, () => this.props.createNote(this.state))
+    } else {
+      this.setState({notebook_id: this.props.notes[0].notebook_id}, () => this.props.createNote(this.state))
+    }
   }
   render(){
+    console.log(this.props)
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
