@@ -1,4 +1,5 @@
 import * as NoteApiUtil from '../util/notes_api_util'
+import { receiveTag } from './tags_actions'
 
 export const RECEIVE_NOTE = 'RECEIVE_NOTE'
 export const DELETE_NOTE = 'DELETE_NOTE'
@@ -22,7 +23,11 @@ const receiveAllNotes = notes => ({
 export const getNote = note => dispatch => (
   //needs to have notebook_id and id 
   NoteApiUtil.fetchNote(note).then(
-    note => dispatch(receiveNote(note))
+    (payload) => {
+      console.log(payload.tags)
+      dispatch(receiveNote(payload.note))
+      dispatch(receiveTag(payload.tags))
+    }
   )
 )
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import NotebookIndex from '../notebooks/notebook_index';
+import TagsIndexContainer from '../tags/tags_index_container';
 
 class Home extends React.Component {
   constructor(props){
@@ -10,6 +11,7 @@ class Home extends React.Component {
     return(
       <div>
         <NotebookIndex /> 
+        <TagsIndexContainer />
       </div>
     )
   }

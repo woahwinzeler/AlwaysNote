@@ -8,8 +8,9 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :notebooks, except: [:new, :edit] do 
       resources :notes, only: [:create, :destroy, :update, :index, :show] do 
-        resources :tags, only: [:create, :destroy, :update, :show, :index]
+        resources :tags, only: [:create]
       end 
     end
+    resources :tags, only: [:index, :update, :destroy, :show]
   end
 end

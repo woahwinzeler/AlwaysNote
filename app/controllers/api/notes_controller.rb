@@ -31,7 +31,6 @@ class Api::NotesController < ApplicationController
     @note = Note.find(params[:note][:id])
     if !@note.nil?
       @note.destroy!
-      @note = nil 
       render json: @note 
     else
       render json: @note.errors.full_messages, status: 404
@@ -41,7 +40,7 @@ class Api::NotesController < ApplicationController
   def update 
     @note = Note.find(params[:note][:id])
     if @note.update(note_params)
-      render json: @note 
+      render :update 
     else
       render json: @note.errors.full_messages, status: 422
     end 

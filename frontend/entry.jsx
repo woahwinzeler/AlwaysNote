@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
       store = configureStore();
     }
 
+   
+
     ReactDOM.render(<Root store={store} />, main);
 
     //functions added to the window for debugging 

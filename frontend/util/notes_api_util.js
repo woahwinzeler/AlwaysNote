@@ -28,6 +28,8 @@ export const createNote = note => (
   })
 )
 
+
+//returns a notes tags as well 
 export const fetchNote = note => {
   return $.ajax({
     url: `/api/notebooks/${note.notebook_id}/notes/${note.id}`,
