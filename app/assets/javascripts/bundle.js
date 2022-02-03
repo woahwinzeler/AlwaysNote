@@ -1322,11 +1322,11 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         className: "Notes"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, notes, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_form_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
         notebookId: this.state.note.notebookId
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_text_editor_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_text_editor_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         noteToOpen: this.state.noteToOpen,
         notebookId: this.state.note.notebookId,
         note: this.state.note
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tags_tags_index_container__WEBPACK_IMPORTED_MODULE_6__["default"], null)));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tags_tags_index_container__WEBPACK_IMPORTED_MODULE_6__["default"], null));
     }
   }]);
 
@@ -1615,13 +1615,28 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(TagsIndex);
 
+  //TODO: add notes list
+  //TODO: get all tags button
+  //TODO: edit tags
+  //TODO: remove tags 
+  //TODO: style tags 
   function TagsIndex(props) {
+    var _this;
+
     _classCallCheck(this, TagsIndex);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.getAllTags = _this.getAllTags.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(TagsIndex, [{
+    key: "getAllTags",
+    value: function getAllTags(e) {
+      e.preventDefault();
+      this.props.getAllTags(this.props.userId);
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.getAllTags(this.props.userId);
@@ -1629,21 +1644,26 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var tags = Object.keys(this.props.tags);
+      var _this2 = this;
 
-      if (tags.length >= 1) {
-        tags = tags.map(function (tag) {
+      var tags;
+      var tagKeys = Object.keys(this.props.tags);
+
+      if (tagKeys.length >= 1) {
+        // debugger 
+        tags = tagKeys.map(function (id) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            key: tag.id
-          }, " ");
+            key: id,
+            color: _this2.props.tags[id].color
+          }, _this2.props.tags[id].title);
         });
-      } else {
-        tags = null;
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tags"
-      }, tags);
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.getAllTags
+      }, " See All Tags "), tags);
     }
   }]);
 

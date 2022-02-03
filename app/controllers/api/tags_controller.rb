@@ -28,10 +28,9 @@ class Api::TagsController < ApplicationController
         else
           render json: @tag.errors.full_messages, status: 422
         end
-      end 
       else 
         render json: {"msg": "user must own the tag they're updating"}, status: 422
-    end
+      end 
     else
       render json: @tag.errors.full_messages, status: 404
     end

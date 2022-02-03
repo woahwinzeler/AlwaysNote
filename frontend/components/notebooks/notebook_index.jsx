@@ -94,12 +94,8 @@ class NotebookIndex extends React.Component{
            <NoteFormContainer notebookId={this.state.note.notebookId}/>
           </ul>
         </div>
-        <div>
           <TextEditorContainer noteToOpen={this.state.noteToOpen} notebookId={this.state.note.notebookId}  note={this.state.note}/>
-        </div>
-        <div>
           <TagsIndexContainer />
-        </div>
       </div>
 
     )
