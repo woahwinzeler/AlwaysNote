@@ -3,9 +3,8 @@ import { motion } from 'framer-motion'
 import Modal from '../Modal/modal'
 import findById from '../../util/find_by_id'
 import TextEditorContainer from '../note/text_editor_container'
-import NotebookFormContainer from './notebook_form_container'
 import NoteFormContainer from './note_form_container'
-import NotebookIndexContainer from './notebook_index_container'
+import TagsIndexContainer from '../tags/tags_index_container'
 
 
 class NotebookIndex extends React.Component{
@@ -97,6 +96,9 @@ class NotebookIndex extends React.Component{
         </div>
         <div>
           <TextEditorContainer noteToOpen={this.state.noteToOpen} notebookId={this.state.note.notebookId}  note={this.state.note}/>
+        </div>
+        <div>
+          <TagsIndexContainer />
         </div>
       </div>
 

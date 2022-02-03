@@ -2,6 +2,7 @@ import * as TagApiUtil from '../util/tags_api_util'
 
 export const RECEIVE_ALL_TAGS = 'RECEIVE_ALL_TAGS'
 export const RECEIVE_TAGS = 'RECEIVE_TAGS'
+export const RECEIVE_TAG = 'RECEIVE_TAG'
 export const DELETE_TAG = 'DELETE_TAG'
 const RECEIVE_NOTE = 'RECEIVE_NOTE'
 
@@ -10,9 +11,14 @@ const receiveNote = note => ({
   note
 })
 
-export const receiveTag = tags => ({
+export const receiveTags = tags => ({
   type: RECEIVE_TAGS,
   tags
+})
+
+const receiveTag = tag => ({
+  type: RECEIVE_TAG, 
+  tag 
 })
 
 const removeTag = tagId => ({

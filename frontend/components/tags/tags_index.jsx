@@ -1,4 +1,4 @@
-import 'react'
+import React from 'react'
 
 class TagsIndex extends React.Component{
   constructor(props){
@@ -10,9 +10,15 @@ class TagsIndex extends React.Component{
   }
 
   render(){
+    let tags = Object.keys(this.props.tags);
+    if (tags.length >= 1){
+      tags = tags.map((tag) => <div key={tag.id}> </div>)
+    } else {
+      tags = null;
+    }
     return (
       <div className="tags">
-        {this.props.tags}
+        {tags}
       </div>
     )
   }
