@@ -1158,6 +1158,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tags_tags_index_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../tags/tags_index_container */ "./frontend/components/tags/tags_index_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1334,7 +1340,13 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         noteToOpen: this.state.noteToOpen,
         notebookId: this.state.note.notebookId,
         note: this.state.note
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tags_tags_index_container__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tags_tags_index_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        showNote: function showNote(noteId) {
+          return _this3.setState(_objectSpread(_objectSpread({}, _this3.state), {}, {
+            noteToOpen: noteId
+          }));
+        }
+      }));
     }
   }]);
 
@@ -1623,8 +1635,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(TagsIndex);
 
-  //TODO: add notes list
-  //TODO: get all tags button
+  //TODO: show note 
   //TODO: edit tags
   //TODO: remove tags 
   //TODO: style tags 
@@ -1639,6 +1650,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     };
     _this.getAllTags = _this.getAllTags.bind(_assertThisInitialized(_this));
     _this.getTagNotes = _this.getTagNotes.bind(_assertThisInitialized(_this));
+    _this.showNote = _this.showNote.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1647,6 +1659,16 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     value: function getAllTags(e) {
       e.preventDefault();
       this.props.getAllTags(this.props.userId);
+    }
+  }, {
+    key: "showNote",
+    value: function showNote(note) {
+      var _this2 = this;
+
+      console.log(note);
+      this.props.getNote(note).then(function () {
+        return _this2.props.showNote(note.id);
+      });
     }
   }, {
     key: "getTagNotes",
@@ -1661,7 +1683,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var tags;
       var tagKeys = Object.keys(this.props.tags);
@@ -1670,28 +1692,29 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         tags = tagKeys.map(function (id) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: id,
-            color: _this2.props.tags[id].color,
+            color: _this3.props.tags[id].color,
             onClick: function onClick() {
-              return _this2.getTagNotes(id);
-            }
-          }, _this2.props.tags[id].title);
+              return _this3.getTagNotes(id);
+            },
+            className: "tag"
+          }, _this3.props.tags[id].title);
         });
-      }
+      } //TODO add onClick={this.showNote(note)} tp the div with a key of note.id
+
 
       var notes;
       var noteKeys = Object.keys(this.props.notes);
 
       if (noteKeys.length > 0) {
         notes = noteKeys.map(function (key) {
-          var note = _this2.props.notes[key];
+          var note = _this3.props.notes[key];
 
-          if (typeof _this2.props.notes[key].tag !== 'undefined') {
+          if (typeof _this3.props.notes[key].tag !== 'undefined') {
+            console.log(note);
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "tag-note"
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               key: note.id,
-              onClick: true
-            }, " ", note.title));
+              className: "tag-note"
+            }, " ", note.title);
           } else {
             return null;
           }
@@ -1702,9 +1725,15 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         className: "tag-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.getAllTags
-      }, " See All Tags "), tags, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, " See All Tags "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "all-tags"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "tag-header"
+      }, " Tags "), tags), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tagged-notes"
-      }, notes));
+      }, ",", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "tag-header"
+      }, " Notes "), notes));
     }
   }]);
 
@@ -1727,6 +1756,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_tags_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/tags_actions */ "./frontend/actions/tags_actions.js");
 /* harmony import */ var _tags_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tags_index */ "./frontend/components/tags/tags_index.jsx");
+/* harmony import */ var _actions_note_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/note_actions */ "./frontend/actions/note_actions.js");
+
 
 
 
@@ -1755,6 +1786,9 @@ var mDTP = function mDTP(dispatch) {
     },
     updateTag: function updateTag(tag) {
       return dispatch(Object(_actions_tags_actions__WEBPACK_IMPORTED_MODULE_1__["updateTag"])(tag));
+    },
+    getNote: function getNote(note) {
+      return dispatch(Object(_actions_note_actions__WEBPACK_IMPORTED_MODULE_3__["getNote"])(note));
     }
   };
 };

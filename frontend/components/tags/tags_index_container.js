@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { fetchTag, getAllTags, deleteTag, createTag, updateTag} from '../../actions/tags_actions'
 import TagsIndex from './tags_index'
+import {getNote} from '../../actions/note_actions'
 
 const mSTP = state => ({
   tags: state.entities.tags,
@@ -14,6 +15,7 @@ const mDTP = dispatch => ({
   fetchTagsNotes: tagId => dispatch(fetchTag(tagId)),
   createTag: tag => dispatch(createTag(tag)),
   updateTag: tag => dispatch(updateTag(tag)),
+  getNote: note => dispatch(getNote(note)),
 })
 
 const TagsIndexContainer = connect(mSTP, mDTP)(TagsIndex)
