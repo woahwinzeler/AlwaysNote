@@ -4,7 +4,8 @@ import TagsIndex from './tags_index'
 
 const mSTP = state => ({
   tags: state.entities.tags,
-  userId: state.sessions.CurrentUserId  
+  userId: state.sessions.CurrentUserId,
+  notes: state.entities.notes
 })
 
 const mDTP = dispatch => ({

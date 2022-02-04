@@ -1670,11 +1670,30 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         });
       }
 
+      var notes;
+      var noteKeys = Object.keys(this.props.notes);
+
+      if (noteKeys.length > 0) {
+        notes = noteKeys.map(function (key) {
+          var note = _this2.props.notes[key];
+
+          if (typeof _this2.props.notes[key].tag !== 'undefined') {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "tag-note"
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", note.title));
+          } else {
+            return null;
+          }
+        });
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "tags"
+        className: "tag-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.getAllTags
-      }, " See All Tags "), tags);
+      }, " See All Tags "), tags, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "tagged-notes"
+      }, notes));
     }
   }]);
 
@@ -1704,7 +1723,8 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state) {
   return {
     tags: state.entities.tags,
-    userId: state.sessions.CurrentUserId
+    userId: state.sessions.CurrentUserId,
+    notes: state.entities.notes
   };
 };
 

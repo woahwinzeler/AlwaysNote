@@ -4,6 +4,7 @@ json.set! "note" do
       json.title note.title 
       json.body note.body
       json.notebook_id note.notebook_id 
+      json.tag true 
     end
   end
 end
