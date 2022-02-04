@@ -13,7 +13,6 @@ const notesReducer = (oldState={}, action) => {
       return Object.assign({}, oldState, note)
     case RECEIVE_ALL_NOTES:
       let { notes } = action.notes
-      console.log(notes)
       return Object.assign({}, notes)
     default:
       return oldState

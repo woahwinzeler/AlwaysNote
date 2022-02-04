@@ -1626,7 +1626,11 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, TagsIndex);
 
     _this = _super.call(this, props);
+    _this.state = {
+      notes: {}
+    };
     _this.getAllTags = _this.getAllTags.bind(_assertThisInitialized(_this));
+    _this.getTagNotes = _this.getTagNotes.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1635,6 +1639,11 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     value: function getAllTags(e) {
       e.preventDefault();
       this.props.getAllTags(this.props.userId);
+    }
+  }, {
+    key: "getTagNotes",
+    value: function getTagNotes(id) {
+      this.props.fetchTagsNotes(id);
     }
   }, {
     key: "componentDidMount",
@@ -1650,11 +1659,13 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
       var tagKeys = Object.keys(this.props.tags);
 
       if (tagKeys.length >= 1) {
-        // debugger 
         tags = tagKeys.map(function (id) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: id,
-            color: _this2.props.tags[id].color
+            color: _this2.props.tags[id].color,
+            onClick: function onClick() {
+              return _this2.getTagNotes(id);
+            }
           }, _this2.props.tags[id].title);
         });
       }
@@ -2166,7 +2177,6 @@ var notesReducer = function notesReducer() {
 
     case _actions_note_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_NOTES"]:
       var notes = action.notes.notes;
-      console.log(notes);
       return Object.assign({}, notes);
 
     default:

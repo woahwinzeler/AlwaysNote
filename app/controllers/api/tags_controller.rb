@@ -5,7 +5,7 @@ class Api::TagsController < ApplicationController
     #http://localhost:3000/api/notebooks/18/notes/6/tags?tag[user_id]=1
     #working
     @tags = Tag.where(user_id: params[:tag][:user_id])
-    render json: @tags 
+    render :index 
   end
   
 
@@ -39,11 +39,15 @@ class Api::TagsController < ApplicationController
   def show
     #displays notes of a given tag
     #working  http://localhost:3000/api/notebooks/18/notes/6/tags/2?tag[id]=10
-    @tag = Tag.find(params[:tag][:id].to_i) 
-    if !@tag.nil?
-      render json: @tag.notes
+    @tag = Tag.find(params[:id].to_i) 
+    if @tag.notes.empty?
+      render json: {}
     else 
-      render json: @tag.errors.full_messages, status: 404
+      if !@tag.nil?
+        render :show 
+      else 
+        render json: @tag.errors.full_messages, status: 404
+      end 
     end 
 
   end

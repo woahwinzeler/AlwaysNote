@@ -9,13 +9,22 @@ class TagsIndex extends React.Component{
   constructor(props){
     super(props)
 
+    this.state = {
+      notes: {}
+    }
+
     this.getAllTags = this.getAllTags.bind(this)
+    this.getTagNotes = this.getTagNotes.bind(this)
   }
 
   getAllTags(e){
     e.preventDefault(); 
 
     this.props.getAllTags(this.props.userId)
+  }
+
+  getTagNotes(id){
+    this.props.fetchTagsNotes(id)
   }
 
   componentDidMount(){
@@ -26,8 +35,7 @@ class TagsIndex extends React.Component{
     let tags; 
     let tagKeys = Object.keys(this.props.tags);
     if (tagKeys.length >= 1){
-      // debugger 
-      tags = tagKeys.map((id) => <div key={id} color={this.props.tags[id].color}>{this.props.tags[id].title}</div>)
+      tags = tagKeys.map((id) => <div key={id} color={this.props.tags[id].color} onClick={() => this.getTagNotes(id)}>{this.props.tags[id].title}</div>)
     } 
     return (
       <div className="tags">
