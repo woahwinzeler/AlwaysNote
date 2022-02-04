@@ -10,7 +10,7 @@ const mSTP = ({sessions, entities: {notebooks, users, notes}}) => {
   return {
     notebooks: Object.values(notebooks),
     currentUser: users[sessions.id],
-    notes: Object.values(notes)
+    notes: notes
   }
 }
 const mDTP = dispatch => ({

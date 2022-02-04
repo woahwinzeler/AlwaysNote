@@ -59,8 +59,10 @@ class TextEditor extends React.Component{
       if(typeof this.props.note.id !== 'undefined'){
         if(Number.isInteger(this.props.note.id) && typeof prevProps.note === 'undefined'){
           this.setState({note: this.props.note})
+          console.log("hit top")
         } else if (typeof prevProps.note.id !== 'undefined' && this.props.note.id !==  prevProps.note.id){
           this.setState({note: this.props.note})
+          console.log("hit bottom")
         }
       }
     }

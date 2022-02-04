@@ -1,7 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Modal from '../Modal/modal'
-import findById from '../../util/find_by_id'
 import TextEditorContainer from '../note/text_editor_container'
 import NoteFormContainer from './note_form_container'
 import TagsIndexContainer from '../tags/tags_index_container'
@@ -28,13 +27,18 @@ class NotebookIndex extends React.Component{
     this.deleteNotebook = this.deleteNotebook.bind(this)
     this.showNotesIndex = this.showNotesIndex.bind(this)
     this.showNote = this.showNote.bind(this)
+    this.showNoteFromTag = this.showNoteFromTag.bind(this)
   }
 
   showNote(e){
-    let val = e.currentTarget.value
-    let note = this.props.getNote(findById(this.props.notes, val)).then(() =>  this.setState({note: note, 
-      noteToOpen: val,
+    let noteId = e.currentTarget.value
+    let note = this.props.getNote(this.props.notes[noteId]).then(() =>  this.setState({note: this.props.notes[noteId], 
+      noteToOpen: noteId,
       noteFormToOpen: true}))
+  }
+
+  showNoteFromTag(){
+
   }
 
   showNotesIndex(e){
@@ -73,16 +77,14 @@ class NotebookIndex extends React.Component{
       <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>-</motion.button>
     </li>)
 
-
-    let notes = this.props.notes.map((note, index) => {
+    let notesArray = Object.values(this.props.notes)
+    let notes = notesArray.map((note, index) => {
       if(typeof note.tag === 'undefined' || note.notebook_id === this.state.note.notebookId){
         return <li key={index} onClick={this.showNote} value={note.id} className="NotesItem">{note.title}</li>
       } else {
         return null
       }
     })
-    // notes.unshift(<li> <button onClick> Add a new note</button></li>)
-
     return(
       <div className="notesAndBooks">
         <div className="notebooks">
