@@ -1228,7 +1228,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       var noteId = e.currentTarget.value;
-      var note = this.props.getNote(this.props.notes[noteId]).then(function () {
+      this.props.getNote(this.props.notes[noteId]).then(function () {
         return _this2.setState({
           note: _this2.props.notes[noteId],
           noteToOpen: noteId,
@@ -1731,7 +1731,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         className: "tag-header"
       }, " Tags "), tags), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tagged-notes"
-      }, ",", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "tag-header"
       }, " Notes "), notes));
     }

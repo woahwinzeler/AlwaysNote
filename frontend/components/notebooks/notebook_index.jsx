@@ -32,9 +32,10 @@ class NotebookIndex extends React.Component{
 
   showNote(e){
     let noteId = e.currentTarget.value
-    let note = this.props.getNote(this.props.notes[noteId]).then(() =>  this.setState({note: this.props.notes[noteId], 
-      noteToOpen: noteId,
-      noteFormToOpen: true}))
+    this.props.getNote(this.props.notes[noteId]).then(
+      () =>  this.setState({note: this.props.notes[noteId], 
+                            noteToOpen: noteId,
+                            noteFormToOpen: true}))
   }
 
   showNoteFromTag(){

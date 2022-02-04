@@ -71,7 +71,7 @@ class TagsIndex extends React.Component{
         {tags}
       </div>
       <div className="tagged-notes">
-        ,<h3 className="tag-header" > Notes </h3>
+        <h3 className="tag-header" > Notes </h3>
         {notes}
       </div>
       </div>
