@@ -1292,12 +1292,16 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         }, "-"));
       });
       var notes = this.props.notes.map(function (note, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: index,
-          onClick: _this3.showNote,
-          value: note.id,
-          className: "NotesItem"
-        }, note.title);
+        if (typeof note.tag === 'undefined' || note.notebook_id === _this3.state.note.notebookId) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: index,
+            onClick: _this3.showNote,
+            value: note.id,
+            className: "NotesItem"
+          }, note.title);
+        } else {
+          return null;
+        }
       }); // notes.unshift(<li> <button onClick> Add a new note</button></li>)
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1680,7 +1684,9 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
           if (typeof _this2.props.notes[key].tag !== 'undefined') {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "tag-note"
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", note.title));
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              key: note.id
+            }, " ", note.title));
           } else {
             return null;
           }

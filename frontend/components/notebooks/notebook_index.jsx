@@ -74,7 +74,13 @@ class NotebookIndex extends React.Component{
     </li>)
 
 
-    let notes = this.props.notes.map((note, index) => <li key={index} onClick={this.showNote} value={note.id} className="NotesItem">{note.title}</li>)
+    let notes = this.props.notes.map((note, index) => {
+      if(typeof note.tag === 'undefined' || note.notebook_id === this.state.note.notebookId){
+        return <li key={index} onClick={this.showNote} value={note.id} className="NotesItem">{note.title}</li>
+      } else {
+        return null
+      }
+    })
     // notes.unshift(<li> <button onClick> Add a new note</button></li>)
 
     return(

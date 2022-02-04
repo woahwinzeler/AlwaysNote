@@ -45,7 +45,7 @@ class TagsIndex extends React.Component{
         if (typeof this.props.notes[key].tag !== 'undefined'){
           return (
             <div className="tag-note">
-              <div> {note.title}</div>
+              <div key={note.id}> {note.title}</div>
             </div>
           )
         } else {
