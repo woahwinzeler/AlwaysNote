@@ -62,7 +62,7 @@ class TextEditor extends React.Component{
           console.log("hit top")
         } else if (typeof prevProps.note.id !== 'undefined' && this.props.note.id !==  prevProps.note.id){
           this.setState({note: this.props.note})
-          console.log("hit bottom")
+          console.log(this.props.note)
         }
       }
     }
@@ -92,9 +92,9 @@ class TextEditor extends React.Component{
     if (this.state.note.body === undefined){
       body = ''
     } else {
+      console.log(this.state.note.body)
       body = this.state.note.body 
     }
-
 
     return (
       <div>

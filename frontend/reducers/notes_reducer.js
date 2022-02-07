@@ -9,8 +9,13 @@ const notesReducer = (oldState={}, action) => {
       delete newState[action.id]
       return newState
     case RECEIVE_NOTE:
-      let { note } = action.note
-      return Object.assign({}, oldState, note)
+      let { note } = action.note 
+      debugger 
+      if (note === undefined){
+        return Object.assign({}, oldState, action.note)
+      } else {
+        return Object.assign({}, oldState, note)
+      }
     case RECEIVE_ALL_NOTES:
       let { notes } = action.notes
       return Object.assign({}, notes)

@@ -24,7 +24,7 @@ export const getNote = note => dispatch => (
   //needs to have notebook_id and id 
   NoteApiUtil.fetchNote(note).then(
     (payload) => {
-      console.log(payload.tags)
+      console.log(payload.note)
       dispatch(receiveNote(payload.note))
       dispatch(receiveTags(payload.tags))
     }

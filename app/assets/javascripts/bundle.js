@@ -136,7 +136,7 @@ var getNote = function getNote(note) {
   return function (dispatch) {
     return (//needs to have notebook_id and id 
       _util_notes_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchNote"](note).then(function (payload) {
-        console.log(payload.tags);
+        console.log(payload.note);
         dispatch(receiveNote(payload.note));
         dispatch(Object(_tags_actions__WEBPACK_IMPORTED_MODULE_1__["receiveTags"])(payload.tags));
       })
@@ -749,7 +749,7 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
             this.setState({
               note: this.props.note
             });
-            console.log("hit bottom");
+            console.log(this.props.note);
           }
         }
       }
@@ -787,6 +787,7 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
       if (this.state.note.body === undefined) {
         body = '';
       } else {
+        console.log(this.state.note.body);
         body = this.state.note.body;
       }
 
@@ -2238,7 +2239,13 @@ var notesReducer = function notesReducer() {
 
     case _actions_note_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_NOTE"]:
       var note = action.note.note;
-      return Object.assign({}, oldState, note);
+      debugger;
+
+      if (note === undefined) {
+        return Object.assign({}, oldState, action.note);
+      } else {
+        return Object.assign({}, oldState, note);
+      }
 
     case _actions_note_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_NOTES"]:
       var notes = action.notes.notes;
