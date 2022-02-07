@@ -1,0 +1,14 @@
+  add, edit, remove tags -- modal
+
+  jbuilder on showing notes through tags, store tagId instead of boolean 
+
+  store tag color in hex instead of string 
+
+  figure out extra notes item that happens during auto save
+
+  style tags
+
+  style login, signup
+
+  refactor autosave
+

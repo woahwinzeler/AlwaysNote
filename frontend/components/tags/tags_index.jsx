@@ -1,7 +1,6 @@
 import React from 'react'
 
 class TagsIndex extends React.Component{
-  //TODO: show note 
   //TODO: edit tags
   //TODO: remove tags 
   //TODO: style tags
@@ -12,6 +11,7 @@ class TagsIndex extends React.Component{
     this.state = {
       notes: {}, 
       selectedNote: {}, 
+      selectedTag: {},
     }
 
     this.getAllTags = this.getAllTags.bind(this)
@@ -26,12 +26,11 @@ class TagsIndex extends React.Component{
   }
 
   showNote(note){
-    console.log(note)
     this.props.getNote(note).then(() => this.props.showNote(note.id))
   }
 
   getTagNotes(id){
-    this.props.fetchTagsNotes(id)
+    this.props.fetchTagsNotes(id).then(() => this.setState({selectedTag: parseInt(id)}))
   }
 
   componentDidMount(){
@@ -46,15 +45,14 @@ class TagsIndex extends React.Component{
       tags = tagKeys.map((id) => <div key={id} color={this.props.tags[id].color} onClick={() => this.getTagNotes(id)} className="tag">{this.props.tags[id].title}</div>)
     } 
 
-    //TODO add onClick={this.showNote(note)} tp the div with a key of note.id
 
     let notes;
     let noteKeys = Object.keys(this.props.notes);
     if (noteKeys.length > 0){
       notes = noteKeys.map(key => {
         let note = this.props.notes[key];
-        if (typeof this.props.notes[key].tag !== 'undefined'){
-          console.log(note)
+        console.log(this.props.notes[key].tag, this.state.selectedTag, this.props.notes[key].tag === this.state.selectedTag )
+        if (typeof this.props.notes[key].tag !== 'undefined' && this.props.notes[key].tag === this.state.selectedTag){
           return (
               <div key={note.id}  onClick={() => this.showNote(note)}className="tag-note"> {note.title}</div>
           )

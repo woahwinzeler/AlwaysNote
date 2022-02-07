@@ -1636,7 +1636,6 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(TagsIndex);
 
-  //TODO: show note 
   //TODO: edit tags
   //TODO: remove tags 
   //TODO: style tags
@@ -1649,7 +1648,8 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       notes: {},
-      selectedNote: {}
+      selectedNote: {},
+      selectedTag: {}
     };
     _this.getAllTags = _this.getAllTags.bind(_assertThisInitialized(_this));
     _this.getTagNotes = _this.getTagNotes.bind(_assertThisInitialized(_this));
@@ -1668,7 +1668,6 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     value: function showNote(note) {
       var _this2 = this;
 
-      console.log(note);
       this.props.getNote(note).then(function () {
         return _this2.props.showNote(note.id);
       });
@@ -1676,7 +1675,13 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "getTagNotes",
     value: function getTagNotes(id) {
-      this.props.fetchTagsNotes(id);
+      var _this3 = this;
+
+      this.props.fetchTagsNotes(id).then(function () {
+        return _this3.setState({
+          selectedTag: parseInt(id)
+        });
+      });
     }
   }, {
     key: "componentDidMount",
@@ -1686,7 +1691,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var tags;
       var tagKeys = Object.keys(this.props.tags);
@@ -1695,29 +1700,28 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         tags = tagKeys.map(function (id) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: id,
-            color: _this3.props.tags[id].color,
+            color: _this4.props.tags[id].color,
             onClick: function onClick() {
-              return _this3.getTagNotes(id);
+              return _this4.getTagNotes(id);
             },
             className: "tag"
-          }, _this3.props.tags[id].title);
+          }, _this4.props.tags[id].title);
         });
-      } //TODO add onClick={this.showNote(note)} tp the div with a key of note.id
-
+      }
 
       var notes;
       var noteKeys = Object.keys(this.props.notes);
 
       if (noteKeys.length > 0) {
         notes = noteKeys.map(function (key) {
-          var note = _this3.props.notes[key];
+          var note = _this4.props.notes[key];
+          console.log(_this4.props.notes[key].tag, _this4.state.selectedTag, _this4.props.notes[key].tag === _this4.state.selectedTag);
 
-          if (typeof _this3.props.notes[key].tag !== 'undefined') {
-            console.log(note);
+          if (typeof _this4.props.notes[key].tag !== 'undefined' && _this4.props.notes[key].tag === _this4.state.selectedTag) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               key: note.id,
               onClick: function onClick() {
-                return _this3.showNote(note);
+                return _this4.showNote(note);
               },
               className: "tag-note"
             }, " ", note.title);

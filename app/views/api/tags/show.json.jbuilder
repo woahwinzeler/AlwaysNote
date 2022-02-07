@@ -5,6 +5,6 @@
       json.title note.title 
       json.body note.body
       json.notebook_id note.notebook_id 
-      json.tag true 
+      json.tag @tag.id 
     end
   end
