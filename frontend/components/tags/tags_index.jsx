@@ -4,12 +4,14 @@ class TagsIndex extends React.Component{
   //TODO: show note 
   //TODO: edit tags
   //TODO: remove tags 
-  //TODO: style tags 
+  //TODO: style tags
+  //TODO: add tags  
   constructor(props){
     super(props)
 
     this.state = {
-      notes: {}
+      notes: {}, 
+      selectedNote: {}, 
     }
 
     this.getAllTags = this.getAllTags.bind(this)
@@ -54,7 +56,7 @@ class TagsIndex extends React.Component{
         if (typeof this.props.notes[key].tag !== 'undefined'){
           console.log(note)
           return (
-              <div key={note.id} className="tag-note"> {note.title}</div>
+              <div key={note.id}  onClick={() => this.showNote(note)}className="tag-note"> {note.title}</div>
           )
         } else {
           return null 

@@ -1639,7 +1639,8 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
   //TODO: show note 
   //TODO: edit tags
   //TODO: remove tags 
-  //TODO: style tags 
+  //TODO: style tags
+  //TODO: add tags  
   function TagsIndex(props) {
     var _this;
 
@@ -1647,7 +1648,8 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      notes: {}
+      notes: {},
+      selectedNote: {}
     };
     _this.getAllTags = _this.getAllTags.bind(_assertThisInitialized(_this));
     _this.getTagNotes = _this.getTagNotes.bind(_assertThisInitialized(_this));
@@ -1714,6 +1716,9 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
             console.log(note);
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               key: note.id,
+              onClick: function onClick() {
+                return _this3.showNote(note);
+              },
               className: "tag-note"
             }, " ", note.title);
           } else {
@@ -2239,7 +2244,6 @@ var notesReducer = function notesReducer() {
 
     case _actions_note_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_NOTE"]:
       var note = action.note.note;
-      debugger;
 
       if (note === undefined) {
         return Object.assign({}, oldState, action.note);

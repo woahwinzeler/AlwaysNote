@@ -10,7 +10,6 @@ const notesReducer = (oldState={}, action) => {
       return newState
     case RECEIVE_NOTE:
       let { note } = action.note 
-      debugger 
       if (note === undefined){
         return Object.assign({}, oldState, action.note)
       } else {

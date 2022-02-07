@@ -1,4 +1,4 @@
-json.set! "note" do
+
   @tag.notes.each do |note|
     json.set! note.id do
       json.id note.id 
@@ -8,4 +8,3 @@ json.set! "note" do
       json.tag true 
     end
   end
-end
