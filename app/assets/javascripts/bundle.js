@@ -1707,15 +1707,15 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
             className: "tag"
           }, _this4.props.tags[id].title);
         });
-      }
+      } //TODO: Select a tag to see associated notes never renders 
+
 
       var notes;
       var noteKeys = Object.keys(this.props.notes);
 
-      if (noteKeys.length > 0) {
+      if (noteKeys.length > 0 && typeof noteKeys.length !== 'undefined') {
         notes = noteKeys.map(function (key) {
           var note = _this4.props.notes[key];
-          console.log(_this4.props.notes[key].tag, _this4.state.selectedTag, _this4.props.notes[key].tag === _this4.state.selectedTag);
 
           if (typeof _this4.props.notes[key].tag !== 'undefined' && _this4.props.notes[key].tag === _this4.state.selectedTag) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1729,6 +1729,16 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
             return null;
           }
         });
+      } else {
+        if (typeof this.state.selectedTag === 'undefined') {
+          notes = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            className: "placeholder"
+          }, " ", this.props.tags[this.state.selectedTag], " has no associated notes. ");
+        } else {
+          notes = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            className: "placeholder"
+          }, " Select a tag to see associated notes");
+        }
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

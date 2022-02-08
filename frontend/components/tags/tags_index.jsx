@@ -45,13 +45,14 @@ class TagsIndex extends React.Component{
       tags = tagKeys.map((id) => <div key={id} color={this.props.tags[id].color} onClick={() => this.getTagNotes(id)} className="tag">{this.props.tags[id].title}</div>)
     } 
 
+    
 
+    //TODO: Select a tag to see associated notes never renders 
     let notes;
     let noteKeys = Object.keys(this.props.notes);
-    if (noteKeys.length > 0){
+    if (noteKeys.length > 0 && typeof noteKeys.length !== 'undefined'){
       notes = noteKeys.map(key => {
         let note = this.props.notes[key];
-        console.log(this.props.notes[key].tag, this.state.selectedTag, this.props.notes[key].tag === this.state.selectedTag )
         if (typeof this.props.notes[key].tag !== 'undefined' && this.props.notes[key].tag === this.state.selectedTag){
           return (
               <div key={note.id}  onClick={() => this.showNote(note)}className="tag-note"> {note.title}</div>
@@ -60,8 +61,14 @@ class TagsIndex extends React.Component{
           return null 
         } 
       })
-    }  
-    
+    } else {
+      if (typeof this.state.selectedTag === 'undefined'){
+        notes = <p className="placeholder"> {this.props.tags[this.state.selectedTag]} has no associated notes. </p>
+      } else {
+        notes = <p className="placeholder"> Select a tag to see associated notes</p>
+      }
+    }
+  
     
     return (
       <div className="tag-container">
