@@ -12,7 +12,6 @@ class TagsIndex extends React.Component{
     this.state = {
       notes: {}, 
       selectedNote: {}, 
-      selectedTag: {},
       modalOpen: false,
       editMode: false,
       tagSelected: -1, 
@@ -120,6 +119,7 @@ class TagsIndex extends React.Component{
         <h3 className="tag-header" > Notes </h3>
         {notes}
       </div>
+      <TagActionModal tag={this.state.tagSelected} modalOpen={this.state.modalOpen} />
       </div>
       
     )

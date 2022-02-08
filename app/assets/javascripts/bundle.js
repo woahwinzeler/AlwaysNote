@@ -1717,7 +1717,6 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       notes: {},
       selectedNote: {},
-      selectedTag: {},
       modalOpen: false,
       editMode: false,
       tagSelected: -1
@@ -1866,7 +1865,10 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         className: "tagged-notes"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "tag-header"
-      }, " Notes "), notes));
+      }, " Notes "), notes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tag_action_modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        tag: this.state.tagSelected,
+        modalOpen: this.state.modalOpen
+      }));
     }
   }]);
 
