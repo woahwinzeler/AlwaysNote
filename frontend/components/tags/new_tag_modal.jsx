@@ -1,9 +1,7 @@
 import React from 'react'
-import { motion } from "framer-motion"
 
 
-
-class TagActionModal extends React.Component{
+class NewTagModal extends React.Component{
   constructor(props){
     super(props)
   }  
@@ -27,4 +25,4 @@ class TagActionModal extends React.Component{
   }
 }
 
-export default TagActionModal; 
+export default NewTagModal; 

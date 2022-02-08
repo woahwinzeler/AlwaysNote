@@ -1,5 +1,6 @@
 import React from 'react'
 import TagActionModal from './tag_action_modal'
+import NewTagModal from './new_tag_modal'
 
 class TagsIndex extends React.Component{
   //TODO: edit tags
@@ -10,11 +11,11 @@ class TagsIndex extends React.Component{
     super(props)
 
     this.state = {
-      notes: {}, 
-      selectedNote: {}, 
       modalOpen: false,
       editMode: false,
       tagSelected: -1, 
+      newTagModalOpen: false, 
+      selectedNote: -1, 
     }
 
     this.getAllTags = this.getAllTags.bind(this)
@@ -22,12 +23,18 @@ class TagsIndex extends React.Component{
     this.showNote = this.showNote.bind(this)
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.showNoteOrEngageModal = this.showNoteOrEngageModal.bind(this); 
+    this.showNewTagModal = this.showNewTagModal.bind(this);
   }
 
   getAllTags(e){
     e.preventDefault(); 
 
     this.props.getAllTags(this.props.userId)
+  }
+
+  showNewTagModal(e){
+    e.preventDefault();
+    this.setState({newTagModalOpen: true})
   }
 
   showModal(id){
@@ -60,6 +67,8 @@ class TagsIndex extends React.Component{
 
 
   }
+
+
 
   getTagNotes(id){
     this.props.fetchTagsNotes(id).then(() => this.setState({selectedTag: parseInt(id)}))
@@ -115,11 +124,13 @@ class TagsIndex extends React.Component{
         <h3 className="tag-header"> Tags </h3>
         {tags}
       </div>
+      <button onClick={this.showNewTagModal}> Create New Tag </button>
       <div className="tagged-notes">
         <h3 className="tag-header" > Notes </h3>
         {notes}
       </div>
-      <TagActionModal tag={this.state.tagSelected} modalOpen={this.state.modalOpen} />
+      <TagActionModal tag={this.state.tagSelected} modalOpen={this.state.modalOpen} hideModal={() => this.setState({modalOpen:false})} />
+      <NewTagModal modalOpen={this.state.newTagModalOpen} hideModal={() => this.setState({newTagModalOpen:false})} selectedNoteId={this.props.selectedNoteId} />
       </div>
       
     )
