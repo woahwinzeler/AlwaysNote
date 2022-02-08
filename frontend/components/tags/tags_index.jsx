@@ -1,4 +1,5 @@
 import React from 'react'
+import TagActionModal from './tag_action_modal'
 
 class TagsIndex extends React.Component{
   //TODO: edit tags
@@ -12,11 +13,16 @@ class TagsIndex extends React.Component{
       notes: {}, 
       selectedNote: {}, 
       selectedTag: {},
+      modalOpen: false,
+      editMode: false,
+      tagSelected: -1, 
     }
 
     this.getAllTags = this.getAllTags.bind(this)
     this.getTagNotes = this.getTagNotes.bind(this)
     this.showNote = this.showNote.bind(this)
+    this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.showNoteOrEngageModal = this.showNoteOrEngageModal.bind(this); 
   }
 
   getAllTags(e){
@@ -25,8 +31,35 @@ class TagsIndex extends React.Component{
     this.props.getAllTags(this.props.userId)
   }
 
+  showModal(id){
+    let tag = this.props.tags[id]; 
+    this.setState({ modalOpen: true, tagSelected: tag  })
+    console.log('modal')
+  }
+
+  showNoteOrEngageModal(id){
+    if(this.state.editMode){
+      this.showModal(id);
+    } else {
+      this.getTagNotes(id);
+    }
+  }
+
   showNote(note){
     this.props.getNote(note).then(() => this.props.showNote(note.id))
+  }
+
+  toggleEditMode(e){
+    e.preventDefault();
+    if (this.state.editMode){
+      this.setState({editMode: false})
+    } else {
+      this.setState({editMode: true})
+    }
+   
+    //TODO: set classname for styling 
+
+
   }
 
   getTagNotes(id){
@@ -42,7 +75,9 @@ class TagsIndex extends React.Component{
     let tags; 
     let tagKeys = Object.keys(this.props.tags);
     if (tagKeys.length >= 1){
-      tags = tagKeys.map((id) => <div key={id} color={this.props.tags[id].color} onClick={() => this.getTagNotes(id)} className="tag">{this.props.tags[id].title}</div>)
+      tags = tagKeys.map((id) => 
+      <div key={id} color={this.props.tags[id].color} onClick={() => this.showNoteOrEngageModal(id)} className="tag">{this.props.tags[id].title}
+      </div>)
     } 
 
     
@@ -69,10 +104,14 @@ class TagsIndex extends React.Component{
       }
     }
   
-    
+    let button = this.state.editMode ?   
+    <button onClick={this.toggleEditMode}> Show Tags </button> :
+    <button onClick={this.toggleEditMode} > Edit Tags </button> 
+
     return (
       <div className="tag-container">
       <button onClick={this.getAllTags}> See All Tags </button>
+      {button}
       <div className="all-tags">
         <h3 className="tag-header"> Tags </h3>
         {tags}
@@ -82,6 +121,7 @@ class TagsIndex extends React.Component{
         {notes}
       </div>
       </div>
+      
     )
   }
 

@@ -96,6 +96,19 @@ h5 {
 
 }
 
+.action-tag-modal{
+  top: 250px;
+  width: 360px;
+  padding: 10px;
+  margin-left: -580px;
+  background: #fff;
+  z-index: 3;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+
+
 #bigGreenButton:hover{
   filter: brightness(110%);
 }

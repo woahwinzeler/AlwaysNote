@@ -1596,10 +1596,10 @@ var Splash = function Splash() {
 
 /***/ }),
 
-/***/ "./frontend/components/tags/tags_index.jsx":
-/*!*************************************************!*\
-  !*** ./frontend/components/tags/tags_index.jsx ***!
-  \*************************************************/
+/***/ "./frontend/components/tags/tag_action_modal.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/tags/tag_action_modal.jsx ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1631,6 +1631,74 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+var TagActionModal = /*#__PURE__*/function (_React$Component) {
+  _inherits(TagActionModal, _React$Component);
+
+  var _super = _createSuper(TagActionModal);
+
+  function TagActionModal(props) {
+    _classCallCheck(this, TagActionModal);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(TagActionModal, [{
+    key: "render",
+    value: function render() {
+      if (this.props.modalOpen) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "action-tag-modal"
+        });
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }
+    }
+  }]);
+
+  return TagActionModal;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (TagActionModal);
+
+/***/ }),
+
+/***/ "./frontend/components/tags/tags_index.jsx":
+/*!*************************************************!*\
+  !*** ./frontend/components/tags/tags_index.jsx ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _tag_action_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tag_action_modal */ "./frontend/components/tags/tag_action_modal.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
 var TagsIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(TagsIndex, _React$Component);
 
@@ -1649,11 +1717,16 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       notes: {},
       selectedNote: {},
-      selectedTag: {}
+      selectedTag: {},
+      modalOpen: false,
+      editMode: false,
+      tagSelected: -1
     };
     _this.getAllTags = _this.getAllTags.bind(_assertThisInitialized(_this));
     _this.getTagNotes = _this.getTagNotes.bind(_assertThisInitialized(_this));
     _this.showNote = _this.showNote.bind(_assertThisInitialized(_this));
+    _this.toggleEditMode = _this.toggleEditMode.bind(_assertThisInitialized(_this));
+    _this.showNoteOrEngageModal = _this.showNoteOrEngageModal.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1664,6 +1737,25 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
       this.props.getAllTags(this.props.userId);
     }
   }, {
+    key: "showModal",
+    value: function showModal(id) {
+      var tag = this.props.tags[id];
+      this.setState({
+        modalOpen: true,
+        tagSelected: tag
+      });
+      console.log('modal');
+    }
+  }, {
+    key: "showNoteOrEngageModal",
+    value: function showNoteOrEngageModal(id) {
+      if (this.state.editMode) {
+        this.showModal(id);
+      } else {
+        this.getTagNotes(id);
+      }
+    }
+  }, {
     key: "showNote",
     value: function showNote(note) {
       var _this2 = this;
@@ -1671,6 +1763,22 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
       this.props.getNote(note).then(function () {
         return _this2.props.showNote(note.id);
       });
+    }
+  }, {
+    key: "toggleEditMode",
+    value: function toggleEditMode(e) {
+      e.preventDefault();
+
+      if (this.state.editMode) {
+        this.setState({
+          editMode: false
+        });
+      } else {
+        this.setState({
+          editMode: true
+        });
+      } //TODO: set classname for styling 
+
     }
   }, {
     key: "getTagNotes",
@@ -1702,7 +1810,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
             key: id,
             color: _this4.props.tags[id].color,
             onClick: function onClick() {
-              return _this4.getTagNotes(id);
+              return _this4.showNoteOrEngageModal(id);
             },
             className: "tag"
           }, _this4.props.tags[id].title);
@@ -1741,11 +1849,16 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         }
       }
 
+      var button = this.state.editMode ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.toggleEditMode
+      }, " Show Tags ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.toggleEditMode
+      }, " Edit Tags ");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tag-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.getAllTags
-      }, " See All Tags "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, " See All Tags "), button, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "all-tags"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "tag-header"
