@@ -2058,13 +2058,14 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
           };
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: id,
+            title: _this4.props.tags[id].title,
             color: _this4.props.tags[id].color,
             style: style,
             onClick: function onClick() {
               return _this4.showNoteOrEngageModal(id);
             },
             className: "tag"
-          }, _this4.props.tags[id].title);
+          });
         });
       } //TODO: Select a tag to see associated notes never renders 
 

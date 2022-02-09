@@ -89,7 +89,7 @@ class TagsIndex extends React.Component{
           background:  this.props.tags[id].color
         }
         return (
-          <div key={id} color={this.props.tags[id].color} style={style} onClick={() => this.showNoteOrEngageModal(id)} className="tag">{this.props.tags[id].title}
+          <div key={id} title={this.props.tags[id].title} color={this.props.tags[id].color} style={style} onClick={() => this.showNoteOrEngageModal(id)} className="tag">
       </div>)
       })
     } 
