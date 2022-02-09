@@ -1651,13 +1651,17 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
     value: function componentDidUpdate() {
       var _this2 = this;
 
-      if (this.props.selectedNoteId !== this.state.note_ids[0] && this.state.notes.length < 2) {
-        this.setState({
-          note_ids: [this.props.selectedNoteId],
-          notes: [this.props.notes[this.props.selectedNoteId]]
-        }, function () {
-          return console.log(_this2.state);
-        });
+      var noteId = parseInt(this.props.selectedNoteId);
+
+      if (!!noteId) {
+        if (noteId !== this.state.note_ids[0] && this.state.notes.length < 2) {
+          this.setState({
+            note_ids: [noteId],
+            notes: [this.props.notes[this.props.selectedNoteId]]
+          }, function () {
+            return console.log(_this2.state);
+          });
+        }
       }
     }
   }, {

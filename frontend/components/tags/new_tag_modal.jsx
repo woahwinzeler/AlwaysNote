@@ -19,12 +19,16 @@ class NewTagModal extends React.Component{
   } 
 
   componentDidUpdate(){
-    if(this.props.selectedNoteId !== this.state.note_ids[0] && this.state.notes.length < 2){
-      this.setState({
-        note_ids: [this.props.selectedNoteId], 
-        notes: [this.props.notes[this.props.selectedNoteId]]
-      }, () => console.log(this.state))
+    let noteId = parseInt(this.props.selectedNoteId);
+    if(!!noteId){
+      if( noteId !== this.state.note_ids[0] && this.state.notes.length < 2){
+        this.setState({
+          note_ids: [noteId], 
+          notes: [this.props.notes[this.props.selectedNoteId]]
+        }, () => console.log(this.state))
+      }
     }
+   
   }
 
   handleInput(type) {

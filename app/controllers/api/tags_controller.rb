@@ -55,7 +55,10 @@ class Api::TagsController < ApplicationController
   def create 
     #is working
     #http://localhost:3000/api/notebooks/18/notes/6/tags?tag[user_id]=1&tag[color]=burgundy&tag[title]=Id is divisible by 3&tag[note_ids]=9, 3, 6
+    debugger 
     @tag = Tag.new(tag_params)
+    noteIds = params[:tag][:note_ids].map{|noteId| noteId.to_i}
+    @tag.note_ids = noteIds; 
     if @tag.save 
       render json: @tag
     else 
