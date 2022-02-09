@@ -17,6 +17,8 @@ class TagsIndex extends React.Component{
       tagSelected: -1, 
       newTagModalOpen: false, 
       selectedNote: -1, 
+      tagClassName: "tag-index",
+      notesClassName: "tagged-notes"
     }
 
     this.getAllTags = this.getAllTags.bind(this)
@@ -25,7 +27,26 @@ class TagsIndex extends React.Component{
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.showNoteOrEngageModal = this.showNoteOrEngageModal.bind(this); 
     this.showNewTagModal = this.showNewTagModal.bind(this);
+    this.hideTags = this.hideTags.bind(this)
+    this.hideNotes = this.hideNotes.bind(this)
   }
+
+  hideTags(){
+    if (this.state.tagClassName === "tag-index"){
+      this.setState({tagClassName: "hidden"})
+    } else {
+      this.setState({tagClassName: "tag-index"})
+    }
+  }
+
+  hideNotes(){
+    if (this.state.notesClassName === "tagged-notes"){
+      this.setState({notesClassName: "hidden"})
+    } else {
+      this.setState({notesClassName: "tagged-notes"})
+    }
+  }
+
 
   getAllTags(e){
     e.preventDefault(); 
@@ -41,7 +62,6 @@ class TagsIndex extends React.Component{
   showModal(id){
     let tag = this.props.tags[id]; 
     this.setState({ modalOpen: true, tagSelected: tag  })
-    console.log('modal')
   }
 
   showNoteOrEngageModal(id){
@@ -123,21 +143,27 @@ class TagsIndex extends React.Component{
     <button onClick={this.toggleEditMode} > Edit Tags </button> 
 
     return (
-      <div className="tag-container">
-      <button onClick={this.getAllTags}> See All Tags </button>
-      {button}
-      <div className="all-tags">
-        <h3 className="tag-header"> Tags </h3>
-        {tags}
-      </div>
-      <button onClick={this.showNewTagModal}> Create New Tag </button>
-      <div className="tagged-notes">
-        <h3 className="tag-header" > Notes </h3>
-        {notes}
-      </div>
-      <TagActionModal tag={this.state.tagSelected} modalOpen={this.state.modalOpen} hideModal={() => this.setState({modalOpen:false})} />
-      <NewTagModalContainer modalOpen={this.state.newTagModalOpen} hideModal={() => this.setState({newTagModalOpen:false})} selectedNoteId={this.props.selectedNoteId} />
-      </div>
+      <>
+        <div className="tag-container">
+          <div className="collapsable" onClick={this.hideTags}> --- </div> 
+          <div className={this.state.tagClassName}>
+            <button onClick={this.getAllTags}> See All Tags </button>
+            {button}
+            <div className="all-tags">
+              <h3 className="tag-header"> Tags </h3>
+              {tags}
+            </div>
+            <button onClick={this.showNewTagModal}> Create New Tag </button>
+          </div>
+          <div className="collapsable" onClick={this.hideNotes}> ----- </div> 
+          <div className={this.state.notesClassName}>
+            <h3 className="tag-header" > Notes </h3>
+            {notes}
+          </div>
+          <TagActionModal tag={this.state.tagSelected} modalOpen={this.state.modalOpen} hideModal={() => this.setState({modalOpen:false})} />
+          <NewTagModalContainer modalOpen={this.state.newTagModalOpen} hideModal={() => this.setState({newTagModalOpen:false})} selectedNoteId={this.props.selectedNoteId} />
+        </div>
+      </>
       
     )
   }

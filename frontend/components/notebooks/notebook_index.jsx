@@ -104,7 +104,7 @@ class NotebookIndex extends React.Component{
     return(
       <div className="notesAndBooks">
         <div className="notebooks">
-        <div className="clickToCollapse" onClick={() => this.collapseNotebooks()}> ----- </div>
+        <div className="collapsable" onClick={() => this.collapseNotebooks()}> ----- </div>
           <ul className={this.state.NotebookClass}>
             {notebooks}
             <motion.button className="newNotebookButton" onClick={this.toggleModal}
@@ -113,7 +113,7 @@ class NotebookIndex extends React.Component{
           </ul>
         </div>
         <div className="NotesContainer">
-        <div className="clickToCollapse" onClick={() => this.collapseNotes()}> ----- </div>
+        <div className="collapsable" onClick={() => this.collapseNotes()}> ----- </div>
           <ul>
           <div className={this.state.NoteClass}>
             {notes}

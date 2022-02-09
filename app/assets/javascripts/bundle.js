@@ -1339,7 +1339,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notebooks"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "clickToCollapse",
+        className: "collapsable",
         onClick: function onClick() {
           return _this3.collapseNotebooks();
         }
@@ -1360,7 +1360,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "NotesContainer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "clickToCollapse",
+        className: "collapsable",
         onClick: function onClick() {
           return _this3.collapseNotes();
         }
@@ -1958,7 +1958,9 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
       editMode: false,
       tagSelected: -1,
       newTagModalOpen: false,
-      selectedNote: -1
+      selectedNote: -1,
+      tagClassName: "tag-index",
+      notesClassName: "tagged-notes"
     };
     _this.getAllTags = _this.getAllTags.bind(_assertThisInitialized(_this));
     _this.getTagNotes = _this.getTagNotes.bind(_assertThisInitialized(_this));
@@ -1966,10 +1968,38 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     _this.toggleEditMode = _this.toggleEditMode.bind(_assertThisInitialized(_this));
     _this.showNoteOrEngageModal = _this.showNoteOrEngageModal.bind(_assertThisInitialized(_this));
     _this.showNewTagModal = _this.showNewTagModal.bind(_assertThisInitialized(_this));
+    _this.hideTags = _this.hideTags.bind(_assertThisInitialized(_this));
+    _this.hideNotes = _this.hideNotes.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(TagsIndex, [{
+    key: "hideTags",
+    value: function hideTags() {
+      if (this.state.tagClassName === "tag-index") {
+        this.setState({
+          tagClassName: "hidden"
+        });
+      } else {
+        this.setState({
+          tagClassName: "tag-index"
+        });
+      }
+    }
+  }, {
+    key: "hideNotes",
+    value: function hideNotes() {
+      if (this.state.notesClassName === "tagged-notes") {
+        this.setState({
+          notesClassName: "hidden"
+        });
+      } else {
+        this.setState({
+          notesClassName: "tagged-notes"
+        });
+      }
+    }
+  }, {
     key: "getAllTags",
     value: function getAllTags(e) {
       e.preventDefault();
@@ -1991,7 +2021,6 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         modalOpen: true,
         tagSelected: tag
       });
-      console.log('modal');
     }
   }, {
     key: "showNoteOrEngageModal",
@@ -2106,8 +2135,13 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
       }, " Show Tags ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.toggleEditMode
       }, " Edit Tags ");
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tag-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "collapsable",
+        onClick: this.hideTags
+      }, " --- "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: this.state.tagClassName
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.getAllTags
       }, " See All Tags "), button, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2116,8 +2150,11 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         className: "tag-header"
       }, " Tags "), tags), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.showNewTagModal
-      }, " Create New Tag "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "tagged-notes"
+      }, " Create New Tag ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "collapsable",
+        onClick: this.hideNotes
+      }, " ----- "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: this.state.notesClassName
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "tag-header"
       }, " Notes "), notes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tag_action_modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -2136,7 +2173,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
           });
         },
         selectedNoteId: this.props.selectedNoteId
-      }));
+      })));
     }
   }]);
 
