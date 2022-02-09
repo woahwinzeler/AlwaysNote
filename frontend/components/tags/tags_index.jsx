@@ -84,9 +84,14 @@ class TagsIndex extends React.Component{
     let tags; 
     let tagKeys = Object.keys(this.props.tags);
     if (tagKeys.length >= 1){
-      tags = tagKeys.map((id) => 
-      <div key={id} color={this.props.tags[id].color} onClick={() => this.showNoteOrEngageModal(id)} className="tag">{this.props.tags[id].title}
+      tags = tagKeys.map((id) => {
+        const style = {
+          background:  this.props.tags[id].color
+        }
+        return (
+          <div key={id} color={this.props.tags[id].color} style={style} onClick={() => this.showNoteOrEngageModal(id)} className="tag">{this.props.tags[id].title}
       </div>)
+      })
     } 
 
     
@@ -99,7 +104,7 @@ class TagsIndex extends React.Component{
         let note = this.props.notes[key];
         if (typeof this.props.notes[key].tag !== 'undefined' && this.props.notes[key].tag === this.state.selectedTag){
           return (
-              <div key={note.id}  onClick={() => this.showNote(note)}className="tag-note"> {note.title}</div>
+              <div key={note.id}  onClick={() => this.showNote(note)} className="tag-note"> {note.title}</div>
           )
         } else {
           return null 

@@ -34,17 +34,17 @@ class NotebookIndex extends React.Component{
 
   collapseNotebooks(){
     if (this.state.NotebookClass=== "NotebookIndex"){
-      this.setState({NotebookClass: "NotebookIndexClosed"}, () => console.log(this.state)); 
+      this.setState({NotebookClass: "NotebookIndexClosed"}); 
     } else{
-      this.setState({NotebookClass: "NotebookIndex"}, () => console.log(this.state)); 
+      this.setState({NotebookClass: "NotebookIndex"}); 
     }
   }
 
   collapseNotes(){
     if (this.state.NoteClass === "Notes"){
-      this.setState({NoteClass: "NotesHidden"}, () => console.log(this.state)); 
+      this.setState({NoteClass: "NotesHidden"}); 
     } else{
-      this.setState({NoteClass: "Notes"}, () => console.log(this.state)); 
+      this.setState({NoteClass: "Notes"}); 
     }
   }
 

@@ -21,6 +21,7 @@
 }
 
 
+
 .NotebookIndex{
   width: 300px;
   height: 100%;
@@ -54,10 +55,15 @@
 .tag-note{
   text-align: center; 
 }
+.all-tags{
+  display: grid;
+}
 .tag {
-  padding-bottom: 0.3rem;
-  padding-top: 0.3rem;
-  text-align: center;
+  border-radius: 50%;
+  padding: 10px;
+  width: 10px;
+  height: 10px; 
+  background: lightblue; 
 }
 
 .tag-header{
@@ -188,7 +194,7 @@ img {
   display: none; 
 }
 
-.Notes > ul > li {
+.NotesItem {
   list-style-type: none;
   color: whitesmoke; 
 }
