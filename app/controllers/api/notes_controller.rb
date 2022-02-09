@@ -2,6 +2,7 @@ class Api::NotesController < ApplicationController
   def index 
     notebook = Notebook.find(params[:notebook_id])
     @notes = notebook.notes
+    #TODO: put tagIds on the frontend 
     render :index 
   end
 

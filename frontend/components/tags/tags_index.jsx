@@ -1,6 +1,7 @@
 import React from 'react'
 import TagActionModal from './tag_action_modal'
 import NewTagModal from './new_tag_modal'
+import NewTagModalContainer from './new_tag_modal_container'
 
 class TagsIndex extends React.Component{
   //TODO: edit tags
@@ -130,7 +131,7 @@ class TagsIndex extends React.Component{
         {notes}
       </div>
       <TagActionModal tag={this.state.tagSelected} modalOpen={this.state.modalOpen} hideModal={() => this.setState({modalOpen:false})} />
-      <NewTagModal modalOpen={this.state.newTagModalOpen} hideModal={() => this.setState({newTagModalOpen:false})} selectedNoteId={this.props.selectedNoteId} />
+      <NewTagModalContainer modalOpen={this.state.newTagModalOpen} hideModal={() => this.setState({newTagModalOpen:false})} selectedNoteId={this.props.selectedNoteId} />
       </div>
       
     )

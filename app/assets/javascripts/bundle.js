@@ -723,7 +723,7 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
       _this.state = {
         note: {
           id: _this.props.noteId,
-          title: "",
+          title: "Scratchpad",
           body: "",
           notebook_id: _this.props.notebookId
         }
@@ -1159,12 +1159,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tags_tags_index_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../tags/tags_index_container */ "./frontend/components/tags/tags_index_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1343,10 +1337,11 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         note: this.state.note
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tags_tags_index_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
         showNote: function showNote(noteId) {
-          return _this3.setState(_objectSpread(_objectSpread({}, _this3.state), {}, {
+          return _this3.setState({
             noteToOpen: noteId
-          }));
-        }
+          });
+        },
+        selectedNoteId: this.state.noteToOpen
       }));
     }
   }]);
@@ -1637,18 +1632,41 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(NewTagModal);
 
   function NewTagModal(props) {
+    var _this;
+
     _classCallCheck(this, NewTagModal);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      id: null,
+      note: {
+        title: ""
+      }
+    };
+    return _this;
   }
 
   _createClass(NewTagModal, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      if (this.props.selectedNoteId !== this.state.id) {
+        debugger;
+        this.setState({
+          id: this.props.selectedNoteId,
+          note: this.props.notes[this.props.selectedNoteId]
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       if (this.props.modalOpen) {
+        var header = !!this.state.id ? "Creating a tag for:" + this.state.note.title : "No note selected";
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "action-tag-modal"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "note-title"
+        }, " ", header, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",
           onClick: this.props.hideModal
         }));
@@ -1662,6 +1680,31 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (NewTagModal);
+
+/***/ }),
+
+/***/ "./frontend/components/tags/new_tag_modal_container.js":
+/*!*************************************************************!*\
+  !*** ./frontend/components/tags/new_tag_modal_container.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _new_tag_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./new_tag_modal */ "./frontend/components/tags/new_tag_modal.jsx");
+
+
+
+var mSTP = function mSTP(state) {
+  return {
+    notes: state.entities.notes
+  };
+};
+
+var NewTagModalContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, null)(_new_tag_modal__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (NewTagModalContainer);
 
 /***/ }),
 
@@ -1749,6 +1792,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _tag_action_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tag_action_modal */ "./frontend/components/tags/tag_action_modal.jsx");
 /* harmony import */ var _new_tag_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./new_tag_modal */ "./frontend/components/tags/new_tag_modal.jsx");
+/* harmony import */ var _new_tag_modal_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./new_tag_modal_container */ "./frontend/components/tags/new_tag_modal_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1770,6 +1814,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -1960,7 +2005,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
             modalOpen: false
           });
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_new_tag_modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_new_tag_modal_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         modalOpen: this.state.newTagModalOpen,
         hideModal: function hideModal() {
           return _this4.setState({

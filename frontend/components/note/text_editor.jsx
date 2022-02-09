@@ -42,7 +42,7 @@ class TextEditor extends React.Component{
       this.state = {
         note: {
           id: this.props.noteId, 
-          title: "",
+          title: "Scratchpad",
           body: "",
           notebook_id: this.props.notebookId
         }

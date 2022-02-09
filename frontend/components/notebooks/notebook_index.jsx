@@ -104,9 +104,7 @@ class NotebookIndex extends React.Component{
           </ul>
         </div>
           <TextEditorContainer noteToOpen={this.state.noteToOpen} notebookId={this.state.note.notebookId}  note={this.state.note}/>
-          <TagsIndexContainer showNote={(noteId) => this.setState({...this.state,
-            noteToOpen: noteId
-            })}/>
+          <TagsIndexContainer showNote={(noteId) => this.setState({noteToOpen: noteId})} selectedNoteId={this.state.noteToOpen}/>
       </div>
 
     )
