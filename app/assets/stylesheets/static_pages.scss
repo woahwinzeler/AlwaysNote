@@ -6,9 +6,38 @@
 }
 
 .Notebooks{
-  background-color: black; 
+  padding: 10px;
+  margin: 10px
   
 }
+
+.NotebookIndexClosed{
+ display: none; 
+}
+
+.clickToCollapse{
+  height: 10px,
+  width 100%; 
+}
+
+
+.NotebookIndex{
+  width: 300px;
+  height: 100%;
+  overflow-y: scroll;
+
+}
+.NotebookIndex > li{
+  list-style-type: none;
+  display: flex;
+  align-content: space-between;
+}
+.NotebookIndex > li > h5 {
+  text-align: left;
+  padding: 0;
+  margin: 0;
+}
+
 
 .tag-container{
   display: flex;
@@ -59,22 +88,6 @@ h5 {
 * {
   font-family: "Soleil",Helvetica,Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
-}
-
-.NotebookIndex{
-  width: 300px;
-  height: 100%;
-
-}
-.NotebookIndex > li{
-  list-style-type: none;
-  display: flex;
-  align-content: space-between;
-}
-.NotebookIndex > li > h5 {
-  text-align: left;
-  padding: 0;
-  margin: 0;
 }
 
 .button-signup-container{

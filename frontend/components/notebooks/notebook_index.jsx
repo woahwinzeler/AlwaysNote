@@ -16,6 +16,7 @@ class NotebookIndex extends React.Component{
       notes: [],
       noteToOpen: null,
       noteFormToOpen: false,
+      class: "NotebookIndex",
       note: {
         title: "",
         body: "",
@@ -27,6 +28,15 @@ class NotebookIndex extends React.Component{
     this.deleteNotebook = this.deleteNotebook.bind(this)
     this.showNotesIndex = this.showNotesIndex.bind(this)
     this.showNote = this.showNote.bind(this)
+    this.collapseNotebooks = this.collapseNotebooks.bind(this)
+  }
+
+  collapseNotebooks(){
+    if (this.state.class === "NotebookIndex"){
+      this.setState({class: "NotebookIndexClosed"}, () => console.log(this.state)); 
+    } else{
+      this.setState({class: "NotebookIndex"}, () => console.log(this.state)); 
+    }
   }
 
   showNote(e){
@@ -85,13 +95,13 @@ class NotebookIndex extends React.Component{
     return(
       <div className="notesAndBooks">
         <div className="notebooks">
-          <ul className="NotebookIndex">
+        <div className="clickToCollapse" onClick={() => this.collapseNotebooks()}> ----- </div>
+          <ul className={this.state.class}>
             {notebooks}
-          </ul>
-          <motion.button className="newNotebookButton" onClick={this.toggleModal}
+            <motion.button className="newNotebookButton" onClick={this.toggleModal}
           whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>Create new notebook</motion.button>
-          {/* first argument is a boolean, second is the compenet to render */}
           {this.state.modalOpen && <Modal modalOpen={this.state.modalOpen} handleClose={this.toggleModal} />}
+          </ul>
         </div>
         <div className="Notes">
           <ul>
