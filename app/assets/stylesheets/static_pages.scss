@@ -184,6 +184,10 @@ img {
   display: flex;
 }
 
+.NotesHidden{
+  display: none; 
+}
+
 .Notes > ul > li {
   list-style-type: none;
   color: whitesmoke; 

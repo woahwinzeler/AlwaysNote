@@ -16,7 +16,8 @@ class NotebookIndex extends React.Component{
       notes: [],
       noteToOpen: null,
       noteFormToOpen: false,
-      class: "NotebookIndex",
+      NotebookClass: "NotebookIndex",
+      NoteClass: "Notes",
       note: {
         title: "",
         body: "",
@@ -32,10 +33,18 @@ class NotebookIndex extends React.Component{
   }
 
   collapseNotebooks(){
-    if (this.state.class === "NotebookIndex"){
-      this.setState({class: "NotebookIndexClosed"}, () => console.log(this.state)); 
+    if (this.state.NotebookClass=== "NotebookIndex"){
+      this.setState({NotebookClass: "NotebookIndexClosed"}, () => console.log(this.state)); 
     } else{
-      this.setState({class: "NotebookIndex"}, () => console.log(this.state)); 
+      this.setState({NotebookClass: "NotebookIndex"}, () => console.log(this.state)); 
+    }
+  }
+
+  collapseNotes(){
+    if (this.state.NoteClass === "Notes"){
+      this.setState({NoteClass: "NotesHidden"}, () => console.log(this.state)); 
+    } else{
+      this.setState({NoteClass: "Notes"}, () => console.log(this.state)); 
     }
   }
 
@@ -96,17 +105,20 @@ class NotebookIndex extends React.Component{
       <div className="notesAndBooks">
         <div className="notebooks">
         <div className="clickToCollapse" onClick={() => this.collapseNotebooks()}> ----- </div>
-          <ul className={this.state.class}>
+          <ul className={this.state.NotebookClass}>
             {notebooks}
             <motion.button className="newNotebookButton" onClick={this.toggleModal}
           whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>Create new notebook</motion.button>
           {this.state.modalOpen && <Modal modalOpen={this.state.modalOpen} handleClose={this.toggleModal} />}
           </ul>
         </div>
-        <div className="Notes">
+        <div className="NotesContainer">
+        <div className="clickToCollapse" onClick={() => this.collapseNotes()}> ----- </div>
           <ul>
+          <div className={this.state.NoteClass}>
             {notes}
            <NoteFormContainer notebookId={this.state.note.notebookId}/>
+          </div>
           </ul>
         </div>
           <TextEditorContainer noteToOpen={this.state.noteToOpen} notebookId={this.state.note.notebookId}  note={this.state.note}/>
