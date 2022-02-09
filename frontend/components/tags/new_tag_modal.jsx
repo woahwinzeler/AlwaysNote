@@ -6,37 +6,78 @@ class NewTagModal extends React.Component{
     super(props)
 
     this.state = {
-      id: null,
-      note: {
-        title: "",
-      }
+      note_ids: [-1],
+      notes: [],
+      title: "",
+      color: "#4BA541",
+      user_id: this.props.userId,
+
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
 
   } 
 
   componentDidUpdate(){
-    if(this.props.selectedNoteId !== this.state.id){
-      debugger 
+    if(this.props.selectedNoteId !== this.state.note_ids[0] && this.state.notes.length < 2){
       this.setState({
-        id: this.props.selectedNoteId, 
-        note: this.props.notes[this.props.selectedNoteId]
-      })
+        note_ids: [this.props.selectedNoteId], 
+        notes: [this.props.notes[this.props.selectedNoteId]]
+      }, () => console.log(this.state))
     }
   }
 
+  handleInput(type) {
+    return e => {
+        this.setState({[type]: e.currentTarget.value}, () => console.log(this.state))
+    }
+  }
 
+  handleSubmit(e){
+    e.preventDefault();
+    let tag = {
+      tag: {
+        title: this.state.title,
+        color: this.state.color,
+        user_id: this.state.userId || this.props.userId, 
+        note_ids: this.state.note_ids
+      }
+    }
+    console.log(tag)
+    this.props.createTag(tag)
+    this.props.hideModal()
+  }
 
 
 
   render(){
     if (this.props.modalOpen){
-      let header = !!this.state.id ? "Creating a tag for:" + this.state.note.title : "No note selected"
+      let header = "Linked notes: "
+      if (this.state.notes.length < 1 || this.state.notes[0] === undefined){
+        header += "none"
+      } else {
+        for(let i = 0; i < this.state.notes.length; i++){
+          console.log(this.state)
+          header += this.state.notes[i].title;
+        } 
+      }
       return (
         <>
         <div className="action-tag-modal">
+          <h2 className="action-tag-modal-header"> Create Tag </h2>
           {/* <div onClick={this.props.hideModal}> close modal </div> */}
           <div className="note-title"> {header} </div>
-          
+          <form className="new-tag-modal-form" onSubmit={this.handleSubmit} >
+                             <label className="tag-color"> Choose Color {this.state.color}
+                              <input id="color" onChange={this.handleInput("color")} type="color" required="required" />
+                               </label>
+                            <div>
+                                <label className="tag-title"> Tag Title 
+                                  <input onChange={this.handleInput("title")} type="text" required="required" name="label" />
+                                </label>
+                                <button className="tag-button" type="submit">Create Tag</button>
+                            </div>
+          </form>
         </div>
         <div className="modal-screen" onClick={this.props.hideModal}></div>
         </>

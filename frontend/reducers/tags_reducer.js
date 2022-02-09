@@ -10,7 +10,7 @@ const tagsReducer = (oldState={}, action) => {
     case RECEIVE_TAGS:
       return Object.assign({}, action.tags)
     case RECEIVE_TAG:
-      return Object.assign({}, oldState, action.tag)
+      return Object.assign({}, oldState, {[action.tag.id]: action.tag})
     case DELETE_TAG:
       let newState = Object.assign({}, oldState)
       delete newState[action.tagId]

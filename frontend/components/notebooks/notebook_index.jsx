@@ -27,7 +27,6 @@ class NotebookIndex extends React.Component{
     this.deleteNotebook = this.deleteNotebook.bind(this)
     this.showNotesIndex = this.showNotesIndex.bind(this)
     this.showNote = this.showNote.bind(this)
-    this.showNoteFromTag = this.showNoteFromTag.bind(this)
   }
 
   showNote(e){
@@ -38,9 +37,6 @@ class NotebookIndex extends React.Component{
                             noteFormToOpen: true}))
   }
 
-  showNoteFromTag(){
-
-  }
 
   showNotesIndex(e){
     let notebookId = e.currentTarget.value; 

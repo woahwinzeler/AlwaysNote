@@ -21,13 +21,13 @@ export const deleteTag = id => (
   })
 )
 
-export const createTag = tag => (
-  $.ajax({
-    url: `/api/notebooks/${tag.notebook_id}/notes/${tag.note_ids[0]}/tags`,
+export const createTag = tag => {
+  return $.ajax({
+    url: `/api/tags`,
     method: `POST`,
     data: tag 
   })
-)
+}
 
 export const showNotes = tagId => (
   $.ajax({

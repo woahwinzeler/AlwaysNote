@@ -1213,7 +1213,6 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     _this.deleteNotebook = _this.deleteNotebook.bind(_assertThisInitialized(_this));
     _this.showNotesIndex = _this.showNotesIndex.bind(_assertThisInitialized(_this));
     _this.showNote = _this.showNote.bind(_assertThisInitialized(_this));
-    _this.showNoteFromTag = _this.showNoteFromTag.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1231,9 +1230,6 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         });
       });
     }
-  }, {
-    key: "showNoteFromTag",
-    value: function showNoteFromTag() {}
   }, {
     key: "showNotesIndex",
     value: function showNotesIndex(e) {
@@ -1604,6 +1600,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1638,35 +1636,99 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      id: null,
-      note: {
-        title: ""
-      }
+      note_ids: [-1],
+      notes: [],
+      title: "",
+      color: "#4BA541",
+      user_id: _this.props.userId
     };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(NewTagModal, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      if (this.props.selectedNoteId !== this.state.id) {
-        debugger;
+      var _this2 = this;
+
+      if (this.props.selectedNoteId !== this.state.note_ids[0] && this.state.notes.length < 2) {
         this.setState({
-          id: this.props.selectedNoteId,
-          note: this.props.notes[this.props.selectedNoteId]
+          note_ids: [this.props.selectedNoteId],
+          notes: [this.props.notes[this.props.selectedNoteId]]
+        }, function () {
+          return console.log(_this2.state);
         });
       }
+    }
+  }, {
+    key: "handleInput",
+    value: function handleInput(type) {
+      var _this3 = this;
+
+      return function (e) {
+        _this3.setState(_defineProperty({}, type, e.currentTarget.value), function () {
+          return console.log(_this3.state);
+        });
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var tag = {
+        tag: {
+          title: this.state.title,
+          color: this.state.color,
+          user_id: this.state.userId || this.props.userId,
+          note_ids: this.state.note_ids
+        }
+      };
+      console.log(tag);
+      this.props.createTag(tag);
+      this.props.hideModal();
     }
   }, {
     key: "render",
     value: function render() {
       if (this.props.modalOpen) {
-        var header = !!this.state.id ? "Creating a tag for:" + this.state.note.title : "No note selected";
+        var header = "Linked notes: ";
+
+        if (this.state.notes.length < 1 || this.state.notes[0] === undefined) {
+          header += "none";
+        } else {
+          for (var i = 0; i < this.state.notes.length; i++) {
+            console.log(this.state);
+            header += this.state.notes[i].title;
+          }
+        }
+
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "action-tag-modal"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+          className: "action-tag-modal-header"
+        }, " Create Tag "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "note-title"
-        }, " ", header, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, " ", header, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          className: "new-tag-modal-form",
+          onSubmit: this.handleSubmit
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "tag-color"
+        }, " Choose Color ", this.state.color, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          id: "color",
+          onChange: this.handleInput("color"),
+          type: "color",
+          required: "required"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "tag-title"
+        }, " Tag Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          onChange: this.handleInput("title"),
+          type: "text",
+          required: "required",
+          name: "label"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "tag-button",
+          type: "submit"
+        }, "Create Tag")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",
           onClick: this.props.hideModal
         }));
@@ -1694,16 +1756,27 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _new_tag_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./new_tag_modal */ "./frontend/components/tags/new_tag_modal.jsx");
+/* harmony import */ var _actions_tags_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/tags_actions */ "./frontend/actions/tags_actions.js");
+
 
 
 
 var mSTP = function mSTP(state) {
   return {
-    notes: state.entities.notes
+    notes: state.entities.notes,
+    userId: state.sessions.CurrentUserId
   };
 };
 
-var NewTagModalContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, null)(_new_tag_modal__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var mDTP = function mDTP(dispatch) {
+  return {
+    createTag: function createTag(tag) {
+      return dispatch(Object(_actions_tags_actions__WEBPACK_IMPORTED_MODULE_2__["createTag"])(tag));
+    }
+  };
+};
+
+var NewTagModalContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_new_tag_modal__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (NewTagModalContainer);
 
 /***/ }),
@@ -2610,6 +2683,8 @@ var sessionsReducer = function sessionsReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_tags_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/tags_actions */ "./frontend/actions/tags_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var tagsReducer = function tagsReducer() {
@@ -2625,7 +2700,7 @@ var tagsReducer = function tagsReducer() {
       return Object.assign({}, action.tags);
 
     case _actions_tags_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_TAG"]:
-      return Object.assign({}, oldState, action.tag);
+      return Object.assign({}, oldState, _defineProperty({}, action.tag.id, action.tag));
 
     case _actions_tags_actions__WEBPACK_IMPORTED_MODULE_0__["DELETE_TAG"]:
       var newState = Object.assign({}, oldState);
@@ -2945,7 +3020,7 @@ var deleteTag = function deleteTag(id) {
 };
 var createTag = function createTag(tag) {
   return $.ajax({
-    url: "/api/notebooks/".concat(tag.notebook_id, "/notes/").concat(tag.note_ids[0], "/tags"),
+    url: "/api/tags",
     method: "POST",
     data: tag
   });
