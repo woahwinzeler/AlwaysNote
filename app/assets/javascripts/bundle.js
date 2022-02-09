@@ -1233,7 +1233,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "showNotesIndex",
     value: function showNotesIndex(e) {
-      var notebookId = e.currentTarget.value;
+      var notebookId = e.currentTarget.id;
       this.setState({
         note: {
           notebookId: e.currentTarget.value
@@ -1276,10 +1276,10 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       var notebooks = this.props.notebooks.map(function (notebook, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: index
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "Notebooks",
           onClick: _this3.showNotesIndex,
-          value: notebook.id
+          id: notebook.id
         }, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
           onClick: function onClick() {
             return _this3.deleteNotebook(notebook.id);

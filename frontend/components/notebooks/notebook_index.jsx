@@ -39,7 +39,7 @@ class NotebookIndex extends React.Component{
 
 
   showNotesIndex(e){
-    let notebookId = e.currentTarget.value; 
+    let notebookId = e.currentTarget.id; 
     this.setState({note: {notebookId: e.currentTarget.value }})
     this.props.getAllNotes(notebookId)
   }
@@ -69,7 +69,7 @@ class NotebookIndex extends React.Component{
 
   render(){
     let notebooks = this.props.notebooks.map((notebook, index) => <li key={index}>
-      <button className="Notebooks"onClick={this.showNotesIndex} value={notebook.id}> {notebook.title} </button>
+      <div className="Notebooks"onClick={this.showNotesIndex} id={notebook.id}> {notebook.title} </div>
       <br /> 
       <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>-</motion.button>
     </li>)
