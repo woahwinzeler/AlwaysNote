@@ -1328,6 +1328,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     _this.showNotesIndex = _this.showNotesIndex.bind(_assertThisInitialized(_this));
     _this.showNote = _this.showNote.bind(_assertThisInitialized(_this));
     _this.collapseNotebooks = _this.collapseNotebooks.bind(_assertThisInitialized(_this));
+    _this.collapseNotes = _this.collapseNotes.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1340,16 +1341,10 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "collapseNotes",
-    value: function collapseNotes() {
-      if (this.state.NoteClass === "Notes") {
-        this.setState({
-          NoteClass: "NotesHidden"
-        });
-      } else {
-        this.setState({
-          NoteClass: "Notes"
-        });
-      }
+    value: function collapseNotes(cssClass) {
+      this.setState({
+        NoteClass: cssClass
+      });
     }
   }, {
     key: "showNote",
@@ -1463,12 +1458,10 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         handleClose: this.toggleModal
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "NotesContainer"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "collapsable",
-        onClick: function onClick() {
-          return _this3.collapseNotes();
-        }
-      }, " ----- "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        target: "Notes",
+        changeClass: this.collapseNotes
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: this.state.NoteClass
       }, notes, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_form_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         notebookId: this.state.note.notebookId

@@ -31,6 +31,7 @@ class NotebookIndex extends React.Component{
     this.showNotesIndex = this.showNotesIndex.bind(this)
     this.showNote = this.showNote.bind(this)
     this.collapseNotebooks = this.collapseNotebooks.bind(this)
+    this.collapseNotes = this.collapseNotes.bind(this);
   }
 
   collapseNotebooks(cssClass){
@@ -39,12 +40,8 @@ class NotebookIndex extends React.Component{
 
   
 
-  collapseNotes(){
-    if (this.state.NoteClass === "Notes"){
-      this.setState({NoteClass: "NotesHidden"}); 
-    } else{
-      this.setState({NoteClass: "Notes"}); 
-    }
+  collapseNotes(cssClass){
+    this.setState({NoteClass: cssClass})
   }
 
   showNote(e){
@@ -112,7 +109,7 @@ class NotebookIndex extends React.Component{
           </ul>
         </div>
         <div className="NotesContainer">
-        <div className="collapsable" onClick={() => this.collapseNotes()}> ----- </div>
+        <Collapsable target="Notes" changeClass={this.collapseNotes} />
           <ul>
           <div className={this.state.NoteClass}>
             {notes}

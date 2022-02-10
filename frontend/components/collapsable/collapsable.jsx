@@ -42,7 +42,6 @@ class Collapsable extends React.Component{
         return (
           <div className="collapsable" style={this.style} onClick={() => this.collapseAndOpen()}> 
             <div className={this.state.arrowClass}>
-              
             </div>
           </div>
         )
