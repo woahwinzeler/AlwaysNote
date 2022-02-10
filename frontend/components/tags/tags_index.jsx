@@ -2,6 +2,7 @@ import React from 'react'
 import TagActionModal from './tag_action_modal'
 import NewTagModal from './new_tag_modal'
 import NewTagModalContainer from './new_tag_modal_container'
+import Collapsable from '../collapsable/collapsable'
 
 class TagsIndex extends React.Component{
   //TODO: edit tags
@@ -31,20 +32,12 @@ class TagsIndex extends React.Component{
     this.hideNotes = this.hideNotes.bind(this)
   }
 
-  hideTags(){
-    if (this.state.tagClassName === "tag-index"){
-      this.setState({tagClassName: "hidden"})
-    } else {
-      this.setState({tagClassName: "tag-index"})
-    }
+  hideTags(cssClass){
+    this.setState({tagClassName: cssClass})
   }
 
-  hideNotes(){
-    if (this.state.notesClassName === "tagged-notes"){
-      this.setState({notesClassName: "hidden"})
-    } else {
-      this.setState({notesClassName: "tagged-notes"})
-    }
+  hideNotes(cssClass){
+    this.setState({notesClassName: cssClass})
   }
 
 
@@ -145,7 +138,7 @@ class TagsIndex extends React.Component{
     return (
       <>
         <div className="tag-container">
-          <div className="collapsable" onClick={this.hideTags}> --- </div> 
+        <Collapsable target="tag-index" changeClass={this.hideTags}/>
           <div className={this.state.tagClassName}>
             <button onClick={this.getAllTags}> See All Tags </button>
             {button}
@@ -155,7 +148,7 @@ class TagsIndex extends React.Component{
             </div>
             <button onClick={this.showNewTagModal}> Create New Tag </button>
           </div>
-          <div className="collapsable" onClick={this.hideNotes}> ----- </div> 
+          <Collapsable target="tagged-notes" changeClass={this.hideNotes}/>
           <div className={this.state.notesClassName}>
             <h3 className="tag-header" > Notes </h3>
             {notes}

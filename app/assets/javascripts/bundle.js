@@ -2008,6 +2008,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tag_action_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tag_action_modal */ "./frontend/components/tags/tag_action_modal.jsx");
 /* harmony import */ var _new_tag_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./new_tag_modal */ "./frontend/components/tags/new_tag_modal.jsx");
 /* harmony import */ var _new_tag_modal_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./new_tag_modal_container */ "./frontend/components/tags/new_tag_modal_container.js");
+/* harmony import */ var _collapsable_collapsable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../collapsable/collapsable */ "./frontend/components/collapsable/collapsable.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2029,6 +2030,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -2072,29 +2074,17 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
 
   _createClass(TagsIndex, [{
     key: "hideTags",
-    value: function hideTags() {
-      if (this.state.tagClassName === "tag-index") {
-        this.setState({
-          tagClassName: "hidden"
-        });
-      } else {
-        this.setState({
-          tagClassName: "tag-index"
-        });
-      }
+    value: function hideTags(cssClass) {
+      this.setState({
+        tagClassName: cssClass
+      });
     }
   }, {
     key: "hideNotes",
-    value: function hideNotes() {
-      if (this.state.notesClassName === "tagged-notes") {
-        this.setState({
-          notesClassName: "hidden"
-        });
-      } else {
-        this.setState({
-          notesClassName: "tagged-notes"
-        });
-      }
+    value: function hideNotes(cssClass) {
+      this.setState({
+        notesClassName: cssClass
+      });
     }
   }, {
     key: "getAllTags",
@@ -2234,10 +2224,10 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
       }, " Edit Tags ");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tag-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "collapsable",
-        onClick: this.hideTags
-      }, " --- "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        target: "tag-index",
+        changeClass: this.hideTags
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: this.state.tagClassName
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.getAllTags
@@ -2247,10 +2237,10 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         className: "all-tags"
       }, tags), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.showNewTagModal
-      }, " Create New Tag ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "collapsable",
-        onClick: this.hideNotes
-      }, " ----- "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, " Create New Tag ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        target: "tagged-notes",
+        changeClass: this.hideNotes
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: this.state.notesClassName
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "tag-header"
