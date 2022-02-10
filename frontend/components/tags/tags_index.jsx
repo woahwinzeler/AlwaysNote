@@ -149,8 +149,8 @@ class TagsIndex extends React.Component{
           <div className={this.state.tagClassName}>
             <button onClick={this.getAllTags}> See All Tags </button>
             {button}
+            <h3 className="tag-header"> Tags </h3>
             <div className="all-tags">
-              <h3 className="tag-header"> Tags </h3>
               {tags}
             </div>
             <button onClick={this.showNewTagModal}> Create New Tag </button>
