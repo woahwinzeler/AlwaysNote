@@ -4,6 +4,7 @@ import Modal from '../Modal/modal'
 import TextEditorContainer from '../note/text_editor_container'
 import NoteFormContainer from './note_form_container'
 import TagsIndexContainer from '../tags/tags_index_container'
+import Collapsable from '../collapsable/collapsable'
 
 
 class NotebookIndex extends React.Component{
@@ -32,13 +33,11 @@ class NotebookIndex extends React.Component{
     this.collapseNotebooks = this.collapseNotebooks.bind(this)
   }
 
-  collapseNotebooks(){
-    if (this.state.NotebookClass=== "NotebookIndex"){
-      this.setState({NotebookClass: "NotebookIndexClosed"}); 
-    } else{
-      this.setState({NotebookClass: "NotebookIndex"}); 
-    }
+  collapseNotebooks(cssClass){
+    this.setState({NotebookClass: cssClass})
   }
+
+  
 
   collapseNotes(){
     if (this.state.NoteClass === "Notes"){
@@ -104,7 +103,7 @@ class NotebookIndex extends React.Component{
     return(
       <div className="notesAndBooks">
         <div className="notebooks">
-        <div className="collapsable" onClick={() => this.collapseNotebooks()}> ----- </div>
+        <Collapsable target="NotebookIndex" changeClass={this.collapseNotebooks}/>
           <ul className={this.state.NotebookClass}>
             {notebooks}
             <motion.button className="newNotebookButton" onClick={this.toggleModal}
