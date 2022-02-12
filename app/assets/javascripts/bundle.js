@@ -1347,6 +1347,11 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "getColor",
+    value: function getColor() {
+      return "hsl(" + 360 * Math.random() + ',' + (25 + 70 * Math.random()) + '%,' + (85 + 10 * Math.random()) + '%)';
+    }
+  }, {
     key: "showNote",
     value: function showNote(e) {
       var _this2 = this;
@@ -1374,9 +1379,9 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.getAllNotebooks();
-      var ele = document.getElementById('body');
-      ele.setAttribute('style', 'background-color:#525252');
+      this.props.getAllNotebooks(); //nightmode 
+      // let ele = document.getElementById('body')
+      // ele.setAttribute('style', 'background-color:#525252')
     }
   }, {
     key: "deleteNotebook",
@@ -1404,32 +1409,52 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var notebooks = this.props.notebooks.map(function (notebook, index) {
+        var color = _this3.getColor();
+
+        var color2 = _this3.getColor();
+
+        _this3.style = {
+          background: color
+        };
+        _this3.style2 = {
+          background: color2
+        };
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: index
+          key: index,
+          style: _this3.style2
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "Notebooks",
           onClick: _this3.showNotesIndex,
-          id: notebook.id
+          id: notebook.id,
+          style: _this3.style
         }, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
           onClick: function onClick() {
             return _this3.deleteNotebook(notebook.id);
           },
           whileHover: {
-            scale: 1.1
+            scale: 1.5
           },
           whileTap: {
-            scale: 0.9
-          }
-        }, "-"));
+            scale: 0.7
+          },
+          id: "delete-notebook-button"
+        }));
       });
       var notesArray = Object.values(this.props.notes);
       var notes = notesArray.map(function (note, index) {
+        var color = _this3.getColor();
+
+        var style = {
+          background: color
+        };
+
         if (typeof note.tag === 'undefined' || note.notebook_id === _this3.state.note.notebookId) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: index,
             onClick: _this3.showNote,
             value: note.id,
-            className: "NotesItem"
+            className: "NotesItem",
+            style: style
           }, note.title);
         } else {
           return null;

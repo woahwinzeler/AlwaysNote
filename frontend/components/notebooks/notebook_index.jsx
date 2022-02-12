@@ -26,6 +26,7 @@ class NotebookIndex extends React.Component{
       }
     }
 
+
     this.toggleModal = this.toggleModal.bind(this)
     this.deleteNotebook = this.deleteNotebook.bind(this)
     this.showNotesIndex = this.showNotesIndex.bind(this)
@@ -42,6 +43,12 @@ class NotebookIndex extends React.Component{
 
   collapseNotes(cssClass){
     this.setState({NoteClass: cssClass})
+  }
+
+  getColor(){ 
+    return "hsl(" + 360 * Math.random() + ',' +
+               (25 + 70 * Math.random()) + '%,' + 
+               (85 + 10 * Math.random()) + '%)'
   }
 
   showNote(e){
@@ -62,8 +69,9 @@ class NotebookIndex extends React.Component{
   componentDidMount(){
     this.props.getAllNotebooks(); 
 
-    let ele = document.getElementById('body')
-    ele.setAttribute('style', 'background-color:#525252')
+    //nightmode 
+    // let ele = document.getElementById('body')
+    // ele.setAttribute('style', 'background-color:#525252')
   }
 
   deleteNotebook(id){
@@ -83,15 +91,35 @@ class NotebookIndex extends React.Component{
   }
 
   render(){
-    let notebooks = this.props.notebooks.map((notebook, index) => <li key={index}>
-      <div className="Notebooks"onClick={this.showNotesIndex} id={notebook.id}> {notebook.title} </div>
-      <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>-</motion.button>
-    </li>)
+    let notebooks = this.props.notebooks.map((notebook, index) => {
+
+      let color = this.getColor();
+
+      let color2 = this.getColor();
+
+      this.style = {
+        background: color
+      }
+      this.style2 = {
+        background: color2
+      }
+      
+      return (
+      <li key={index} style={this.style2}>
+      <div className="Notebooks"onClick={this.showNotesIndex} id={notebook.id} style={this.style}> {notebook.title} </div>
+      <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id="delete-notebook-button"></motion.button>
+    </li>
+    )})
+    
 
     let notesArray = Object.values(this.props.notes)
     let notes = notesArray.map((note, index) => {
+      let color = this.getColor();
+      let style = {
+        background: color, 
+      }
       if(typeof note.tag === 'undefined' || note.notebook_id === this.state.note.notebookId){
-        return <li key={index} onClick={this.showNote} value={note.id} className="NotesItem">{note.title}</li>
+        return <li key={index} onClick={this.showNote} value={note.id} className="NotesItem" style={style}>{note.title}</li>
       } else {
         return null
       }
