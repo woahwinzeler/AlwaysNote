@@ -59,7 +59,7 @@
 .NotebookIndex > li{
   list-style-type: none;
   display: flex;
-  align-content: space-between;
+  justify-content: space-between;
 }
 .NotebookIndex > li > h5 {
   text-align: left;

@@ -85,7 +85,6 @@ class NotebookIndex extends React.Component{
   render(){
     let notebooks = this.props.notebooks.map((notebook, index) => <li key={index}>
       <div className="Notebooks"onClick={this.showNotesIndex} id={notebook.id}> {notebook.title} </div>
-      <br /> 
       <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>-</motion.button>
     </li>)
 
@@ -100,7 +99,7 @@ class NotebookIndex extends React.Component{
     return(
       <div className="notesAndBooks">
         <div className="notebooks">
-        <Collapsable target="NotebookIndex" changeClass={this.collapseNotebooks}/>
+        <Collapsable target="NotebookIndex" changeClass={this.collapseNotebooks}> Notebooks </Collapsable>
           <ul className={this.state.NotebookClass}>
             {notebooks}
             <motion.button className="newNotebookButton" onClick={this.toggleModal}

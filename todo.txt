@@ -1,20 +1,17 @@
   add, edit, remove tags -- modal
 
-
-
-  store tag color in hex instead of string 
-
-  figure out extra notes item that happens during auto save
-
-  style tags
-
   style login, signup
 
   refactor autosave
 
-  style 
-
-  done 
-
   jbuilder on showing notes through tags, store tagId instead of boolean 
 
+
+
+  notebook item styling:
+    make button red, add confirmation modal
+    Random pastal color, brightness increases on open
+  note index below notes:
+    change box color to tag
+    overflow-y: scroll
+    style note items
