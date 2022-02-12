@@ -19,14 +19,14 @@ class NoteForm extends React.Component{
 
   handleSubmit(e) {
     e.preventDefault();
-    if(this.props.notebookId){
+    console.log(this.props.notebookId)
+    if(this.props.notebookId !== undefined){
       this.setState({notebook_id: this.props.notebookId}, () => this.props.createNote(this.state))
     } else {
-      this.setState({notebook_id: this.props.notes[0].notebook_id}, () => this.props.createNote(this.state))
+      this.setState({notebook_id: Object.values(this.props.notes)[0].notebook_id}, () => this.props.createNote(this.state))
     }
   }
   render(){
-    console.log(this.props)
     return (
       <form onSubmit={this.handleSubmit}>
         <label>

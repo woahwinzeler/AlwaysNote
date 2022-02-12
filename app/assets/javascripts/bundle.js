@@ -1031,8 +1031,9 @@ var NoteForm = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       e.preventDefault();
+      console.log(this.props.notebookId);
 
-      if (this.props.notebookId) {
+      if (this.props.notebookId !== undefined) {
         this.setState({
           notebook_id: this.props.notebookId
         }, function () {
@@ -1040,7 +1041,7 @@ var NoteForm = /*#__PURE__*/function (_React$Component) {
         });
       } else {
         this.setState({
-          notebook_id: this.props.notes[0].notebook_id
+          notebook_id: Object.values(this.props.notes)[0].notebook_id
         }, function () {
           return _this3.props.createNote(_this3.state);
         });
@@ -1049,7 +1050,6 @@ var NoteForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
