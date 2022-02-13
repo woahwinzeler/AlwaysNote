@@ -1317,6 +1317,9 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       noteFormToOpen: false,
       NotebookClass: "NotebookIndex",
       NoteClass: "Notes",
+      ulStyle: {
+        background: "rgba(255, 0, 0, 0.4)"
+      },
       note: {
         title: "",
         body: "",
@@ -1367,9 +1370,13 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "showNotesIndex",
-    value: function showNotesIndex(e) {
+    value: function showNotesIndex(e, style) {
+      debugger;
       var notebookId = e.currentTarget.id;
       this.setState({
+        ulStyle: {
+          background: style
+        },
         note: {
           notebookId: e.currentTarget.value
         }
@@ -1424,7 +1431,9 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
           style: _this3.style2
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "Notebooks",
-          onClick: _this3.showNotesIndex,
+          onClick: function onClick(e) {
+            return _this3.showNotesIndex(e, _this3.style);
+          },
           id: notebook.id,
           style: _this3.style
         }, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
@@ -1468,7 +1477,8 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         target: "NotebookIndex",
         changeClass: this.collapseNotebooks
       }, " Notebooks "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: this.state.NotebookClass
+        className: this.state.NotebookClass,
+        style: this.state.ulStyle
       }, notebooks, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
         className: "newNotebookButton",
         onClick: this.toggleModal,
@@ -1486,7 +1496,9 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_6__["default"], {
         target: "Notes",
         changeClass: this.collapseNotes
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "notes-box"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: this.state.NoteClass
       }, notes, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_form_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         notebookId: this.state.note.notebookId

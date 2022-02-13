@@ -75,6 +75,7 @@ button{
 .tag-index{
   flex-direction: column;
   overflow-y: scroll; 
+  height: fit-content; 
 }
 
 #delete-notebook-button{
@@ -235,6 +236,15 @@ img {
 
 .NotesHidden{
   display: none; 
+}
+
+.notes-box{
+
+}
+
+ul{
+  padding: 0px;
+  margin: 0px
 }
 
 .NotesItem {

@@ -19,6 +19,9 @@ class NotebookIndex extends React.Component{
       noteFormToOpen: false,
       NotebookClass: "NotebookIndex",
       NoteClass: "Notes",
+      ulStyle: {
+        background: "rgba(255, 0, 0, 0.4)", 
+      },
       note: {
         title: "",
         body: "",
@@ -60,9 +63,13 @@ class NotebookIndex extends React.Component{
   }
 
 
-  showNotesIndex(e){
+  showNotesIndex(e, style){
+    debugger 
     let notebookId = e.currentTarget.id; 
-    this.setState({note: {notebookId: e.currentTarget.value }})
+    this.setState({ulStyle: {
+      background: style
+    }, 
+    note: {notebookId: e.currentTarget.value }})
     this.props.getAllNotes(notebookId)
   }
 
@@ -106,7 +113,7 @@ class NotebookIndex extends React.Component{
       
       return (
       <li key={index} style={this.style2}>
-      <div className="Notebooks"onClick={this.showNotesIndex} id={notebook.id} style={this.style}> {notebook.title} </div>
+      <div className="Notebooks"onClick={(e) => this.showNotesIndex(e, this.style)} id={notebook.id} style={this.style}> {notebook.title} </div>
       <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id="delete-notebook-button"></motion.button>
     </li>
     )})
@@ -128,7 +135,7 @@ class NotebookIndex extends React.Component{
       <div className="notesAndBooks">
         <div className="notebooks">
         <Collapsable target="NotebookIndex" changeClass={this.collapseNotebooks}> Notebooks </Collapsable>
-          <ul className={this.state.NotebookClass}>
+          <ul className={this.state.NotebookClass} style={this.state.ulStyle}>
             {notebooks}
             <motion.button className="newNotebookButton" onClick={this.toggleModal}
           whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>Create new notebook</motion.button>
@@ -137,7 +144,7 @@ class NotebookIndex extends React.Component{
         </div>
         <div className="NotesContainer">
         <Collapsable target="Notes" changeClass={this.collapseNotes} />
-          <ul>
+          <ul className="notes-box">
           <div className={this.state.NoteClass}>
             {notes}
            <NoteFormContainer notebookId={this.state.note.notebookId}/>
