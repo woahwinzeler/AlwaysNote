@@ -39,6 +39,10 @@ class Collapsable extends React.Component{
       
 
       render(){
+        // if(this.props.forceOpen){
+        //   this.collapseAndOpen();
+        //   this.props.preventLoop();  
+        // }
         return (
           <div className="collapsable" style={this.style} onClick={() => this.collapseAndOpen()}> 
             <div className={this.state.arrowClass}>

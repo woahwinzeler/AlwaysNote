@@ -32,7 +32,7 @@ class NoteForm extends React.Component{
         <label>
           <input type="text" name="note[title]" onChange={this.update("title")} />
         </label>
-        <input type="submit"/>
+        <input type="submit" value="Create new Note"/>
       </form>
     )
   }

@@ -5,7 +5,7 @@ class Notebook < ApplicationRecord
   belongs_to :user, 
     foreign_key: :author_id
 
-  has_many :notes
+  has_many :notes, dependent: :destroy
 
   #TODO: ensure title. 
 end

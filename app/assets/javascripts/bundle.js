@@ -683,6 +683,10 @@ var Collapsable = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      // if(this.props.forceOpen){
+      //   this.collapseAndOpen();
+      //   this.props.preventLoop();  
+      // }
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "collapsable",
         style: this.style,
@@ -699,6 +703,172 @@ var Collapsable = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Collapsable);
+
+/***/ }),
+
+/***/ "./frontend/components/confirmationModal/confirmation_modal.jsx":
+/*!**********************************************************************!*\
+  !*** ./frontend/components/confirmationModal/confirmation_modal.jsx ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var ConfirmationModal = /*#__PURE__*/function (_React$Component) {
+  _inherits(ConfirmationModal, _React$Component);
+
+  var _super = _createSuper(ConfirmationModal);
+
+  function ConfirmationModal(props) {
+    var _this;
+
+    _classCallCheck(this, ConfirmationModal);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      rendered: false,
+      item: {}
+    };
+    _this.confirmDeletion = _this.confirmDeletion.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ConfirmationModal, [{
+    key: "confirmDeletion",
+    value: function confirmDeletion() {
+      if (this.props.isNote) {
+        this.props.deleteNote(this.props.id);
+      } else {
+        console.log();
+        this.props.deleteNotebook(this.state.item.id);
+      }
+
+      this.props.hideModal();
+    }
+  }, {
+    key: "getNoteOrNotebook",
+    value: function getNoteOrNotebook() {
+      if (this.props.isNote) {
+        var note = this.props.id;
+        this.setState({
+          rendered: true,
+          item: note
+        });
+      } else {
+        var notebook = this.props.notebooks[this.props.id];
+        this.setState({
+          rendered: true,
+          item: notebook
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      if (this.props.modalOpen) {
+        if (!this.state.rendered) {
+          this.getNoteOrNotebook();
+        }
+
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "confirmation-modal"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Are you sure you want to delete ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, " ", this.state.item.title, " "), " forever? "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
+          onClick: function onClick() {
+            return _this2.confirmDeletion();
+          }
+        }, " Delete "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
+          onClick: this.props.hideModal
+        }, "No ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal-screen",
+          onClick: this.props.hideModal
+        }));
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }
+    }
+  }]);
+
+  return ConfirmationModal;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (ConfirmationModal);
+
+/***/ }),
+
+/***/ "./frontend/components/confirmationModal/confirmation_modal_container.js":
+/*!*******************************************************************************!*\
+  !*** ./frontend/components/confirmationModal/confirmation_modal_container.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _confirmation_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./confirmation_modal */ "./frontend/components/confirmationModal/confirmation_modal.jsx");
+/* harmony import */ var _actions_notebook_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/notebook_actions */ "./frontend/actions/notebook_actions.js");
+/* harmony import */ var _actions_note_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/note_actions */ "./frontend/actions/note_actions.js");
+
+
+
+
+
+var mSTP = function mSTP(_ref) {
+  var sessions = _ref.sessions,
+      _ref$entities = _ref.entities,
+      notebooks = _ref$entities.notebooks,
+      users = _ref$entities.users,
+      notes = _ref$entities.notes;
+  return {
+    notes: notes,
+    notebooks: notebooks
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    deleteNote: function deleteNote(note) {
+      return dispatch(Object(_actions_note_actions__WEBPACK_IMPORTED_MODULE_3__["removeNote"])(note));
+    },
+    deleteNotebook: function deleteNotebook(id) {
+      return dispatch(Object(_actions_notebook_actions__WEBPACK_IMPORTED_MODULE_2__["removeNotebook"])(id));
+    }
+  };
+};
+
+var ConfirmationModalContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_confirmation_modal__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (ConfirmationModalContainer);
 
 /***/ }),
 
@@ -901,7 +1071,9 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
         body = this.state.note.body;
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-editor-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
         placeholder: "Start note here...",
         modules: this.modules,
         formats: this.formats,
@@ -1057,7 +1229,8 @@ var NoteForm = /*#__PURE__*/function (_React$Component) {
         name: "note[title]",
         onChange: this.update("title")
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "submit"
+        type: "submit",
+        value: "Create new Note"
       }));
     }
   }]);
@@ -1268,6 +1441,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _note_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./note_form_container */ "./frontend/components/notebooks/note_form_container.js");
 /* harmony import */ var _tags_tags_index_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../tags/tags_index_container */ "./frontend/components/tags/tags_index_container.js");
 /* harmony import */ var _collapsable_collapsable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../collapsable/collapsable */ "./frontend/components/collapsable/collapsable.jsx");
+/* harmony import */ var _confirmationModal_confirmation_modal_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../confirmationModal/confirmation_modal_container */ "./frontend/components/confirmationModal/confirmation_modal_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1298,6 +1472,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(NotebookIndex, _React$Component);
 
@@ -1315,9 +1490,14 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       notes: [],
       noteToOpen: null,
       noteFormToOpen: false,
+      openConfirmationModal: false,
+      takeAction: false,
       NotebookClass: "NotebookIndex",
       addStyle: true,
       NoteClass: "Notes",
+      forceNotesOpen: false,
+      deleteId: -1,
+      isNote: false,
       ulStyle: {
         background: "rgba(255, 0, 0, 0.4)"
       },
@@ -1380,7 +1560,8 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         },
         note: {
           notebookId: notebookId
-        }
+        },
+        forceNotesOpen: true
       });
       this.props.getAllNotes(notebookId);
     }
@@ -1394,12 +1575,20 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "deleteNotebook",
     value: function deleteNotebook(id) {
-      this.props.removeNotebook(id);
+      this.setState({
+        openConfirmationModal: true,
+        deleteId: id,
+        isNote: false
+      });
     }
   }, {
     key: "deleteNote",
     value: function deleteNote(note) {
-      this.props.deleteNote(note);
+      this.setState({
+        openConfirmationModal: true,
+        deleteId: note,
+        isNote: true
+      });
     }
   }, {
     key: "toggleModal",
@@ -1520,7 +1709,13 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         className: "NotesContainer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_6__["default"], {
         target: "Notes",
-        changeClass: this.collapseNotes
+        changeClass: this.collapseNotes,
+        forceOpen: this.state.forceNotesOpen,
+        preventLoop: function preventLoop() {
+          return _this3.setState({
+            forceOpen: !_this3.state.forceOpen
+          });
+        }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "notes-box"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1538,6 +1733,15 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
           });
         },
         selectedNoteId: this.state.noteToOpen
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_confirmationModal_confirmation_modal_container__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        modalOpen: this.state.openConfirmationModal,
+        hideModal: function hideModal() {
+          return _this3.setState({
+            openConfirmationModal: false
+          });
+        },
+        id: this.state.deleteId,
+        isNote: this.state.isNote
       }));
     }
   }]);

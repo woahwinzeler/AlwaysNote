@@ -20,6 +20,11 @@
   width 100%; 
 }
 
+.text-editor-container{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .collapsable{
   width: 100%; 
   height: 12px;
@@ -178,6 +183,19 @@ h5 {
   z-index: 2;
 }
 
+
+.confirmation-modal{
+  top: 100px;
+  height: 100px;
+  right: 40vw; 
+  width: 40vh;
+  padding: 10px;
+  margin-left: -580px;
+  background: #fff;
+  z-index: 10;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
 
 .action-tag-modal{
   top: 100px;

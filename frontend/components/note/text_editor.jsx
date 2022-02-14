@@ -97,7 +97,7 @@ class TextEditor extends React.Component{
     }
 
     return (
-      <div>
+      <div className="text-editor-container">
         <h2>{this.title}</h2>
         <ReactQuill 
           placeholder="Start note here..."

@@ -5,6 +5,7 @@ import TextEditorContainer from '../note/text_editor_container'
 import NoteFormContainer from './note_form_container'
 import TagsIndexContainer from '../tags/tags_index_container'
 import Collapsable from '../collapsable/collapsable'
+import ConfirmationModalContainer from '../confirmationModal/confirmation_modal_container'
 
 
 class NotebookIndex extends React.Component{
@@ -17,9 +18,14 @@ class NotebookIndex extends React.Component{
       notes: [],
       noteToOpen: null,
       noteFormToOpen: false,
+      openConfirmationModal: false, 
+      takeAction: false, 
       NotebookClass: "NotebookIndex",
       addStyle: true, 
       NoteClass: "Notes",
+      forceNotesOpen: false, 
+      deleteId: -1,
+      isNote: false, 
       ulStyle: {
         background: "rgba(255, 0, 0, 0.4)", 
       },
@@ -66,11 +72,13 @@ class NotebookIndex extends React.Component{
 
 
   showNotesIndex(e, style){
-    let notebookId = e.currentTarget.id; 
+    let notebookId = e.currentTarget.id;
     this.setState({ulStyle: {
       background: style
     }, 
-    note: {notebookId: notebookId }})
+    note: {notebookId: notebookId },
+    forceNotesOpen: true, 
+  })
     this.props.getAllNotes(notebookId)
   }
 
@@ -83,11 +91,19 @@ class NotebookIndex extends React.Component{
   }
 
   deleteNotebook(id){
-    this.props.removeNotebook(id)
+    this.setState({
+      openConfirmationModal: true, 
+      deleteId: id,
+      isNote: false,
+    })
   }
 
   deleteNote(note){
-    this.props.deleteNote(note)
+    this.setState({
+      openConfirmationModal: true, 
+      deleteId: note,
+      isNote: true,
+    })
   }
 
   toggleModal(){
@@ -154,7 +170,7 @@ class NotebookIndex extends React.Component{
           </ul>
         </div>
         <div className="NotesContainer">
-        <Collapsable target="Notes" changeClass={this.collapseNotes} />
+        <Collapsable target="Notes" changeClass={this.collapseNotes} forceOpen={this.state.forceNotesOpen} preventLoop={() => this.setState({forceOpen: !this.state.forceOpen})} />
           <ul className="notes-box">
           <div className={this.state.NoteClass}>
             {notes}
@@ -164,6 +180,7 @@ class NotebookIndex extends React.Component{
         </div>
           <TextEditorContainer noteToOpen={this.state.noteToOpen} notebookId={this.state.note.notebookId}  note={this.state.note}/>
           <TagsIndexContainer showNote={(noteId) => this.setState({noteToOpen: noteId})} selectedNoteId={this.state.noteToOpen}/>
+          <ConfirmationModalContainer  modalOpen={this.state.openConfirmationModal} hideModal={() => this.setState({openConfirmationModal: false})} id={this.state.deleteId} isNote={this.state.isNote}/>
       </div>
 
     )

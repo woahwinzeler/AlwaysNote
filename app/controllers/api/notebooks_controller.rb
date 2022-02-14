@@ -35,7 +35,6 @@ class Api::NotebooksController < ApplicationController
   end
 
   def destroy
-    # debugger 
     @notebook = Notebook.find(params[:id])
     @notebook.destroy! 
     render json: nil
