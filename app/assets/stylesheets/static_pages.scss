@@ -281,6 +281,8 @@ ul{
 }
 .Notes {
   width: 300px;
+  overflow-y: scroll;
+  height: 90vh; 
 }
 
 .NotesItem{

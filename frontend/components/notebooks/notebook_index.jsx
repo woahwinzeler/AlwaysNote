@@ -127,7 +127,7 @@ class NotebookIndex extends React.Component{
         background: color, 
       }
       if(typeof note.tag === 'undefined' || note.notebook_id === this.state.note.notebookId){
-        return <motion.div key={index} onClick={this.showNote} title={note.id} className="NotesItem" style={style}>{note.title}</motion.div>
+        return <motion.div key={index} onClick={this.showNote} title={note.id} className="NotesItem" style={style} whileHover={{scale: 1.2}} whileTap={{scale: 0.9}} >{note.title}</motion.div>
       } else {
         return null
       }
