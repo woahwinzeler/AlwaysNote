@@ -18,6 +18,7 @@ class NotebookIndex extends React.Component{
       noteToOpen: null,
       noteFormToOpen: false,
       NotebookClass: "NotebookIndex",
+      addStyle: true, 
       NoteClass: "Notes",
       ulStyle: {
         background: "rgba(255, 0, 0, 0.4)", 
@@ -55,7 +56,7 @@ class NotebookIndex extends React.Component{
   }
 
   showNote(e){
-    let noteId = e.currentTarget.value
+    let noteId = e.currentTarget.title
     this.props.getNote(this.props.notes[noteId]).then(
       () =>  this.setState({note: this.props.notes[noteId], 
                             noteToOpen: noteId,
@@ -64,7 +65,6 @@ class NotebookIndex extends React.Component{
 
 
   showNotesIndex(e, style){
-    debugger 
     let notebookId = e.currentTarget.id; 
     this.setState({ulStyle: {
       background: style
@@ -100,23 +100,24 @@ class NotebookIndex extends React.Component{
   render(){
     let notebooks = this.props.notebooks.map((notebook, index) => {
 
-      let color = this.getColor();
+      if(this.state.addStyle){
+        let color = this.getColor();
 
-      let color2 = this.getColor();
-
-      this.style = {
-        background: color
-      }
-      this.style2 = {
-        background: color2
-      }
-      
-      return (
-      <li key={index} style={this.style2}>
-      <div className="Notebooks"onClick={(e) => this.showNotesIndex(e, this.style)} id={notebook.id} style={this.style}> {notebook.title} </div>
-      <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id="delete-notebook-button"></motion.button>
-    </li>
-    )})
+        let color2 = this.getColor();
+  
+        this.style = {
+          background: color
+        }
+        this.style2 = {
+          background: color2
+        }
+        
+        return (
+        <li key={index} style={this.style2}>
+        <div className="Notebooks"onClick={(e) => this.showNotesIndex(e, this.style)} id={notebook.id} style={this.style}> {notebook.title} </div>
+        <motion.button onClick={() => this.deleteNotebook(notebook.id)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id="delete-notebook-button"></motion.button>
+      </li>)
+      }})
     
 
     let notesArray = Object.values(this.props.notes)
@@ -126,7 +127,7 @@ class NotebookIndex extends React.Component{
         background: color, 
       }
       if(typeof note.tag === 'undefined' || note.notebook_id === this.state.note.notebookId){
-        return <li key={index} onClick={this.showNote} value={note.id} className="NotesItem" style={style}>{note.title}</li>
+        return <motion.div key={index} onClick={this.showNote} title={note.id} className="NotesItem" style={style}>{note.title}</motion.div>
       } else {
         return null
       }
@@ -135,7 +136,7 @@ class NotebookIndex extends React.Component{
       <div className="notesAndBooks">
         <div className="notebooks">
         <Collapsable target="NotebookIndex" changeClass={this.collapseNotebooks}> Notebooks </Collapsable>
-          <ul className={this.state.NotebookClass} style={this.state.ulStyle}>
+          <ul className={this.state.NotebookClass} >
             {notebooks}
             <motion.button className="newNotebookButton" onClick={this.toggleModal}
           whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>Create new notebook</motion.button>

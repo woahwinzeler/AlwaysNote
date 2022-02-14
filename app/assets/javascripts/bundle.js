@@ -1316,6 +1316,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       noteToOpen: null,
       noteFormToOpen: false,
       NotebookClass: "NotebookIndex",
+      addStyle: true,
       NoteClass: "Notes",
       ulStyle: {
         background: "rgba(255, 0, 0, 0.4)"
@@ -1359,7 +1360,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     value: function showNote(e) {
       var _this2 = this;
 
-      var noteId = e.currentTarget.value;
+      var noteId = e.currentTarget.title;
       this.props.getNote(this.props.notes[noteId]).then(function () {
         return _this2.setState({
           note: _this2.props.notes[noteId],
@@ -1371,7 +1372,6 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "showNotesIndex",
     value: function showNotesIndex(e, style) {
-      debugger;
       var notebookId = e.currentTarget.id;
       this.setState({
         ulStyle: {
@@ -1416,38 +1416,40 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var notebooks = this.props.notebooks.map(function (notebook, index) {
-        var color = _this3.getColor();
+        if (_this3.state.addStyle) {
+          var color = _this3.getColor();
 
-        var color2 = _this3.getColor();
+          var color2 = _this3.getColor();
 
-        _this3.style = {
-          background: color
-        };
-        _this3.style2 = {
-          background: color2
-        };
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: index,
-          style: _this3.style2
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "Notebooks",
-          onClick: function onClick(e) {
-            return _this3.showNotesIndex(e, _this3.style);
-          },
-          id: notebook.id,
-          style: _this3.style
-        }, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
-          onClick: function onClick() {
-            return _this3.deleteNotebook(notebook.id);
-          },
-          whileHover: {
-            scale: 1.5
-          },
-          whileTap: {
-            scale: 0.7
-          },
-          id: "delete-notebook-button"
-        }));
+          _this3.style = {
+            background: color
+          };
+          _this3.style2 = {
+            background: color2
+          };
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: index,
+            style: _this3.style2
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "Notebooks",
+            onClick: function onClick(e) {
+              return _this3.showNotesIndex(e, _this3.style);
+            },
+            id: notebook.id,
+            style: _this3.style
+          }, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
+            onClick: function onClick() {
+              return _this3.deleteNotebook(notebook.id);
+            },
+            whileHover: {
+              scale: 1.5
+            },
+            whileTap: {
+              scale: 0.7
+            },
+            id: "delete-notebook-button"
+          }));
+        }
       });
       var notesArray = Object.values(this.props.notes);
       var notes = notesArray.map(function (note, index) {
@@ -1458,10 +1460,10 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         };
 
         if (typeof note.tag === 'undefined' || note.notebook_id === _this3.state.note.notebookId) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].div, {
             key: index,
             onClick: _this3.showNote,
-            value: note.id,
+            title: note.id,
             className: "NotesItem",
             style: style
           }, note.title);
@@ -1477,8 +1479,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         target: "NotebookIndex",
         changeClass: this.collapseNotebooks
       }, " Notebooks "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: this.state.NotebookClass,
-        style: this.state.ulStyle
+        className: this.state.NotebookClass
       }, notebooks, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
         className: "newNotebookButton",
         onClick: this.toggleModal,
