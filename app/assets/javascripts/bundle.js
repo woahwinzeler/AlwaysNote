@@ -1329,6 +1329,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     };
     _this.toggleModal = _this.toggleModal.bind(_assertThisInitialized(_this));
     _this.deleteNotebook = _this.deleteNotebook.bind(_assertThisInitialized(_this));
+    _this.deleteNote = _this.deleteNote.bind(_assertThisInitialized(_this));
     _this.showNotesIndex = _this.showNotesIndex.bind(_assertThisInitialized(_this));
     _this.showNote = _this.showNote.bind(_assertThisInitialized(_this));
     _this.collapseNotebooks = _this.collapseNotebooks.bind(_assertThisInitialized(_this));
@@ -1378,7 +1379,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
           background: style
         },
         note: {
-          notebookId: e.currentTarget.value
+          notebookId: notebookId
         }
       });
       this.props.getAllNotes(notebookId);
@@ -1394,6 +1395,11 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     key: "deleteNotebook",
     value: function deleteNotebook(id) {
       this.props.removeNotebook(id);
+    }
+  }, {
+    key: "deleteNote",
+    value: function deleteNote(note) {
+      this.props.deleteNote(note);
     }
   }, {
     key: "toggleModal",
@@ -1460,19 +1466,31 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         };
 
         if (typeof note.tag === 'undefined' || note.notebook_id === _this3.state.note.notebookId) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].div, {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "NotesItem",
+            style: style
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
+            onClick: function onClick() {
+              return _this3.deleteNote(note);
+            },
+            whileHover: {
+              scale: 1.5
+            },
+            whileTap: {
+              scale: 0.7
+            },
+            id: "delete-note-button"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].div, {
             key: index,
             onClick: _this3.showNote,
             title: note.id,
-            className: "NotesItem",
-            style: style,
             whileHover: {
               scale: 1.2
             },
             whileTap: {
               scale: 0.9
             }
-          }, note.title);
+          }, note.title));
         } else {
           return null;
         }
@@ -1593,6 +1611,9 @@ var mDTP = function mDTP(dispatch) {
     },
     createNote: function createNote(note) {
       return dispatch(Object(_actions_note_actions__WEBPACK_IMPORTED_MODULE_2__["createNote"])(note));
+    },
+    deleteNote: function deleteNote(note) {
+      return dispatch(Object(_actions_note_actions__WEBPACK_IMPORTED_MODULE_2__["removeNote"])(note));
     }
   };
 };

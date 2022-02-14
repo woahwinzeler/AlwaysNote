@@ -33,6 +33,7 @@ class NotebookIndex extends React.Component{
 
     this.toggleModal = this.toggleModal.bind(this)
     this.deleteNotebook = this.deleteNotebook.bind(this)
+    this.deleteNote = this.deleteNote.bind(this);
     this.showNotesIndex = this.showNotesIndex.bind(this)
     this.showNote = this.showNote.bind(this)
     this.collapseNotebooks = this.collapseNotebooks.bind(this)
@@ -69,7 +70,7 @@ class NotebookIndex extends React.Component{
     this.setState({ulStyle: {
       background: style
     }, 
-    note: {notebookId: e.currentTarget.value }})
+    note: {notebookId: notebookId }})
     this.props.getAllNotes(notebookId)
   }
 
@@ -83,6 +84,10 @@ class NotebookIndex extends React.Component{
 
   deleteNotebook(id){
     this.props.removeNotebook(id)
+  }
+
+  deleteNote(note){
+    this.props.deleteNote(note)
   }
 
   toggleModal(){
@@ -127,7 +132,12 @@ class NotebookIndex extends React.Component{
         background: color, 
       }
       if(typeof note.tag === 'undefined' || note.notebook_id === this.state.note.notebookId){
-        return <motion.div key={index} onClick={this.showNote} title={note.id} className="NotesItem" style={style} whileHover={{scale: 1.2}} whileTap={{scale: 0.9}} >{note.title}</motion.div>
+        return (
+        <div className="NotesItem" style={style} >
+        <motion.button onClick={() => this.deleteNote(note)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id="delete-note-button"></motion.button>
+        <motion.div key={index} onClick={this.showNote} title={note.id} whileHover={{scale: 1.2}} whileTap={{scale: 0.9}} >{note.title}
+        </motion.div>
+        </div>)
       } else {
         return null
       }
