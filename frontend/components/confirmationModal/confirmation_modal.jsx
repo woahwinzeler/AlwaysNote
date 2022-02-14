@@ -10,7 +10,13 @@ class ConfirmationModal extends React.Component{
       item: {}
     }
     this.confirmDeletion = this.confirmDeletion.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }  
+
+  handleClose(){
+    this.props.hideModal();
+    this.setState({rendered: false})
+  }
 
 
   confirmDeletion(){
@@ -19,8 +25,7 @@ class ConfirmationModal extends React.Component{
     } else {
       this.props.deleteNotebook(this.state.item.id)
     }
-    this.props.hideModal();
-    this.setState({rendered: false})
+    this.handleClose();
   }
 
   getNoteOrNotebook(){
@@ -45,7 +50,7 @@ class ConfirmationModal extends React.Component{
             <p> Are you sure you want to delete <strong> {this.state.item.title} </strong> forever? </p>
             <div className="confirmation-modal-buttons">
               <motion.button onClick={() => this.confirmDeletion()} id="delete-button"> Delete </motion.button>
-              <motion.button onClick={this.props.hideModal} >No </motion.button>
+              <motion.button onClick={this.handleClose} >No </motion.button>
             </div>
           </div>
           <div className="modal-screen" onClick={this.props.hideModal}></div>

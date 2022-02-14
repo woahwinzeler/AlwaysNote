@@ -759,10 +759,19 @@ var ConfirmationModal = /*#__PURE__*/function (_React$Component) {
       item: {}
     };
     _this.confirmDeletion = _this.confirmDeletion.bind(_assertThisInitialized(_this));
+    _this.handleClose = _this.handleClose.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ConfirmationModal, [{
+    key: "handleClose",
+    value: function handleClose() {
+      this.props.hideModal();
+      this.setState({
+        rendered: false
+      });
+    }
+  }, {
     key: "confirmDeletion",
     value: function confirmDeletion() {
       if (this.props.isNote) {
@@ -771,10 +780,7 @@ var ConfirmationModal = /*#__PURE__*/function (_React$Component) {
         this.props.deleteNotebook(this.state.item.id);
       }
 
-      this.props.hideModal();
-      this.setState({
-        rendered: false
-      });
+      this.handleClose();
     }
   }, {
     key: "getNoteOrNotebook",
@@ -813,7 +819,7 @@ var ConfirmationModal = /*#__PURE__*/function (_React$Component) {
           },
           id: "delete-button"
         }, " Delete "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
-          onClick: this.props.hideModal
+          onClick: this.handleClose
         }, "No "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",
           onClick: this.props.hideModal
