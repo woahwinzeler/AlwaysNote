@@ -768,11 +768,13 @@ var ConfirmationModal = /*#__PURE__*/function (_React$Component) {
       if (this.props.isNote) {
         this.props.deleteNote(this.props.id);
       } else {
-        console.log();
         this.props.deleteNotebook(this.state.item.id);
       }
 
       this.props.hideModal();
+      this.setState({
+        rendered: false
+      });
     }
   }, {
     key: "getNoteOrNotebook",
@@ -803,13 +805,16 @@ var ConfirmationModal = /*#__PURE__*/function (_React$Component) {
 
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "confirmation-modal"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Are you sure you want to delete ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, " ", this.state.item.title, " "), " forever? "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Are you sure you want to delete ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, " ", this.state.item.title, " "), " forever? "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "confirmation-modal-buttons"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
           onClick: function onClick() {
             return _this2.confirmDeletion();
-          }
+          },
+          id: "delete-button"
         }, " Delete "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
           onClick: this.props.hideModal
-        }, "No ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "No "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",
           onClick: this.props.hideModal
         }));

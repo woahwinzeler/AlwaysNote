@@ -17,10 +17,10 @@ class ConfirmationModal extends React.Component{
     if(this.props.isNote){
       this.props.deleteNote(this.props.id)
     } else {
-      console.log()
       this.props.deleteNotebook(this.state.item.id)
     }
     this.props.hideModal();
+    this.setState({rendered: false})
   }
 
   getNoteOrNotebook(){
@@ -43,8 +43,10 @@ class ConfirmationModal extends React.Component{
         <>
           <div className="confirmation-modal">
             <p> Are you sure you want to delete <strong> {this.state.item.title} </strong> forever? </p>
-            <motion.button onClick={() => this.confirmDeletion()}> Delete </motion.button>
-            <motion.button onClick={this.props.hideModal} >No </motion.button>
+            <div className="confirmation-modal-buttons">
+              <motion.button onClick={() => this.confirmDeletion()} id="delete-button"> Delete </motion.button>
+              <motion.button onClick={this.props.hideModal} >No </motion.button>
+            </div>
           </div>
           <div className="modal-screen" onClick={this.props.hideModal}></div>
         </>

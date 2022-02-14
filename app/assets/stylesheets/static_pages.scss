@@ -185,16 +185,24 @@ h5 {
 
 
 .confirmation-modal{
-  top: 100px;
   height: 100px;
-  right: 40vw; 
-  width: 40vh;
+  position: absolute; 
+  display: center;
   padding: 10px;
-  margin-left: -580px;
   background: #fff;
   z-index: 10;
   border-radius: 5px;
   border: 1px solid #000;
+}
+
+#delete-button{
+  background-color: red,
+  
+}
+
+.confirmation-modal-buttons{
+  display: flex;
+  justify-content: space-between; 
 }
 
 .action-tag-modal{
