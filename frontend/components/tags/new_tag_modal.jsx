@@ -92,10 +92,11 @@ class NewTagModal extends React.Component{
         let NotebooksNotes; 
         if(openNotebooks.includes(notebook.id)){
           NotebooksNotes = notes.filter(note => note.notebook_id === notebook.id)
+          console.log(notes)
           NotebooksNotes = notes.map(note => <div className="NoteItem" key={note.id}> {note.title} </div>)
         }
         return(
-          <div>
+          <div className="notes-and-Notebooks-container">
             <div className="create-tag-notebook-index" onClick={this.addOrRemoveNotebook} title={notebook.id}>
               {notebook.title}
               <div className="small-gray-arrow-down"> </div>

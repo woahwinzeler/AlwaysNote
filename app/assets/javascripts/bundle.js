@@ -1805,8 +1805,9 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         var style = {
           background: color
         };
+        console.log(note.notebook_id, parseInt(_this3.state.note.notebookId));
 
-        if (typeof note.tag === 'undefined' || note.notebook_id === _this3.state.note.notebookId) {
+        if (note.notebook_id === parseInt(_this3.state.note.notebookId)) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "NotesItem",
             style: style
@@ -2331,6 +2332,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
             NotebooksNotes = notes.filter(function (note) {
               return note.notebook_id === notebook.id;
             });
+            console.log(notes);
             NotebooksNotes = notes.map(function (note) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "NoteItem",
@@ -2339,7 +2341,9 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
             });
           }
 
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "notes-and-Notebooks-container"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "create-tag-notebook-index",
             onClick: _this5.addOrRemoveNotebook,
             title: notebook.id
@@ -3289,7 +3293,7 @@ var notesReducer = function notesReducer() {
 
     case _actions_note_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_NOTES"]:
       var notes = action.notes.notes;
-      return Object.assign({}, notes);
+      return Object.assign({}, oldState, notes);
 
     default:
       return oldState;

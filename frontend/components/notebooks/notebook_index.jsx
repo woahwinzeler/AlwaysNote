@@ -154,7 +154,8 @@ class NotebookIndex extends React.Component{
       let style = {
         background: color, 
       }
-      if(typeof note.tag === 'undefined' || note.notebook_id === this.state.note.notebookId){
+      console.log(note.notebook_id,  parseInt(this.state.note.notebookId))
+      if(note.notebook_id === parseInt(this.state.note.notebookId)){
         return (
         <div className="NotesItem" style={style} >
         <motion.button onClick={() => this.handleNote(note)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id="delete-note-button"></motion.button>

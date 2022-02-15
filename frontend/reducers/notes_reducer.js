@@ -17,7 +17,7 @@ const notesReducer = (oldState={}, action) => {
       }
     case RECEIVE_ALL_NOTES:
       let { notes } = action.notes
-      return Object.assign({}, notes)
+      return Object.assign({}, oldState, notes)
     default:
       return oldState
   }
