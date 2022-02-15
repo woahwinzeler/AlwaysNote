@@ -1022,6 +1022,7 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
     }
 
     _this.handleBody = _this.handleBody.bind(_assertThisInitialized(_this));
+    _this.editTitle = _this.editTitle.bind(_assertThisInitialized(_this));
     _this.userEditCount = 0;
     return _this;
   }
@@ -1070,6 +1071,9 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
       this.props.updateNote(this.state.note);
     }
   }, {
+    key: "editTitle",
+    value: function editTitle() {}
+  }, {
     key: "render",
     value: function render() {
       var body;
@@ -1084,7 +1088,9 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-editor-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        onDoubleClick: this.editTitle
+      }, this.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
         placeholder: "Start note here...",
         modules: this.modules,
         formats: this.formats,
@@ -1508,6 +1514,9 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       NoteClass: "Notes",
       forceNotesOpen: false,
       deleteId: -1,
+      link: false,
+      linkedTagId: -1,
+      tag: {},
       isNote: false,
       ulStyle: {
         background: "rgba(255, 0, 0, 0.4)"
@@ -1520,7 +1529,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     };
     _this.toggleModal = _this.toggleModal.bind(_assertThisInitialized(_this));
     _this.deleteNotebook = _this.deleteNotebook.bind(_assertThisInitialized(_this));
-    _this.deleteNote = _this.deleteNote.bind(_assertThisInitialized(_this));
+    _this.handleNote = _this.handleNote.bind(_assertThisInitialized(_this));
     _this.showNotesIndex = _this.showNotesIndex.bind(_assertThisInitialized(_this));
     _this.showNote = _this.showNote.bind(_assertThisInitialized(_this));
     _this.collapseNotebooks = _this.collapseNotebooks.bind(_assertThisInitialized(_this));
@@ -1593,13 +1602,19 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "deleteNote",
-    value: function deleteNote(note) {
-      this.setState({
-        openConfirmationModal: true,
-        deleteId: note,
-        isNote: true
-      });
+    key: "handleNote",
+    value: function handleNote(note) {
+      if (this.state.link) {
+        this.props.tags[this.state.linkedTagId];
+        this.state.tag.note_ids.push(note.id);
+        this.props.updateTag(this.state.tag);
+      } else {
+        this.setState({
+          openConfirmationModal: true,
+          deleteId: note,
+          isNote: true
+        });
+      }
     }
   }, {
     key: "toggleModal",
@@ -1671,7 +1686,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
             style: style
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
             onClick: function onClick() {
-              return _this3.deleteNote(note);
+              return _this3.handleNote(note);
             },
             whileHover: {
               scale: 1.5
@@ -1743,7 +1758,13 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
             noteToOpen: noteId
           });
         },
-        selectedNoteId: this.state.noteToOpen
+        selectedNoteId: this.state.noteToOpen,
+        changeMode: function changeMode(tag) {
+          return _this3.setState({
+            link: !_this3.state.link,
+            tag: tag
+          });
+        }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_confirmationModal_confirmation_modal_container__WEBPACK_IMPORTED_MODULE_7__["default"], {
         modalOpen: this.state.openConfirmationModal,
         hideModal: function hideModal() {
@@ -1778,6 +1799,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_note_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/note_actions */ "./frontend/actions/note_actions.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _notebook_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./notebook_index */ "./frontend/components/notebooks/notebook_index.jsx");
+/* harmony import */ var _actions_tags_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/tags_actions */ "./frontend/actions/tags_actions.js");
+
 
 
 
@@ -1790,11 +1813,13 @@ var mSTP = function mSTP(_ref) {
       _ref$entities = _ref.entities,
       notebooks = _ref$entities.notebooks,
       users = _ref$entities.users,
-      notes = _ref$entities.notes;
+      notes = _ref$entities.notes,
+      tags = _ref$entities.tags;
   return {
     notebooks: Object.values(notebooks),
     currentUser: users[sessions.id],
-    notes: notes
+    notes: notes,
+    tags: tags
   };
 };
 
@@ -1829,6 +1854,9 @@ var mDTP = function mDTP(dispatch) {
     },
     deleteNote: function deleteNote(note) {
       return dispatch(Object(_actions_note_actions__WEBPACK_IMPORTED_MODULE_2__["removeNote"])(note));
+    },
+    updateTag: function updateTag(tag) {
+      return dispatch(Object(_actions_tags_actions__WEBPACK_IMPORTED_MODULE_5__["updateTag"])(tag));
     }
   };
 };
@@ -2105,7 +2133,6 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
           note_ids: this.state.note_ids
         }
       };
-      console.log(tag);
       this.props.createTag(tag);
       this.props.hideModal();
     }
@@ -2119,16 +2146,25 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
           header += "none";
         } else {
           for (var i = 0; i < this.state.notes.length; i++) {
-            console.log(this.state);
             header += this.state.notes[i].title;
           }
         }
 
+        console.log(this.props.notebooks);
+        var notebooks = Object.values(this.props.notebooks).map(function (notebook) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "create-tag-notebook-index"
+          }, notebook.title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "small-gray-arrow-down"
+          }, " "));
+        });
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "action-tag-modal"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
           className: "action-tag-modal-header"
         }, " Create Tag "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "content-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "note-title"
         }, " ", header, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
           className: "new-tag-modal-form",
@@ -2151,6 +2187,8 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
           className: "tag-button",
           type: "submit"
         }, "Create Tag")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "notebook-index-contianer"
+        }, notebooks))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",
           onClick: this.props.hideModal
         }));
@@ -2186,7 +2224,8 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state) {
   return {
     notes: state.entities.notes,
-    userId: state.sessions.CurrentUserId
+    userId: state.sessions.CurrentUserId,
+    notebooks: state.entities.notebooks
   };
 };
 

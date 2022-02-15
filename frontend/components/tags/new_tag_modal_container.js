@@ -6,6 +6,7 @@ import { createTag } from '../../actions/tags_actions'
 const mSTP = state => ({
   notes: state.entities.notes, 
   userId: state.sessions.CurrentUserId,
+  notebooks: state.entities.notebooks
 })
 
 const mDTP = dispatch => ({

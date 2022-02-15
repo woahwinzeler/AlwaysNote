@@ -1,17 +1,40 @@
-  add, edit, remove tags -- modal
+  CRAM for approval tommorrow: 
 
-  style login, signup
+  NOTEBOOKINDEX
+  stop style re-render 
 
-  refactor autosave
+  CREATENOTEBOOK
+  re-style 
+  
+  TAGINDEX
+  OnClick for tags changes red circles to green ones, clicking on them links the tag to the note, and opens the corresponding tag in the menu below
+  OnHover displays tag title 
 
-  jbuilder on showing notes through tags, store tagId instead of boolean 
+  NOTEINDEX under TAGINDEX
+  Scrollable menu of tags, on click drops down the given tags notes. 
+  Can delete/ link/unlinks notes on click of button 
+  Delete tag button,
 
+  SHOW NOTE CONTROLLER
+  fix jbuilder 
 
+  CREATE TAG MODAL
+  Scrollable menu of notebooks, on click drops down the given index
+  OnClick highlights the given note and links/breaks the link of the tag and note
 
-  notebook item styling:
-    make button red, add confirmation modal
-    Random pastal color, brightness increases on open
-  note index below notes:
-    change box color to tag
-    overflow-y: scroll
-    style note items
+  TEXTEDITOR
+  onDouble click of title renders an inline input to update title
+  Refactor autosave
+
+  POST-SAMI TO-DO
+
+    add github and LinkedIn 
+    
+    style login, signup
+
+    make a small 16-bit color canavs for the bottom left 
+      --will have to set a clamp
+
+    make a colorful jumping game that plays and pauses with the mouse hover and the spacebar
+
+    default note issue 

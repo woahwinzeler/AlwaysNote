@@ -47,7 +47,6 @@ class NewTagModal extends React.Component{
         note_ids: this.state.note_ids
       }
     }
-    console.log(tag)
     this.props.createTag(tag)
     this.props.hideModal()
   }
@@ -61,27 +60,48 @@ class NewTagModal extends React.Component{
         header += "none"
       } else {
         for(let i = 0; i < this.state.notes.length; i++){
-          console.log(this.state)
           header += this.state.notes[i].title;
         } 
       }
+
+      console.log(this.props.notebooks)
+
+      let notebooks = Object.values(this.props.notebooks).map(notebook => {
+        return(
+          <div className="create-tag-notebook-index">
+            {notebook.title}
+            <div className="small-gray-arrow-down"> </div>
+          </div>
+        )
+      })
+
+
+
+
       return (
         <>
         <div className="action-tag-modal">
           <h2 className="action-tag-modal-header"> Create Tag </h2>
           {/* <div onClick={this.props.hideModal}> close modal </div> */}
-          <div className="note-title"> {header} </div>
-          <form className="new-tag-modal-form" onSubmit={this.handleSubmit} >
-                             <label className="tag-color"> Choose Color {this.state.color}
-                              <input id="color" onChange={this.handleInput("color")} type="color" required="required" />
-                               </label>
-                            <div>
-                                <label className="tag-title"> Tag Title 
-                                  <input onChange={this.handleInput("title")} type="text" required="required" name="label" />
-                                </label>
-                                <button className="tag-button" type="submit">Create Tag</button>
-                            </div>
-          </form>
+          <div className="content-container">
+            <div>
+              <div className="note-title"> {header} </div>
+              <form className="new-tag-modal-form" onSubmit={this.handleSubmit} >
+                                <label className="tag-color"> Choose Color {this.state.color}
+                                  <input id="color" onChange={this.handleInput("color")} type="color" required="required" />
+                                  </label>
+                                <div>
+                                    <label className="tag-title"> Tag Title 
+                                      <input onChange={this.handleInput("title")} type="text" required="required" name="label" />
+                                    </label>
+                                    <button className="tag-button" type="submit">Create Tag</button>
+                                </div>
+              </form>
+            </div>
+            <div className="notebook-index-contianer">
+              {notebooks}
+            </div>
+          </div>
         </div>
         <div className="modal-screen" onClick={this.props.hideModal}></div>
         </>

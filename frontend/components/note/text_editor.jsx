@@ -50,6 +50,7 @@ class TextEditor extends React.Component{
     }
 
     this.handleBody = this.handleBody.bind(this)
+    this.editTitle = this.editTitle.bind(this)
     this.userEditCount = 0;
   }
 
@@ -86,6 +87,10 @@ class TextEditor extends React.Component{
     this.props.updateNote(this.state.note)
   }
 
+  editTitle(){
+
+  }
+
   render(){
     let body;
     this.title = this.state.note.title
@@ -98,7 +103,7 @@ class TextEditor extends React.Component{
 
     return (
       <div className="text-editor-container">
-        <h2>{this.title}</h2>
+        <h2 onDoubleClick={this.editTitle}>{this.title}</h2>
         <ReactQuill 
           placeholder="Start note here..."
           modules={this.modules}

@@ -24,7 +24,9 @@
   margin-left: auto;
   margin-right: auto;
 }
-
+.quill{
+  height: 60vh; 
+}
 .collapsable{
   width: 100%; 
   height: 12px;
@@ -325,6 +327,36 @@ ul{
   margin: 10px;
   display: flex;
   justify-content: space-between; 
+}
+
+.small-gray-arrow-down{
+  width: 0; 
+  height: 0; 
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  
+  border-top: 3px solid slategray;
+}
+
+.content-container{
+  display: flex;
+  justify-content: space-around; 
+}
+
+.create-tag-notebook-index{
+  border: 2px slategray solid; 
+  padding: 2px;
+  margin: 2px;
+  color: slategray; 
+  display: flex;
+  justify-content: space-between; 
+  flex-direction: row; 
+  width: 18vw; 
+}
+
+.notebook-index-contianer{
+  height: 86%;
+  overflow-y: scroll; 
 }
 /*!
  * Quill Editor v1.3.7

@@ -25,6 +25,9 @@ class NotebookIndex extends React.Component{
       NoteClass: "Notes",
       forceNotesOpen: false, 
       deleteId: -1,
+      link: false, 
+      linkedTagId: -1,
+      tag: {}, 
       isNote: false, 
       ulStyle: {
         background: "rgba(255, 0, 0, 0.4)", 
@@ -39,7 +42,7 @@ class NotebookIndex extends React.Component{
 
     this.toggleModal = this.toggleModal.bind(this)
     this.deleteNotebook = this.deleteNotebook.bind(this)
-    this.deleteNote = this.deleteNote.bind(this);
+    this.handleNote = this.handleNote.bind(this);
     this.showNotesIndex = this.showNotesIndex.bind(this)
     this.showNote = this.showNote.bind(this)
     this.collapseNotebooks = this.collapseNotebooks.bind(this)
@@ -49,8 +52,6 @@ class NotebookIndex extends React.Component{
   collapseNotebooks(cssClass){
     this.setState({NotebookClass: cssClass})
   }
-
-  
 
   collapseNotes(cssClass){
     this.setState({NoteClass: cssClass})
@@ -98,12 +99,18 @@ class NotebookIndex extends React.Component{
     })
   }
 
-  deleteNote(note){
-    this.setState({
-      openConfirmationModal: true, 
-      deleteId: note,
-      isNote: true,
-    })
+  handleNote(note){
+    if(this.state.link){
+      this.props.tags[this.state.linkedTagId]
+      this.state.tag.note_ids.push(note.id)
+      this.props.updateTag(this.state.tag);
+    } else{
+      this.setState({
+        openConfirmationModal: true, 
+        deleteId: note,
+        isNote: true,
+      })
+    }
   }
 
   toggleModal(){
@@ -150,7 +157,7 @@ class NotebookIndex extends React.Component{
       if(typeof note.tag === 'undefined' || note.notebook_id === this.state.note.notebookId){
         return (
         <div className="NotesItem" style={style} >
-        <motion.button onClick={() => this.deleteNote(note)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id="delete-note-button"></motion.button>
+        <motion.button onClick={() => this.handleNote(note)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id="delete-note-button"></motion.button>
         <motion.div key={index} onClick={this.showNote} title={note.id} whileHover={{scale: 1.2}} whileTap={{scale: 0.9}} >{note.title}
         </motion.div>
         </div>)
@@ -179,7 +186,7 @@ class NotebookIndex extends React.Component{
           </ul>
         </div>
           <TextEditorContainer noteToOpen={this.state.noteToOpen} notebookId={this.state.note.notebookId}  note={this.state.note}/>
-          <TagsIndexContainer showNote={(noteId) => this.setState({noteToOpen: noteId})} selectedNoteId={this.state.noteToOpen}/>
+          <TagsIndexContainer showNote={(noteId) => this.setState({noteToOpen: noteId})} selectedNoteId={this.state.noteToOpen} changeMode={(tag) => this.setState({link: !this.state.link, tag: tag})}/>
           <ConfirmationModalContainer  modalOpen={this.state.openConfirmationModal} hideModal={() => this.setState({openConfirmationModal: false})} id={this.state.deleteId} isNote={this.state.isNote}/>
       </div>
 
