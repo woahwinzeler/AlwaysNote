@@ -1805,7 +1805,6 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         var style = {
           background: color
         };
-        console.log(note.notebook_id, parseInt(_this3.state.note.notebookId));
 
         if (note.notebook_id === parseInt(_this3.state.note.notebookId)) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2332,8 +2331,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
             NotebooksNotes = notes.filter(function (note) {
               return note.notebook_id === notebook.id;
             });
-            console.log(notes);
-            NotebooksNotes = notes.map(function (note) {
+            NotebooksNotes = NotebooksNotes.map(function (note) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "NoteItem",
                 key: note.id

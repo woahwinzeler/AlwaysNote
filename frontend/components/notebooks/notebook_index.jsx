@@ -154,7 +154,6 @@ class NotebookIndex extends React.Component{
       let style = {
         background: color, 
       }
-      console.log(note.notebook_id,  parseInt(this.state.note.notebookId))
       if(note.notebook_id === parseInt(this.state.note.notebookId)){
         return (
         <div className="NotesItem" style={style} >

@@ -92,8 +92,7 @@ class NewTagModal extends React.Component{
         let NotebooksNotes; 
         if(openNotebooks.includes(notebook.id)){
           NotebooksNotes = notes.filter(note => note.notebook_id === notebook.id)
-          console.log(notes)
-          NotebooksNotes = notes.map(note => <div className="NoteItem" key={note.id}> {note.title} </div>)
+          NotebooksNotes = NotebooksNotes.map(note => <div className="NoteItem" key={note.id}> {note.title} </div>)
         }
         return(
           <div className="notes-and-Notebooks-container">
