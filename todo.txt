@@ -1,19 +1,6 @@
   CRAM for approval tommorrow: 
 
-  NOTEBOOKINDEX
-  stop style re-render 
-
-  CREATENOTEBOOK
-  re-style 
-  
-  TAGINDEX
-  OnClick for tags changes red circles to green ones, clicking on them links the tag to the note, and opens the corresponding tag in the menu below
-  OnHover displays tag title 
-
-  NOTEINDEX under TAGINDEX
-  Scrollable menu of tags, on click drops down the given tags notes. 
-  Can delete/ link/unlinks notes on click of button 
-  Delete tag button
+  DONE
 
   SHOW NOTE CONTROLLER
   fix jbuilder 
@@ -22,9 +9,30 @@
   Scrollable menu of notebooks, on click drops down the given index
   OnClick highlights the given note and links/breaks the link of the tag and note
 
-  TEXTEDITOR
+  TODO:
+
+  CREATE TAG MODAL -- 1 hour
+  better styling on noteIndex 
+
+  NOTEBOOKINDEX -- 30 minutes
+  stop style re-render 
+
+  CREATENOTEBOOK -- 40 minutes 
+  re-style 
+  
+  TAGINDEX 
+  OnClick for tags changes red circles to green ones, clicking on them links the tag to the note
+  OnHover displays tag title 
+
+  NOTEINDEX under TAGINDEX -- 2 hours
+  Scrollable menu of notes for a given tag
+  Can delete notes/tags on click of button 
+
+  TEXTEDITOR -- 1 hour 10 minutes 
   onDouble click of title renders an inline input to update title
   Refactor autosave
+
+  
 
   POST-SAMI TO-DO
 

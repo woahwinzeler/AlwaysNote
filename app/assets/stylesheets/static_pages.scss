@@ -112,6 +112,7 @@ button{
 
 .tag-note{
   text-align: center; 
+
 }
 .all-tags{
   display: grid;
@@ -309,12 +310,25 @@ ul{
   justify-content: center;
 }
 
-.Modal {
-  width: 200px;
-  height: 200px;
+.label{
   margin: auto;
+  padding: 10px;
+  display: center;
+  text-align: center;
+}
 
-  background-color: lightslategray;
+.form{
+  text-align: center;
+}
+
+.Modal {
+  margin: auto;
+  display: center; 
+  background-color: white;
+  height: 50vh; 
+  width: 50vw;
+  z-index: 13; 
+  border-radius: 8%; 
 }
 .Notes {
   width: 300px;

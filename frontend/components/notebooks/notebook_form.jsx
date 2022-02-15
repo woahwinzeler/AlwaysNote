@@ -26,12 +26,13 @@ class NotebookForm extends React.Component{
   render(){
 
     return(
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <form onSubmit={this.handleSubmit} className="form">
+        <h3> Create a New Notebook </h3>
+        <label className="label">
           Title 
           <input type="text" name="notebook[title]" onChange={this.update('title')} value={this.state.title}/>
         </label>
-        <label>
+        <label className="label">
           Description
           <input type="text" name="notebook[description]" onChange={this.update('description')} value={this.state.description}/>
         </label>
