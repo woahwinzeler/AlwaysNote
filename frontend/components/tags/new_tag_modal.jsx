@@ -60,7 +60,7 @@ class NewTagModal extends React.Component{
     this.setState({ note_ids: [],
       notes: [],
       title: "",
-      color: "#4BA541",
+      color: "#000000",
       user_id: this.props.userId,
       OpenNotebooks: [],})
   }
@@ -95,6 +95,7 @@ class NewTagModal extends React.Component{
 
 
 
+
   render(){
     if (this.props.modalOpen){
       let header = "Linked notes: "
@@ -115,10 +116,20 @@ class NewTagModal extends React.Component{
       let notes = Object.values(this.props.notes); 
 
       let notebooks = Object.values(this.props.notebooks).map(notebook => {
-        let NotebooksNotes; 
+      let NotebooksNotes; 
         if(openNotebooks.includes(notebook.id)){
           NotebooksNotes = notes.filter(note => note.notebook_id === notebook.id)
-          NotebooksNotes = NotebooksNotes.map(note => <div className="NoteItem" key={note.id} onClick={() => this.handleLinkNote(note)}> {note.title} </div>)
+          NotebooksNotes = NotebooksNotes.map(note => {
+            if(!this.state.note_ids.includes(note.id)){
+              return (<div className="NoteItem" key={note.id} onClick={() => this.handleLinkNote(note)}> {note.title} </div>);
+            } else {
+              let style = {
+                background: this.state.color, 
+              }
+              return (<div className="NoteItem" key={note.id} onClick={() => this.handleLinkNote(note)} style={style}> {note.title} </div>);
+            }
+           
+          }); 
         }
         return(
           <div className="notes-and-Notebooks-container">

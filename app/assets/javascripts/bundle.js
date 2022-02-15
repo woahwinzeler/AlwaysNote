@@ -2348,7 +2348,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
         note_ids: [],
         notes: [],
         title: "",
-        color: "#4BA541",
+        color: "#000000",
         user_id: this.props.userId,
         OpenNotebooks: []
       });
@@ -2419,13 +2419,27 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
               return note.notebook_id === notebook.id;
             });
             NotebooksNotes = NotebooksNotes.map(function (note) {
-              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-                className: "NoteItem",
-                key: note.id,
-                onClick: function onClick() {
-                  return _this4.handleLinkNote(note);
-                }
-              }, " ", note.title, " ");
+              if (!_this4.state.note_ids.includes(note.id)) {
+                return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+                  className: "NoteItem",
+                  key: note.id,
+                  onClick: function onClick() {
+                    return _this4.handleLinkNote(note);
+                  }
+                }, " ", note.title, " ");
+              } else {
+                var style = {
+                  background: _this4.state.color
+                };
+                return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+                  className: "NoteItem",
+                  key: note.id,
+                  onClick: function onClick() {
+                    return _this4.handleLinkNote(note);
+                  },
+                  style: style
+                }, " ", note.title, " ");
+              }
             });
           }
 

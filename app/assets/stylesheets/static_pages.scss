@@ -184,6 +184,10 @@ h5 {
 
 }
 
+.create-header{
+  margin-top: 15px
+}
+
 .modal-screen{
   position: fixed;
   background: rgba(0, 0, 0, 0.7);
@@ -370,13 +374,19 @@ ul{
 }
 
 .notes-and-Notebooks-container{
-  height: 90%;
   overflow-y: scroll; 
 }
 
 .content-container{
   display: flex;
   justify-content: space-around; 
+  height: 60vh;
+}
+
+.NoteItem{
+  text-align: center;
+  padding: 1px;
+
 }
 
 .create-tag-notebook-index{
@@ -395,8 +405,9 @@ ul{
 }
 
 .notebook-index-contianer{
-  height: 86%;
+  height: 85%;
   overflow-y: scroll; 
+  border: 2px slategray solid;
 }
 /*!
  * Quill Editor v1.3.7
