@@ -1,4 +1,5 @@
 import React from 'react'
+import NoteListContainer from '../note/note_list_container'
 
 
 class NewTagModal extends React.Component{
@@ -11,10 +12,12 @@ class NewTagModal extends React.Component{
       title: "",
       color: "#4BA541",
       user_id: this.props.userId,
+      OpenNotebooks: [],
 
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addOrRemoveNotebook = this.addOrRemoveNotebook.bind(this);
 
   } 
 
@@ -35,6 +38,22 @@ class NewTagModal extends React.Component{
     return e => {
         this.setState({[type]: e.currentTarget.value}, () => console.log(this.state))
     }
+  }
+
+  addOrRemoveNotebook(e){
+    let id = parseInt(e.currentTarget.title);
+    let index = this.state.OpenNotebooks.indexOf(id)
+    if (index === -1){
+      console.log(id)
+      this.setState({OpenNotebooks: [...this.state.OpenNotebooks, id]}, () => console.log(this.state))
+      this.props.getAllNotes(id);
+    } else {
+      console.log(id)
+      let notebooks = this.state.OpenNotebooks.slice();
+      notebooks.splice(index, 1);
+      this.setState({OpenNotebooks: notebooks}, () => console.log(this.state))
+    }
+
   }
 
   handleSubmit(e){
@@ -64,13 +83,26 @@ class NewTagModal extends React.Component{
         } 
       }
 
-      console.log(this.props.notebooks)
+      let openNotebooks = this.state.OpenNotebooks;
+      console.log(openNotebooks)
+
+      let notes = Object.values(this.props.notes); 
 
       let notebooks = Object.values(this.props.notebooks).map(notebook => {
+        let NotebooksNotes; 
+        if(openNotebooks.includes(notebook.id)){
+          NotebooksNotes = notes.filter(note => note.notebook_id === notebook.id)
+          NotebooksNotes = notes.map(note => <div className="NoteItem" key={note.id}> {note.title} </div>)
+        }
         return(
-          <div className="create-tag-notebook-index">
-            {notebook.title}
-            <div className="small-gray-arrow-down"> </div>
+          <div>
+            <div className="create-tag-notebook-index" onClick={this.addOrRemoveNotebook} title={notebook.id}>
+              {notebook.title}
+              <div className="small-gray-arrow-down"> </div>
+            </div>
+            <div className="notebook-notes">
+              { NotebooksNotes}
+            </div>
           </div>
         )
       })

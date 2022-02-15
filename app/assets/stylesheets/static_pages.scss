@@ -338,6 +338,11 @@ ul{
   border-top: 3px solid slategray;
 }
 
+.notes-and-Notebooks-container{
+  height: 90%;
+  overflow-y: scroll; 
+}
+
 .content-container{
   display: flex;
   justify-content: space-around; 
@@ -352,6 +357,10 @@ ul{
   justify-content: space-between; 
   flex-direction: row; 
   width: 18vw; 
+}
+
+.hidden{
+  display: none;
 }
 
 .notebook-index-contianer{

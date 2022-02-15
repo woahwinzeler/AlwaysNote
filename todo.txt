@@ -13,7 +13,7 @@
   NOTEINDEX under TAGINDEX
   Scrollable menu of tags, on click drops down the given tags notes. 
   Can delete/ link/unlinks notes on click of button 
-  Delete tag button,
+  Delete tag button
 
   SHOW NOTE CONTROLLER
   fix jbuilder 
@@ -33,7 +33,8 @@
     style login, signup
 
     make a small 16-bit color canavs for the bottom left 
-      --will have to set a clamp
+      --will have to set a clamp that accounts for the texteditor 
+      --onDrag to medieate height between canvas and note/notebook
 
     make a colorful jumping game that plays and pauses with the mouse hover and the spacebar
 
