@@ -2396,20 +2396,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
       var _this4 = this;
 
       if (this.props.modalOpen) {
-        var header = "Linked notes: ";
-
-        if (this.state.notes.length < 1 || this.state.notes[0] === undefined) {
-          header += "none";
-        } else {
-          for (var i = 0; i < this.state.notes.length; i++) {
-            header += this.state.notes[i] + ", ";
-            console.log(header);
-          }
-        }
-
-        console.log(this.state);
         var openNotebooks = this.state.OpenNotebooks;
-        console.log(openNotebooks);
         var notes = Object.values(this.props.notes);
         var notebooks = Object.values(this.props.notebooks).map(function (notebook) {
           var NotebooksNotes;
@@ -2461,9 +2448,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
           className: "action-tag-modal-header"
         }, " Create Tag "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content-container"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "note-title"
-        }, " ", header, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
           className: "new-tag-modal-form",
           onSubmit: this.handleSubmit
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -2485,7 +2470,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
           type: "submit"
         }, "Create Tag")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "notebook-index-contianer"
-        }, notebooks))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Link Notes "), notebooks))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",
           onClick: function onClick() {
             _this4.props.hideModal();

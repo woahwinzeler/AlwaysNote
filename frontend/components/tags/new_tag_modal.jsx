@@ -98,20 +98,8 @@ class NewTagModal extends React.Component{
 
   render(){
     if (this.props.modalOpen){
-      let header = "Linked notes: "
-      if (this.state.notes.length < 1 || this.state.notes[0] === undefined){
-        header += "none"
-      } else {
-        for(let i = 0; i < this.state.notes.length; i++){
-          header += this.state.notes[i] + ", ";
-          console.log(header)
-        } 
-      }
-
-      console.log(this.state)
 
       let openNotebooks = this.state.OpenNotebooks;
-      console.log(openNotebooks)
 
       let notes = Object.values(this.props.notes); 
 
@@ -154,7 +142,6 @@ class NewTagModal extends React.Component{
           {/* <div onClick={this.props.hideModal}> close modal </div> */}
           <div className="content-container">
             <div>
-              <div className="note-title"> {header} </div>
               <form className="new-tag-modal-form" onSubmit={this.handleSubmit} >
                                 <label className="tag-color"> Choose Color {this.state.color}
                                   <input id="color" onChange={this.handleInput("color")} type="color" required="required" />
@@ -168,6 +155,7 @@ class NewTagModal extends React.Component{
               </form>
             </div>
             <div className="notebook-index-contianer">
+            <h3> Link Notes </h3>
               {notebooks}
             </div>
           </div>
