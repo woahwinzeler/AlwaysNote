@@ -19,6 +19,7 @@ class NewTagModal extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addOrRemoveNotebook = this.addOrRemoveNotebook.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.handleLinkNote = this.handleLinkNote.bind(this);
 
   } 
 
@@ -28,8 +29,8 @@ class NewTagModal extends React.Component{
       if( noteId !== this.state.note_ids[0] && this.state.notes.length < 2){
         this.setState({
           note_ids: [noteId], 
-          notes: [this.props.notes[this.props.selectedNoteId]]
-        }, () => console.log(this.state))
+          notes: [this.props.notes[this.props.selectedNoteId].title]
+        })
       }
     }
    
@@ -79,6 +80,19 @@ class NewTagModal extends React.Component{
     this.resetState();
   }
 
+  handleLinkNote(note){
+    let index = this.state.note_ids.indexOf(note.id);
+    if(index === -1 ){
+      this.setState({note_ids: [...this.state.note_ids, note.id], notes: [...this.state.notes, note.title]})
+    } else {
+      let note_ids = this.state.note_ids.slice();
+      note_ids.splice(index, 1);
+      let titles = this.state.notes; 
+      titles.splice(this.state.notes.indexOf(note.title), 1);
+      this.setState({note_ids: note_ids, notes: titles})
+    }
+  }
+
 
 
   render(){
@@ -88,7 +102,7 @@ class NewTagModal extends React.Component{
         header += "none"
       } else {
         for(let i = 0; i < this.state.notes.length; i++){
-          header += this.state.notes[i].title;
+          header += this.state.notes[i] + ", ";
           console.log(header)
         } 
       }
@@ -104,7 +118,7 @@ class NewTagModal extends React.Component{
         let NotebooksNotes; 
         if(openNotebooks.includes(notebook.id)){
           NotebooksNotes = notes.filter(note => note.notebook_id === notebook.id)
-          NotebooksNotes = NotebooksNotes.map(note => <div className="NoteItem" key={note.id} onClick={() => this.setState({note_ids: [...this.state.note_ids, note.id], notes: [...this.state.notes, note.title]})}> {note.title} </div>)
+          NotebooksNotes = NotebooksNotes.map(note => <div className="NoteItem" key={note.id} onClick={() => this.handleLinkNote(note)}> {note.title} </div>)
         }
         return(
           <div className="notes-and-Notebooks-container">

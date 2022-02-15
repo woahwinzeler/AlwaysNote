@@ -2232,23 +2232,20 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.addOrRemoveNotebook = _this.addOrRemoveNotebook.bind(_assertThisInitialized(_this));
     _this.resetState = _this.resetState.bind(_assertThisInitialized(_this));
+    _this.handleLinkNote = _this.handleLinkNote.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(NewTagModal, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      var _this2 = this;
-
       var noteId = parseInt(this.props.selectedNoteId);
 
       if (!!noteId) {
         if (noteId !== this.state.note_ids[0] && this.state.notes.length < 2) {
           this.setState({
             note_ids: [noteId],
-            notes: [this.props.notes[this.props.selectedNoteId]]
-          }, function () {
-            return console.log(_this2.state);
+            notes: [this.props.notes[this.props.selectedNoteId].title]
           });
         }
       }
@@ -2256,18 +2253,18 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleInput",
     value: function handleInput(type) {
-      var _this3 = this;
+      var _this2 = this;
 
       return function (e) {
-        _this3.setState(_defineProperty({}, type, e.currentTarget.value), function () {
-          return console.log(_this3.state);
+        _this2.setState(_defineProperty({}, type, e.currentTarget.value), function () {
+          return console.log(_this2.state);
         });
       };
     }
   }, {
     key: "addOrRemoveNotebook",
     value: function addOrRemoveNotebook(e) {
-      var _this4 = this;
+      var _this3 = this;
 
       var id = parseInt(e.currentTarget.title);
       var index = this.state.OpenNotebooks.indexOf(id);
@@ -2276,7 +2273,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
         this.setState({
           OpenNotebooks: [].concat(_toConsumableArray(this.state.OpenNotebooks), [id])
         }, function () {
-          return console.log(_this4.state);
+          return console.log(_this3.state);
         });
         this.props.getAllNotes(id);
       } else {
@@ -2285,7 +2282,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
         this.setState({
           OpenNotebooks: notebooks
         }, function () {
-          return console.log(_this4.state);
+          return console.log(_this3.state);
         });
       }
     }
@@ -2318,9 +2315,30 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
       this.resetState();
     }
   }, {
+    key: "handleLinkNote",
+    value: function handleLinkNote(note) {
+      var index = this.state.note_ids.indexOf(note.id);
+
+      if (index === -1) {
+        this.setState({
+          note_ids: [].concat(_toConsumableArray(this.state.note_ids), [note.id]),
+          notes: [].concat(_toConsumableArray(this.state.notes), [note.title])
+        });
+      } else {
+        var note_ids = this.state.note_ids.slice();
+        note_ids.splice(index, 1);
+        var titles = this.state.notes;
+        titles.splice(this.state.notes.indexOf(note.title), 1);
+        this.setState({
+          note_ids: note_ids,
+          notes: titles
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this4 = this;
 
       if (this.props.modalOpen) {
         var header = "Linked notes: ";
@@ -2329,7 +2347,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
           header += "none";
         } else {
           for (var i = 0; i < this.state.notes.length; i++) {
-            header += this.state.notes[i].title;
+            header += this.state.notes[i] + ", ";
             console.log(header);
           }
         }
@@ -2350,10 +2368,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
                 className: "NoteItem",
                 key: note.id,
                 onClick: function onClick() {
-                  return _this5.setState({
-                    note_ids: [].concat(_toConsumableArray(_this5.state.note_ids), [note.id]),
-                    notes: [].concat(_toConsumableArray(_this5.state.notes), [note.title])
-                  });
+                  return _this4.handleLinkNote(note);
                 }
               }, " ", note.title, " ");
             });
@@ -2363,7 +2378,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
             className: "notes-and-Notebooks-container"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "create-tag-notebook-index",
-            onClick: _this5.addOrRemoveNotebook,
+            onClick: _this4.addOrRemoveNotebook,
             title: notebook.id
           }, notebook.title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "small-gray-arrow-down"
@@ -2404,9 +2419,9 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
         }, notebooks))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",
           onClick: function onClick() {
-            _this5.props.hideModal();
+            _this4.props.hideModal();
 
-            _this5.resetState();
+            _this4.resetState();
           }
         }));
       } else {
