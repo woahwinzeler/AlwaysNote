@@ -1,4 +1,4 @@
-json.set! "notes" do 
+
   json.set! @note.id do 
       json.id @note.id
       json.notebook_id @note.notebook_id
@@ -6,4 +6,3 @@ json.set! "notes" do
       json.body @note.body
       json.tag @note.tags.ids 
   end
-end

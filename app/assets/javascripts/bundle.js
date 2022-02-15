@@ -1154,7 +1154,7 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
     }
 
     _this.handleBody = _this.handleBody.bind(_assertThisInitialized(_this));
-    _this.editTitle = _this.editTitle.bind(_assertThisInitialized(_this));
+    _this.handleTitleSubmit = _this.handleTitleSubmit.bind(_assertThisInitialized(_this));
     _this.userEditCount = 0;
     return _this;
   }
@@ -1209,8 +1209,13 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
-    key: "editTitle",
-    value: function editTitle() {}
+    key: "handleTitleSubmit",
+    value: function handleTitleSubmit() {
+      this.props.updateNote(this.state.note);
+      this.setState({
+        editTitle: !this.state.editTitle
+      });
+    }
   }, {
     key: "render",
     value: function render() {
@@ -1226,6 +1231,19 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
         body = this.state.note.body;
       }
 
+      var screen;
+      var button;
+
+      if (this.state.editTitle) {
+        screen = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "transparent-modal-screen",
+          onClick: this.handleTitleSubmit
+        }, " ");
+        button = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.handleTitleSubmit
+        }, " Change Title");
+      }
+
       var title = this.state.editTitle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         type: "text",
         name: "title",
@@ -1239,15 +1257,15 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
           });
         }
       }, this.title);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-editor-container"
-      }, title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      }, title, button, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
         placeholder: "Start note here...",
         modules: this.modules,
         formats: this.formats,
         onChange: this.handleBody,
         value: body
-      }));
+      })));
     }
   }]);
 

@@ -51,7 +51,7 @@ class TextEditor extends React.Component{
     }
 
     this.handleBody = this.handleBody.bind(this)
-    this.editTitle = this.editTitle.bind(this)
+    this.handleTitleSubmit = this.handleTitleSubmit.bind(this)
     this.userEditCount = 0;
   }
 
@@ -88,8 +88,9 @@ class TextEditor extends React.Component{
     return e => this.setState({note: {...this.state.note, [field]: e.currentTarget.value}});
   }
 
-  editTitle(){
-
+  handleTitleSubmit(){
+    this.props.updateNote(this.state.note)
+    this.setState({editTitle: !this.state.editTitle})
   }
 
   render(){
@@ -101,11 +102,19 @@ class TextEditor extends React.Component{
       console.log(this.state.note.body)
       body = this.state.note.body 
     }
+    let screen; 
+    let button;
+    if(this.state.editTitle){
+      screen = <div className="transparent-modal-screen" onClick={this.handleTitleSubmit}> </div>
+      button = <button onClick={this.handleTitleSubmit}> Change Title</button>
+    }
     let title = this.state.editTitle ?  <textarea type="text" name="title" onChange={this.update('title')} value={this.state.note.title} className="title-input"/> : 
       <h2 onDoubleClick={() => this.setState({editTitle: !this.state.editTitle})}>{this.title}</h2>
     return (
+      <>
       <div className="text-editor-container">
         {title}
+        {button}
         <ReactQuill 
           placeholder="Start note here..."
           modules={this.modules}
@@ -114,6 +123,7 @@ class TextEditor extends React.Component{
           value={body}
         />
       </div>
+      </>
     )
   }
 }
