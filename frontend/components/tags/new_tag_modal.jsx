@@ -7,7 +7,7 @@ class NewTagModal extends React.Component{
     super(props)
 
     this.state = {
-      note_ids: [-1],
+      note_ids: [],
       notes: [],
       title: "",
       color: "#4BA541",
@@ -18,6 +18,7 @@ class NewTagModal extends React.Component{
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addOrRemoveNotebook = this.addOrRemoveNotebook.bind(this);
+    this.resetState = this.resetState.bind(this);
 
   } 
 
@@ -44,16 +45,23 @@ class NewTagModal extends React.Component{
     let id = parseInt(e.currentTarget.title);
     let index = this.state.OpenNotebooks.indexOf(id)
     if (index === -1){
-      console.log(id)
       this.setState({OpenNotebooks: [...this.state.OpenNotebooks, id]}, () => console.log(this.state))
       this.props.getAllNotes(id);
     } else {
-      console.log(id)
       let notebooks = this.state.OpenNotebooks.slice();
       notebooks.splice(index, 1);
       this.setState({OpenNotebooks: notebooks}, () => console.log(this.state))
     }
 
+  }
+
+  resetState(){
+    this.setState({ note_ids: [],
+      notes: [],
+      title: "",
+      color: "#4BA541",
+      user_id: this.props.userId,
+      OpenNotebooks: [],})
   }
 
   handleSubmit(e){
@@ -68,6 +76,7 @@ class NewTagModal extends React.Component{
     }
     this.props.createTag(tag)
     this.props.hideModal()
+    this.resetState();
   }
 
 
@@ -80,8 +89,11 @@ class NewTagModal extends React.Component{
       } else {
         for(let i = 0; i < this.state.notes.length; i++){
           header += this.state.notes[i].title;
+          console.log(header)
         } 
       }
+
+      console.log(this.state)
 
       let openNotebooks = this.state.OpenNotebooks;
       console.log(openNotebooks)
@@ -92,7 +104,7 @@ class NewTagModal extends React.Component{
         let NotebooksNotes; 
         if(openNotebooks.includes(notebook.id)){
           NotebooksNotes = notes.filter(note => note.notebook_id === notebook.id)
-          NotebooksNotes = NotebooksNotes.map(note => <div className="NoteItem" key={note.id}> {note.title} </div>)
+          NotebooksNotes = NotebooksNotes.map(note => <div className="NoteItem" key={note.id} onClick={() => this.setState({note_ids: [...this.state.note_ids, note.id], notes: [...this.state.notes, note.title]})}> {note.title} </div>)
         }
         return(
           <div className="notes-and-Notebooks-container">
@@ -135,7 +147,10 @@ class NewTagModal extends React.Component{
             </div>
           </div>
         </div>
-        <div className="modal-screen" onClick={this.props.hideModal}></div>
+        <div className="modal-screen" onClick={() => {
+          this.props.hideModal();
+          this.resetState();
+          }}></div>
         </>
       )
     } else {

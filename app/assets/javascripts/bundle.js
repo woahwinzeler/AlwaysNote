@@ -2222,7 +2222,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      note_ids: [-1],
+      note_ids: [],
       notes: [],
       title: "",
       color: "#4BA541",
@@ -2231,6 +2231,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.addOrRemoveNotebook = _this.addOrRemoveNotebook.bind(_assertThisInitialized(_this));
+    _this.resetState = _this.resetState.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2272,7 +2273,6 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
       var index = this.state.OpenNotebooks.indexOf(id);
 
       if (index === -1) {
-        console.log(id);
         this.setState({
           OpenNotebooks: [].concat(_toConsumableArray(this.state.OpenNotebooks), [id])
         }, function () {
@@ -2280,7 +2280,6 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
         });
         this.props.getAllNotes(id);
       } else {
-        console.log(id);
         var notebooks = this.state.OpenNotebooks.slice();
         notebooks.splice(index, 1);
         this.setState({
@@ -2289,6 +2288,18 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
           return console.log(_this4.state);
         });
       }
+    }
+  }, {
+    key: "resetState",
+    value: function resetState() {
+      this.setState({
+        note_ids: [],
+        notes: [],
+        title: "",
+        color: "#4BA541",
+        user_id: this.props.userId,
+        OpenNotebooks: []
+      });
     }
   }, {
     key: "handleSubmit",
@@ -2304,6 +2315,7 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
       };
       this.props.createTag(tag);
       this.props.hideModal();
+      this.resetState();
     }
   }, {
     key: "render",
@@ -2318,9 +2330,11 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
         } else {
           for (var i = 0; i < this.state.notes.length; i++) {
             header += this.state.notes[i].title;
+            console.log(header);
           }
         }
 
+        console.log(this.state);
         var openNotebooks = this.state.OpenNotebooks;
         console.log(openNotebooks);
         var notes = Object.values(this.props.notes);
@@ -2334,7 +2348,13 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
             NotebooksNotes = NotebooksNotes.map(function (note) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "NoteItem",
-                key: note.id
+                key: note.id,
+                onClick: function onClick() {
+                  return _this5.setState({
+                    note_ids: [].concat(_toConsumableArray(_this5.state.note_ids), [note.id]),
+                    notes: [].concat(_toConsumableArray(_this5.state.notes), [note.title])
+                  });
+                }
               }, " ", note.title, " ");
             });
           }
@@ -2383,7 +2403,11 @@ var NewTagModal = /*#__PURE__*/function (_React$Component) {
           className: "notebook-index-contianer"
         }, notebooks))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",
-          onClick: this.props.hideModal
+          onClick: function onClick() {
+            _this5.props.hideModal();
+
+            _this5.resetState();
+          }
         }));
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
