@@ -9,7 +9,10 @@ class Api::NotesController < ApplicationController
   def show 
     @note = Note.find(params[:id])
 
+    debugger 
+    
     @tags = @note.tags
+    @ids = [] || @tags.ids ;
 
     if !@note.nil?
       render :show 

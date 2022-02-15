@@ -979,7 +979,6 @@ var NoteList = /*#__PURE__*/function (_React$Component) {
       var _this = this;
 
       var notes;
-      debugger;
 
       if (this.props.notebooksToOpen.includes(this.props.id)) {
         notes = this.props.notes.filter(function (note) {

@@ -24,7 +24,6 @@ class NoteList extends React.Component{
 
   render(){
     let notes;
-    debugger 
     if(this.props.notebooksToOpen.includes(this.props.id)){
       notes = this.props.notes.filter(note => note.notebook_id === this.props.id)
       notes = notes.map(note => <div className="NoteItem" key={note.id}> {note.title} </div>)
