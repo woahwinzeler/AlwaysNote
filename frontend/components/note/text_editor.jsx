@@ -45,7 +45,8 @@ class TextEditor extends React.Component{
           title: "Scratchpad",
           body: "",
           notebook_id: this.props.notebookId
-        }
+        },
+        editTitle: false,
       }
     }
 
@@ -83,8 +84,8 @@ class TextEditor extends React.Component{
     })
   }
 
-  componentDidUnmount(){
-    this.props.updateNote(this.state.note)
+  update(field) {
+    return e => this.setState({note: {...this.state.note, [field]: e.currentTarget.value}});
   }
 
   editTitle(){
@@ -100,10 +101,11 @@ class TextEditor extends React.Component{
       console.log(this.state.note.body)
       body = this.state.note.body 
     }
-
+    let title = this.state.editTitle ?  <textarea type="text" name="title" onChange={this.update('title')} value={this.state.note.title} className="title-input"/> : 
+      <h2 onDoubleClick={() => this.setState({editTitle: !this.state.editTitle})}>{this.title}</h2>
     return (
       <div className="text-editor-container">
-        <h2 onDoubleClick={this.editTitle}>{this.title}</h2>
+        {title}
         <ReactQuill 
           placeholder="Start note here..."
           modules={this.modules}

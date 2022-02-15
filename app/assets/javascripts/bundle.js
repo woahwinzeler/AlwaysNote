@@ -1079,6 +1079,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _quill_snow_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./quill.snow.css */ "./frontend/components/note/quill.snow.css");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1142,7 +1148,8 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
           title: "Scratchpad",
           body: "",
           notebook_id: _this.props.notebookId
-        }
+        },
+        editTitle: false
       };
     }
 
@@ -1191,9 +1198,15 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "componentDidUnmount",
-    value: function componentDidUnmount() {
-      this.props.updateNote(this.state.note);
+    key: "update",
+    value: function update(field) {
+      var _this3 = this;
+
+      return function (e) {
+        return _this3.setState({
+          note: _objectSpread(_objectSpread({}, _this3.state.note), {}, _defineProperty({}, field, e.currentTarget.value))
+        });
+      };
     }
   }, {
     key: "editTitle",
@@ -1201,6 +1214,8 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       var body;
       this.title = this.state.note.title;
 
@@ -1211,11 +1226,22 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
         body = this.state.note.body;
       }
 
+      var title = this.state.editTitle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        type: "text",
+        name: "title",
+        onChange: this.update('title'),
+        value: this.state.note.title,
+        className: "title-input"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        onDoubleClick: function onDoubleClick() {
+          return _this4.setState({
+            editTitle: !_this4.state.editTitle
+          });
+        }
+      }, this.title);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-editor-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        onDoubleClick: this.editTitle
-      }, this.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      }, title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
         placeholder: "Start note here...",
         modules: this.modules,
         formats: this.formats,
