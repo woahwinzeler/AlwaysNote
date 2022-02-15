@@ -35,7 +35,7 @@ class NotebookIndex extends React.Component{
       note: {
         title: "",
         body: "",
-        notebookId: ""
+        notebook_id: ""
       }
     }
 
@@ -68,7 +68,9 @@ class NotebookIndex extends React.Component{
     this.props.getNote(this.props.notes[noteId]).then(
       () =>  this.setState({note: this.props.notes[noteId], 
                             noteToOpen: noteId,
-                            noteFormToOpen: true}))
+                            noteFormToOpen: true,
+                            ...this.state.note,
+                          }))
   }
 
 
@@ -77,7 +79,7 @@ class NotebookIndex extends React.Component{
     this.setState({ulStyle: {
       background: style
     }, 
-    note: {notebookId: notebookId },
+    note: {notebook_id:  notebookId},
     forceNotesOpen: true, 
   })
     this.props.getAllNotes(notebookId)
@@ -154,7 +156,7 @@ class NotebookIndex extends React.Component{
       let style = {
         background: color, 
       }
-      if(note.notebook_id === parseInt(this.state.note.notebookId)){
+      if(note.notebook_id === parseInt(this.state.note.notebook_id)){
         return (
         <div className="NotesItem" style={style} >
         <motion.button onClick={() => this.handleNote(note)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id="delete-note-button"></motion.button>
@@ -165,6 +167,7 @@ class NotebookIndex extends React.Component{
         return null
       }
     })
+    console.log(notes,this.state)
     return(
       <div className="notesAndBooks">
         <div className="notebooks">

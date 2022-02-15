@@ -115,7 +115,7 @@ class TagsIndex extends React.Component{
     if (noteKeys.length > 0 && typeof noteKeys.length !== 'undefined'){
       notes = noteKeys.map(key => {
         let note = this.props.notes[key];
-        if (typeof this.props.notes[key].tag !== 'undefined' && this.props.notes[key].tag === this.state.selectedTag){
+        if (note.tag.includes(this.state.selectedTag)){
           return (
               <div key={note.id}  onClick={() => this.showNote(note)} className="tag-note"> {note.title}</div>
           )
