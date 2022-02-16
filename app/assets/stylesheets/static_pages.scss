@@ -90,7 +90,7 @@ button{
 .tag-index{
   flex-direction: column;
   overflow-y: scroll; 
-  height: fit-content; 
+  height: 58vh; 
 }
 
 #delete-notebook-button{
@@ -114,8 +114,13 @@ button{
 .tag-container{
 }
 
+.tagged-notes-container{
+  overflow-y: scroll;
+}
+
 .tagged-notes {
   padding-top: 2rem; 
+  height: 35vh; 
 }
 
 .tag-note{
@@ -127,6 +132,8 @@ button{
   gap: 1rem; 
   grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
   padding: 2px; 
+  height: 60vh;
+  width: auto;
 }
 .tag {
   border-radius: 50%;
@@ -380,7 +387,11 @@ ul{
 .content-container{
   display: flex;
   justify-content: space-around; 
-  height: 60vh;
+  height: 450px;
+}
+
+h3{
+  text-align: center;
 }
 
 .NoteItem{

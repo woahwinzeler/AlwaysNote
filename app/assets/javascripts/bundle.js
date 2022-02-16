@@ -1544,7 +1544,9 @@ var NotebookForm = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
         className: "form"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Create a New Notebook "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "create-header"
+      }, " Create a New Notebook "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label"
       }, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
@@ -2839,13 +2841,13 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         className: this.state.tagClassName
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.getAllTags
-      }, " See All Tags "), button, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      }, " See All Tags "), button, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.showNewTagModal
+      }, " Create New Tag "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "tag-header"
       }, " Tags "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "all-tags"
-      }, tags), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.showNewTagModal
-      }, " Create New Tag ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, tags)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_4__["default"], {
         target: "tagged-notes",
         changeClass: this.hideNotes
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

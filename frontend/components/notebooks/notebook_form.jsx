@@ -27,7 +27,7 @@ class NotebookForm extends React.Component{
 
     return(
       <form onSubmit={this.handleSubmit} className="form">
-        <h3> Create a New Notebook </h3>
+        <h3 className="create-header"> Create a New Notebook </h3>
         <label className="label">
           Title 
           <input type="text" name="notebook[title]" onChange={this.update('title')} value={this.state.title}/>

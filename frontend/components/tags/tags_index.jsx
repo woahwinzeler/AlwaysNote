@@ -142,11 +142,11 @@ class TagsIndex extends React.Component{
           <div className={this.state.tagClassName}>
             <button onClick={this.getAllTags}> See All Tags </button>
             {button}
+            <button onClick={this.showNewTagModal}> Create New Tag </button>
             <h3 className="tag-header"> Tags </h3>
             <div className="all-tags">
               {tags}
             </div>
-            <button onClick={this.showNewTagModal}> Create New Tag </button>
           </div>
           <Collapsable target="tagged-notes" changeClass={this.hideNotes}/>
           <div className={this.state.notesClassName}>

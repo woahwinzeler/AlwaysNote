@@ -9,18 +9,26 @@
   Scrollable menu of notebooks, on click drops down the given index
   OnClick highlights the given note and links/breaks the link of the tag and note
 
-  TODO:
+  Text Editor 
+  onDouble click of title renders an inline input to update title
 
   CREATE TAG MODAL -- 1 hour
   better styling on noteIndex 
 
-  NOTEBOOKINDEX -- 30 minutes
-  stop style re-render 
+  TEXTEDITOR -- 1 hour 10 minutes 
+  Refactor autosave
+
 
   CREATENOTEBOOK -- 40 minutes 
   re-style 
+
+  TODO:
+
+
+  NOTEBOOKINDEX -- 30 minutes
+  stop style re-render 
   
-  TAGINDEX 
+  TAGINDEX -- 2 hours 
   OnClick for tags changes red circles to green ones, clicking on them links the tag to the note
   OnHover displays tag title 
 
@@ -28,9 +36,6 @@
   Scrollable menu of notes for a given tag
   Can delete notes/tags on click of button 
 
-  TEXTEDITOR -- 1 hour 10 minutes 
-  onDouble click of title renders an inline input to update title
-  Refactor autosave
 
   
 
