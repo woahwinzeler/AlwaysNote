@@ -2810,6 +2810,9 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
           var note = _this4.props.notes[key];
 
           if (note.tag.includes(_this4.state.selectedTag)) {
+            var style3 = {
+              background: _this4.getColor()
+            };
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_5__["motion"].div, {
               key: note.id,
               onClick: function onClick() {
@@ -2817,11 +2820,12 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
               },
               className: "tag-note",
               whileHover: {
-                scale: 1.1
+                scale: 1.2
               },
               whileTap: {
-                scale: 0.9
-              }
+                scale: 0.8
+              },
+              style: style3
             }, " ", note.title);
           } else {
             return null;
@@ -2849,10 +2853,8 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
       if (this.state.selectedTag !== -1) {
         var tag = this.props.tags[this.state.selectedTag];
         tagHeader = tag.title + "'s";
-        console.log('hit');
       }
 
-      console.log(tagHeader);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tag-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_4__["default"], {

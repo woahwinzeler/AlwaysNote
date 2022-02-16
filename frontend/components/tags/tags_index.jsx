@@ -123,8 +123,11 @@ class TagsIndex extends React.Component{
       notes = noteKeys.map(key => {
         let note = this.props.notes[key];
         if (note.tag.includes(this.state.selectedTag)){
+          let style3 = {
+            background: this.getColor(), 
+          }
           return (
-              <motion.div key={note.id}  onClick={() => this.showNote(note)} className="tag-note" whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}> {note.title}</motion.div>
+              <motion.div key={note.id}  onClick={() => this.showNote(note)} className="tag-note" whileHover={{scale: 1.2}} whileTap={{scale: 0.8}} style={style3}> {note.title}</motion.div>
           )
         } else {
           return null 

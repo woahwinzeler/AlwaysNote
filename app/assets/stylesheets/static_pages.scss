@@ -117,17 +117,18 @@ button{
 
 .tagged-notes-container{
   overflow-y: scroll;
+  height: clamp(8vh, 30vh, 33vh); 
 }
 
 .tagged-notes {
-  height: clamp(8vh, 30vh, 35vh); 
+  height: clamp(8vh, 30vh, 33vh); 
 
 }
 
 .tag-note{
   text-align: center; 
   padding: 4px;
-  
+
 
 
 }
