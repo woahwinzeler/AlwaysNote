@@ -3,6 +3,7 @@ import TagActionModal from './tag_action_modal'
 import NewTagModal from './new_tag_modal'
 import NewTagModalContainer from './new_tag_modal_container'
 import Collapsable from '../collapsable/collapsable'
+import {motion} from 'framer-motion'
 
 class TagsIndex extends React.Component{
   //TODO: edit tags
@@ -15,7 +16,7 @@ class TagsIndex extends React.Component{
     this.state = {
       modalOpen: false,
       editMode: false,
-      tagSelected: -1, 
+      selectedTag: -1, 
       newTagModalOpen: false, 
       selectedNote: -1, 
       tagClassName: "tag-index",
@@ -35,6 +36,14 @@ class TagsIndex extends React.Component{
   hideTags(cssClass){
     this.setState({tagClassName: cssClass})
   }
+
+
+  getColor(){ 
+    return "hsl(" + 360 * Math.random() + ',' +
+               (25 + 70 * Math.random()) + '%,' + 
+               (85 + 10 * Math.random()) + '%)'
+  }
+
 
   hideNotes(cssClass){
     this.setState({notesClassName: cssClass})
@@ -108,8 +117,6 @@ class TagsIndex extends React.Component{
     } 
 
     
-
-    //TODO: Select a tag to see associated notes never renders 
     let notes;
     let noteKeys = Object.keys(this.props.notes);
     if (noteKeys.length > 0 && typeof noteKeys.length !== 'undefined'){
@@ -117,7 +124,7 @@ class TagsIndex extends React.Component{
         let note = this.props.notes[key];
         if (note.tag.includes(this.state.selectedTag)){
           return (
-              <div key={note.id}  onClick={() => this.showNote(note)} className="tag-note"> {note.title}</div>
+              <motion.div key={note.id}  onClick={() => this.showNote(note)} className="tag-note" whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}> {note.title}</motion.div>
           )
         } else {
           return null 
@@ -135,6 +142,12 @@ class TagsIndex extends React.Component{
     <button onClick={this.toggleEditMode}> Show Tags </button> :
     <button onClick={this.toggleEditMode} > Edit Tags </button> 
 
+    let tagHeader; 
+    if(this.state.selectedTag !== -1){
+      let tag = this.props.tags[this.state.selectedTag];
+      tagHeader = tag.title + "'s"
+    }
+    
     return (
       <>
         <div className="tag-container">
@@ -150,8 +163,10 @@ class TagsIndex extends React.Component{
           </div>
           <Collapsable target="tagged-notes" changeClass={this.hideNotes}/>
           <div className={this.state.notesClassName}>
-            <h3 className="tag-header" > Notes </h3>
-            {notes}
+            <h3 className="tag-header" > {tagHeader} Notes </h3>
+              <div className="tagged-notes-container">
+              {notes}
+              </div>
           </div>
           <TagActionModal tag={this.state.tagSelected} modalOpen={this.state.modalOpen} hideModal={() => this.setState({modalOpen:false})} />
           <NewTagModalContainer modalOpen={this.state.newTagModalOpen} hideModal={() => this.setState({newTagModalOpen:false})} selectedNoteId={this.props.selectedNoteId} />

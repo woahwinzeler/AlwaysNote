@@ -90,7 +90,8 @@ button{
 .tag-index{
   flex-direction: column;
   overflow-y: scroll; 
-  height: 58vh; 
+  height: 58vh;
+  width: clamp(8vw, 12vw, 20vw) 
 }
 
 #delete-notebook-button{
@@ -119,12 +120,15 @@ button{
 }
 
 .tagged-notes {
-  padding-top: 2rem; 
-  height: 35vh; 
+  height: clamp(8vh, 30vh, 35vh); 
+
 }
 
 .tag-note{
   text-align: center; 
+  padding: 4px;
+  
+
 
 }
 .all-tags{
@@ -132,7 +136,7 @@ button{
   gap: 1rem; 
   grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
   padding: 2px; 
-  height: 60vh;
+  height: clamp(20vh, 55vh, 62vh);
   width: auto;
 }
 .tag {

@@ -2619,6 +2619,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _new_tag_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./new_tag_modal */ "./frontend/components/tags/new_tag_modal.jsx");
 /* harmony import */ var _new_tag_modal_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./new_tag_modal_container */ "./frontend/components/tags/new_tag_modal_container.js");
 /* harmony import */ var _collapsable_collapsable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../collapsable/collapsable */ "./frontend/components/collapsable/collapsable.jsx");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2647,6 +2648,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var TagsIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(TagsIndex, _React$Component);
 
@@ -2665,7 +2667,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       modalOpen: false,
       editMode: false,
-      tagSelected: -1,
+      selectedTag: -1,
       newTagModalOpen: false,
       selectedNote: -1,
       tagClassName: "tag-index",
@@ -2688,6 +2690,11 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
       this.setState({
         tagClassName: cssClass
       });
+    }
+  }, {
+    key: "getColor",
+    value: function getColor() {
+      return "hsl(" + 360 * Math.random() + ',' + (25 + 70 * Math.random()) + '%,' + (85 + 10 * Math.random()) + '%)';
     }
   }, {
     key: "hideNotes",
@@ -2793,8 +2800,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
             className: "tag"
           });
         });
-      } //TODO: Select a tag to see associated notes never renders 
-
+      }
 
       var notes;
       var noteKeys = Object.keys(this.props.notes);
@@ -2804,12 +2810,18 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
           var note = _this4.props.notes[key];
 
           if (note.tag.includes(_this4.state.selectedTag)) {
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_5__["motion"].div, {
               key: note.id,
               onClick: function onClick() {
                 return _this4.showNote(note);
               },
-              className: "tag-note"
+              className: "tag-note",
+              whileHover: {
+                scale: 1.1
+              },
+              whileTap: {
+                scale: 0.9
+              }
             }, " ", note.title);
           } else {
             return null;
@@ -2832,6 +2844,15 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
       }, " Show Tags ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.toggleEditMode
       }, " Edit Tags ");
+      var tagHeader;
+
+      if (this.state.selectedTag !== -1) {
+        var tag = this.props.tags[this.state.selectedTag];
+        tagHeader = tag.title + "'s";
+        console.log('hit');
+      }
+
+      console.log(tagHeader);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tag-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2854,7 +2875,9 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         className: this.state.notesClassName
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "tag-header"
-      }, " Notes "), notes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tag_action_modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, " ", tagHeader, " Notes "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "tagged-notes-container"
+      }, notes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tag_action_modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
         tag: this.state.tagSelected,
         modalOpen: this.state.modalOpen,
         hideModal: function hideModal() {
