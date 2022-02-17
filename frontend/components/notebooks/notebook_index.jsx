@@ -24,6 +24,7 @@ class NotebookIndex extends React.Component{
       addStyle: true, 
       NoteClass: "Notes",
       forceNotesOpen: false, 
+      buttonId: "delete-note-button",
       deleteId: -1,
       link: false, 
       linkedTagId: -1,
@@ -102,11 +103,13 @@ class NotebookIndex extends React.Component{
   }
 
   handleNote(note){
+    console.log('hit Handlenote')
     if(this.state.link){
-      this.props.tags[this.state.linkedTagId]
-      this.state.tag.note_ids.push(note.id)
-      this.props.updateTag(this.state.tag);
+      let tag = this.state.tag; 
+      tag.note_ids.push(note.id)
+      this.props.updateTag(tag);
     } else{
+      console.log('out', this.state.link)
       this.setState({
         openConfirmationModal: true, 
         deleteId: note,
@@ -159,7 +162,7 @@ class NotebookIndex extends React.Component{
       if(note.notebook_id === parseInt(this.state.note.notebook_id)){
         return (
         <div className="NotesItem" style={style} >
-        <motion.button onClick={() => this.handleNote(note)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id="delete-note-button"></motion.button>
+        <motion.button onClick={() => this.handleNote(note)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id={this.state.buttonId}></motion.button>
         <motion.div key={index} onClick={this.showNote} title={note.id} whileHover={{scale: 1.2}} whileTap={{scale: 0.9}} >{note.title}
         </motion.div>
         </div>)
@@ -167,7 +170,6 @@ class NotebookIndex extends React.Component{
         return null
       }
     })
-    console.log(notes,this.state)
     return(
       <div className="notesAndBooks">
         <div className="notebooks">
@@ -189,7 +191,7 @@ class NotebookIndex extends React.Component{
           </ul>
         </div>
           <TextEditorContainer noteToOpen={this.state.noteToOpen} notebookId={this.state.note.notebookId}  note={this.state.note}/>
-          <TagsIndexContainer showNote={(noteId) => this.setState({noteToOpen: noteId})} selectedNoteId={this.state.noteToOpen} changeMode={(tag) => this.setState({link: !this.state.link, tag: tag})}/>
+          <TagsIndexContainer showNote={(noteId) => this.setState({noteToOpen: noteId})} selectedNoteId={this.state.noteToOpen} changeMode={(tag) => this.setState({link: !this.state.link, tag: tag, buttonId: !this.state.link  ? "link-notebook-button" : "delete-notebook-button"})}/>
           <ConfirmationModalContainer  modalOpen={this.state.openConfirmationModal} hideModal={() => this.setState({openConfirmationModal: false})} id={this.state.deleteId} isNote={this.state.isNote}/>
       </div>
 

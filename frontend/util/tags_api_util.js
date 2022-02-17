@@ -7,7 +7,7 @@ export const fetchTagIndex = (userId)  => (
 )
 export const updateTag = (tag) => (
   $.ajax({
-    url: `/api/tags`,
+    url: `/api/tags/${tag.id}`,
     method: 'PATCH',
     data: tag 
   })

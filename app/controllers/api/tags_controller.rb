@@ -12,25 +12,20 @@ class Api::TagsController < ApplicationController
   def update
     #tested and working
     # http://localhost:3000/api/notebooks/18/notes/6/tags/2?tag[id]=10&tag[title]=Another updated tag. Again.&tag[color]=green&tag[user_id]=1&tag[note_ids]=8,9,2
-    @tag = Tag.find(params[:tag][:id].to_i)
+    @tag = Tag.find(params[:id].to_i)
     if !@tag.nil?
-
-      note_ids = params[:tag][:note_ids].split(",").map{|str| str.to_i}
-      title = params[:tag][:title]
-      color = params[:tag][:color]
+      note_ids = params[:note_ids].map{|str| str.to_i}
+      title = params[:title]
+      color = params[:color]
 
       @tag.color = color
       @tag.title = title
       @tag.note_ids = note_ids
-      if params[:tag][:user_id].to_i === @tag.user_id 
-        if @tag.save 
-          render json: @tag
-        else
-          render json: @tag.errors.full_messages, status: 422
-        end
-      else 
-        render json: {"msg": "user must own the tag they're updating"}, status: 422
-      end 
+      if @tag.save 
+        render json: @tag
+      else
+        render json: @tag.errors.full_messages, status: 422
+      end
     else
       render json: @tag.errors.full_messages, status: 404
     end

@@ -1693,6 +1693,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       addStyle: true,
       NoteClass: "Notes",
       forceNotesOpen: false,
+      buttonId: "delete-note-button",
       deleteId: -1,
       link: false,
       linkedTagId: -1,
@@ -1784,11 +1785,14 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleNote",
     value: function handleNote(note) {
+      console.log('hit Handlenote');
+
       if (this.state.link) {
-        this.props.tags[this.state.linkedTagId];
-        this.state.tag.note_ids.push(note.id);
-        this.props.updateTag(this.state.tag);
+        var tag = this.state.tag;
+        tag.note_ids.push(note.id);
+        this.props.updateTag(tag);
       } else {
+        console.log('out', this.state.link);
         this.setState({
           openConfirmationModal: true,
           deleteId: note,
@@ -1874,7 +1878,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
             whileTap: {
               scale: 0.7
             },
-            id: "delete-note-button"
+            id: _this3.state.buttonId
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].div, {
             key: index,
             onClick: _this3.showNote,
@@ -1890,7 +1894,6 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
           return null;
         }
       });
-      console.log(notes, this.state);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notesAndBooks"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1943,7 +1946,8 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         changeMode: function changeMode(tag) {
           return _this3.setState({
             link: !_this3.state.link,
-            tag: tag
+            tag: tag,
+            buttonId: !_this3.state.link ? "link-notebook-button" : "delete-notebook-button"
           });
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_confirmationModal_confirmation_modal_container__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -2685,6 +2689,11 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(TagsIndex, [{
+    key: "changeMode",
+    value: function changeMode(tag) {
+      this.props.changeMode(tag);
+    }
+  }, {
     key: "hideTags",
     value: function hideTags(cssClass) {
       this.setState({
@@ -2849,9 +2858,10 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         onClick: this.toggleEditMode
       }, " Edit Tags ");
       var tagHeader;
+      var tag;
 
       if (this.state.selectedTag !== -1) {
-        var tag = this.props.tags[this.state.selectedTag];
+        tag = this.props.tags[this.state.selectedTag];
         tagHeader = tag.title + "'s";
       }
 
@@ -2879,7 +2889,11 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         className: "tag-header"
       }, " ", tagHeader, " Notes "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tagged-notes-container"
-      }, notes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tag_action_modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, notes, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_5__["motion"].button, {
+        onClick: function onClick() {
+          return _this4.changeMode(tag);
+        }
+      }, "Link More Notes "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tag_action_modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
         tag: this.state.tagSelected,
         modalOpen: this.state.modalOpen,
         hideModal: function hideModal() {
@@ -3816,7 +3830,7 @@ var fetchTagIndex = function fetchTagIndex(userId) {
 };
 var updateTag = function updateTag(tag) {
   return $.ajax({
-    url: "/api/tags",
+    url: "/api/tags/".concat(tag.id),
     method: 'PATCH',
     data: tag
   });

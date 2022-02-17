@@ -33,6 +33,10 @@ class TagsIndex extends React.Component{
     this.hideNotes = this.hideNotes.bind(this)
   }
 
+  changeMode(tag){
+    this.props.changeMode(tag)
+  }
+
   hideTags(cssClass){
     this.setState({tagClassName: cssClass})
   }
@@ -146,8 +150,9 @@ class TagsIndex extends React.Component{
     <button onClick={this.toggleEditMode} > Edit Tags </button> 
 
     let tagHeader; 
+    let tag; 
     if(this.state.selectedTag !== -1){
-      let tag = this.props.tags[this.state.selectedTag];
+      tag = this.props.tags[this.state.selectedTag];
       tagHeader = tag.title + "'s"
     }
     
@@ -169,6 +174,7 @@ class TagsIndex extends React.Component{
             <h3 className="tag-header" > {tagHeader} Notes </h3>
               <div className="tagged-notes-container">
               {notes}
+              <motion.button onClick={() => this.changeMode(tag)}>Link More Notes </motion.button>
               </div>
           </div>
           <TagActionModal tag={this.state.tagSelected} modalOpen={this.state.modalOpen} hideModal={() => this.setState({modalOpen:false})} />

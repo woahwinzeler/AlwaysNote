@@ -12,8 +12,10 @@ json.set! "note" do
     if @tags.length > 0
       @tags.each do |tag| 
         json.set! tag.id do 
+          json.id tag.id
           json.color tag.color
           json.title tag.title
+          json.note_ids tag.note_ids 
         end
       end
     end 
