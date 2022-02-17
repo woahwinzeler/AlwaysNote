@@ -20,7 +20,8 @@ class TagsIndex extends React.Component{
       newTagModalOpen: false, 
       selectedNote: -1, 
       tagClassName: "tag-index",
-      notesClassName: "tagged-notes"
+      notesClassName: "tagged-notes",
+      TagHeader: "Tags",
     }
 
     this.getAllTags = this.getAllTags.bind(this)
@@ -46,6 +47,10 @@ class TagsIndex extends React.Component{
     return "hsl(" + 360 * Math.random() + ',' +
                (25 + 70 * Math.random()) + '%,' + 
                (85 + 10 * Math.random()) + '%)'
+  }
+
+  displayTitle(tag){
+    this.setState({tagHeader: `${tag.title}`})
   }
 
 
@@ -103,6 +108,8 @@ class TagsIndex extends React.Component{
 
   render(){
 
+    //TAG GRID LOGIC 
+
     let tags; 
     let tagKeys = Object.keys(this.props.tags);
     if (tagKeys.length >= 1){
@@ -110,13 +117,14 @@ class TagsIndex extends React.Component{
         const style = {
           background:  this.props.tags[id].color
         }
+        let tag = this.props.tags[id]; 
         return (
-          <div key={id} title={this.props.tags[id].title} color={this.props.tags[id].color} style={style} onClick={() => this.showNoteOrEngageModal(id)} className="tag">
+          <div key={id} title={this.props.tags[id].title} color={this.props.tags[id].color} style={style} onClick={() => this.showNoteOrEngageModal(id)} onMouseOver={() => this.displayTitle(tag)} className="tag">
       </div>)
       })
     } 
 
-    
+    //NOTES INDEX BELOW TAGS 
     let notes;
     let noteKeys = Object.keys(this.props.notes);
     if (noteKeys.length > 0 && typeof noteKeys.length !== 'undefined'){
@@ -140,10 +148,14 @@ class TagsIndex extends React.Component{
         notes = <p className="placeholder"> Select a tag to see associated notes</p>
       }
     }
+
+    //Button Defining the Tag 
   
     let button = this.state.editMode ?   
     <button onClick={this.toggleEditMode}> Show Tags </button> :
     <button onClick={this.toggleEditMode} > Edit Tags </button> 
+
+    
 
     let tagHeader; 
     let tag; 
@@ -153,7 +165,8 @@ class TagsIndex extends React.Component{
     }
 
     let buttonHtml = this.state.editMode ? "Confirm" : "Link More Notes" 
-    
+
+    let Tagheader = this.state.tagHeader;
     return (
       <>
         <div className="tag-container">
@@ -162,7 +175,7 @@ class TagsIndex extends React.Component{
             <button onClick={this.getAllTags}> See All Tags </button>
             {button}
             <button onClick={this.showNewTagModal}> Create New Tag </button>
-            <h3 className="tag-header"> Tags </h3>
+            <h3 className="tag-header"> {Tagheader} </h3>
             <div className="all-tags">
               {tags}
             </div>

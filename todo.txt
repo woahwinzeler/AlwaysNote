@@ -25,6 +25,13 @@
   TODO:
 
 
+  REFACTOR NOTEBOOK INDEX into seperate components 
+  REFACTOR TAGS INDEX to seperate components
+
+   TAG-GRID on Notebooks and Notes -- 
+
+
+
   NOTEBOOKINDEX -- 30 minutes
   stop style re-render 
 

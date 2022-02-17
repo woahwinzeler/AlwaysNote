@@ -1872,7 +1872,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
           var buttonId = _this3.state.buttonId;
 
           if (typeof _this3.state.tag.note_ids !== 'undefined') {
-            if (_this3.state.tag.note_ids.includes(note.id)) {
+            if (_this3.state.tag.note_ids.includes(note.id) && _this3.state.link) {
               buttonId = "de-" + buttonId;
             }
           }
@@ -2592,9 +2592,16 @@ var TagActionModal = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(TagActionModal);
 
   function TagActionModal(props) {
+    var _this;
+
     _classCallCheck(this, TagActionModal);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      color: "",
+      title: ""
+    };
+    return _this;
   }
 
   _createClass(TagActionModal, [{
@@ -2603,7 +2610,7 @@ var TagActionModal = /*#__PURE__*/function (_React$Component) {
       if (this.props.modalOpen) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "action-tag-modal"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "f"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",
           onClick: this.props.hideModal
         }));
@@ -2687,7 +2694,8 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
       newTagModalOpen: false,
       selectedNote: -1,
       tagClassName: "tag-index",
-      notesClassName: "tagged-notes"
+      notesClassName: "tagged-notes",
+      TagHeader: "Tags"
     };
     _this.getAllTags = _this.getAllTags.bind(_assertThisInitialized(_this));
     _this.getTagNotes = _this.getTagNotes.bind(_assertThisInitialized(_this));
@@ -2718,6 +2726,13 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     key: "getColor",
     value: function getColor() {
       return "hsl(" + 360 * Math.random() + ',' + (25 + 70 * Math.random()) + '%,' + (85 + 10 * Math.random()) + '%)';
+    }
+  }, {
+    key: "displayTitle",
+    value: function displayTitle(tag) {
+      this.setState({
+        tagHeader: "".concat(tag.title)
+      });
     }
   }, {
     key: "hideNotes",
@@ -2793,6 +2808,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
+      //TAG GRID LOGIC 
       var tags;
       var tagKeys = Object.keys(this.props.tags);
 
@@ -2801,6 +2817,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
           var style = {
             background: _this4.props.tags[id].color
           };
+          var tag = _this4.props.tags[id];
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: id,
             title: _this4.props.tags[id].title,
@@ -2809,10 +2826,14 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
             onClick: function onClick() {
               return _this4.showNoteOrEngageModal(id);
             },
+            onMouseOver: function onMouseOver() {
+              return _this4.displayTitle(tag);
+            },
             className: "tag"
           });
         });
-      }
+      } //NOTES INDEX BELOW TAGS 
+
 
       var notes;
       var noteKeys = Object.keys(this.props.notes);
@@ -2853,7 +2874,8 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
             className: "placeholder"
           }, " Select a tag to see associated notes");
         }
-      }
+      } //Button Defining the Tag 
+
 
       var button = this.state.editMode ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.toggleEditMode
@@ -2869,6 +2891,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
       }
 
       var buttonHtml = this.state.editMode ? "Confirm" : "Link More Notes";
+      var Tagheader = this.state.tagHeader;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tag-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2882,7 +2905,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         onClick: this.showNewTagModal
       }, " Create New Tag "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "tag-header"
-      }, " Tags "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, " ", Tagheader, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "all-tags"
       }, tags)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_4__["default"], {
         target: "tagged-notes",

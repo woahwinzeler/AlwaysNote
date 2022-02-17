@@ -166,7 +166,7 @@ class NotebookIndex extends React.Component{
       if(note.notebook_id === parseInt(this.state.note.notebook_id)){
         let buttonId = this.state.buttonId; 
         if (typeof this.state.tag.note_ids !== 'undefined'){
-          if(this.state.tag.note_ids.includes(note.id)){
+          if(this.state.tag.note_ids.includes(note.id) && this.state.link){
             buttonId = "de-" + buttonId; 
           }
         }

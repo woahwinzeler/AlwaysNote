@@ -158,6 +158,7 @@ button{
   display: grid;
   gap: 1rem; 
   grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+  grid-auto-rows: minmax(min-content, max-content);
   padding: 2px; 
   height: clamp(20vh, 55vh, 62vh);
   width: auto;
@@ -171,6 +172,8 @@ button{
 
 .tag-header{
   text-align: center;
+  position: sticky;
+  z-index: 3;
 }
 
 .topnav {
