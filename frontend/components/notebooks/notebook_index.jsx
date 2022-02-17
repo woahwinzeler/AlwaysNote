@@ -103,13 +103,17 @@ class NotebookIndex extends React.Component{
   }
 
   handleNote(note){
-    console.log('hit Handlenote')
     if(this.state.link){
       let tag = this.state.tag; 
-      tag.note_ids.push(note.id)
-      this.props.updateTag(tag);
+      let index = tag.note_ids.indexOf(note.id)
+      if(index === - 1){
+        tag.note_ids.push(note.id)
+        this.props.updateTag(tag);
+      } else {
+        tag.note_ids.splice(index, 1);
+        this.props.updateTag(tag); 
+      }
     } else{
-      console.log('out', this.state.link)
       this.setState({
         openConfirmationModal: true, 
         deleteId: note,
@@ -160,9 +164,15 @@ class NotebookIndex extends React.Component{
         background: color, 
       }
       if(note.notebook_id === parseInt(this.state.note.notebook_id)){
+        let buttonId = this.state.buttonId; 
+        if (typeof this.state.tag.note_ids !== 'undefined'){
+          if(this.state.tag.note_ids.includes(note.id)){
+            buttonId = "de-" + buttonId; 
+          }
+        }
         return (
         <div className="NotesItem" style={style} >
-        <motion.button onClick={() => this.handleNote(note)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id={this.state.buttonId}></motion.button>
+        <motion.button onClick={() => this.handleNote(note)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} id={buttonId}></motion.button>
         <motion.div key={index} onClick={this.showNote} title={note.id} whileHover={{scale: 1.2}} whileTap={{scale: 0.9}} >{note.title}
         </motion.div>
         </div>)

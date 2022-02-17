@@ -27,10 +27,19 @@
 
   NOTEBOOKINDEX -- 30 minutes
   stop style re-render 
+
+  NOTEINDEX -- 20 minutes
+  add Notebook header 
   
   TAGINDEX -- 2 hours 
-  OnClick for tags changes red circles to green ones, clicking on them links the tag to the note
+  Render newly linked notes
   OnHover displays tag title 
+  Stop weird spacing when linking notes
+  De-link notes functionallity 
+
+  BUGS
+  creating first note in new notebook 
+
 
   NOTEINDEX under TAGINDEX -- 2 hours
   Scrollable menu of notes for a given tag

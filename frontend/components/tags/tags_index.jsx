@@ -26,8 +26,7 @@ class TagsIndex extends React.Component{
     this.getAllTags = this.getAllTags.bind(this)
     this.getTagNotes = this.getTagNotes.bind(this)
     this.showNote = this.showNote.bind(this)
-    this.toggleEditMode = this.toggleEditMode.bind(this);
-    this.showNoteOrEngageModal = this.showNoteOrEngageModal.bind(this); 
+    // this.toggleEditMode = this.toggleEditMode.bind(this);
     this.showNewTagModal = this.showNewTagModal.bind(this);
     this.hideTags = this.hideTags.bind(this)
     this.hideNotes = this.hideNotes.bind(this)
@@ -35,6 +34,7 @@ class TagsIndex extends React.Component{
 
   changeMode(tag){
     this.props.changeMode(tag)
+    this.setState({editMode: true})
   }
 
   hideTags(cssClass){
@@ -71,29 +71,25 @@ class TagsIndex extends React.Component{
   }
 
   showNoteOrEngageModal(id){
-    if(this.state.editMode){
-      this.showModal(id);
-    } else {
-      this.getTagNotes(id);
-    }
+    this.getTagNotes(id);
   }
 
   showNote(note){
     this.props.getNote(note).then(() => this.props.showNote(note.id))
   }
 
-  toggleEditMode(e){
-    e.preventDefault();
-    if (this.state.editMode){
-      this.setState({editMode: false})
-    } else {
-      this.setState({editMode: true})
-    }
+  // toggleEditMode(e){
+  //   e.preventDefault();
+  //   if (this.state.editMode){
+  //     this.setState({editMode: false})
+  //   } else {
+  //     this.setState({editMode: true})
+  //   }
    
-    //TODO: set classname for styling 
+  //   //TODO: set classname for styling 
 
 
-  }
+  // }
 
 
 
@@ -155,6 +151,8 @@ class TagsIndex extends React.Component{
       tag = this.props.tags[this.state.selectedTag];
       tagHeader = tag.title + "'s"
     }
+
+    let buttonHtml = this.state.editMode ? "Confirm" : "Link More Notes" 
     
     return (
       <>
