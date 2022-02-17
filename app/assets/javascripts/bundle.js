@@ -1831,6 +1831,9 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
 
           var color2 = _this3.getColor();
 
+          _this3.stylingObj[notebook.id] = {
+            background: color2
+          };
           _this3.style = {
             background: color
           };
@@ -1917,6 +1920,12 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         }
       }
 
+      var headerStyling;
+
+      if (typeof this.stylingObj[this.state.note.notebook_id] !== "undefined") {
+        headerStyling = this.stylingObj[this.state.note.notebook_id];
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notesAndBooks"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1954,7 +1963,8 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: this.state.NoteClass
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "notes-header"
+        className: "notes-header",
+        style: headerStyling
       }, notebookHeader), notes, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_form_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         notebookId: this.state.note.notebookId
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_text_editor_container__WEBPACK_IMPORTED_MODULE_3__["default"], {

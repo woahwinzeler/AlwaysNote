@@ -143,6 +143,10 @@ class NotebookIndex extends React.Component{
         let color = this.getColor();
 
         let color2 = this.getColor();
+
+        this.stylingObj[notebook.id] = {
+          background: color2
+        }
   
         this.style = {
           background: color
@@ -192,6 +196,11 @@ class NotebookIndex extends React.Component{
         }
       }
     }
+    
+    let headerStyling;
+    if(typeof this.stylingObj[this.state.note.notebook_id] !== "undefined"){
+      headerStyling = this.stylingObj[this.state.note.notebook_id];
+    }
 
     return(
       <div className="notesAndBooks">
@@ -208,7 +217,7 @@ class NotebookIndex extends React.Component{
         <Collapsable target="Notes" changeClass={this.collapseNotes} forceOpen={this.state.forceNotesOpen} preventLoop={() => this.setState({forceOpen: !this.state.forceOpen})} />
           <ul className="notes-box">
           <div className={this.state.NoteClass}>
-            <h3 className="notes-header">{notebookHeader}</h3>
+            <h3 className="notes-header" style={headerStyling}>{notebookHeader}</h3>
             {notes}
            <NoteFormContainer notebookId={this.state.note.notebookId}/>
           </div>
