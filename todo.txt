@@ -21,6 +21,9 @@
 
   CREATENOTEBOOK -- 40 minutes 
   re-style 
+  
+  TAGINDEX
+  OnHover displays tag title 
 
   TODO:
 
@@ -40,9 +43,7 @@
   
   TAGINDEX -- 2 hours 
   Render newly linked notes
-  OnHover displays tag title 
   Stop weird spacing when linking notes
-  De-link notes functionallity 
 
   BUGS
   creating first note in new notebook 

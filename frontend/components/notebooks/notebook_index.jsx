@@ -12,6 +12,8 @@ class NotebookIndex extends React.Component{
   constructor(props){
     super(props)
 
+    this.stylingObj = {};
+
     this.state = {
       modalOpen: false,
       setModalOpen: false,
@@ -159,6 +161,7 @@ class NotebookIndex extends React.Component{
 
     let notesArray = Object.values(this.props.notes)
     let notes = notesArray.map((note, index) => {
+
       let color = this.getColor();
       let style = {
         background: color, 
@@ -180,6 +183,16 @@ class NotebookIndex extends React.Component{
         return null
       }
     })
+
+    let notebookHeader;
+    if(typeof this.state.note.notebook_id !== ""){
+      for(let i = 0; i < this.props.notebooks.length; i++ ){
+        if(this.props.notebooks[i].id === parseInt(this.state.note.notebook_id)){
+          notebookHeader = this.props.notebooks[i].title 
+        }
+      }
+    }
+
     return(
       <div className="notesAndBooks">
         <div className="notebooks">
@@ -195,6 +208,7 @@ class NotebookIndex extends React.Component{
         <Collapsable target="Notes" changeClass={this.collapseNotes} forceOpen={this.state.forceNotesOpen} preventLoop={() => this.setState({forceOpen: !this.state.forceOpen})} />
           <ul className="notes-box">
           <div className={this.state.NoteClass}>
+            <h3 className="notes-header">{notebookHeader}</h3>
             {notes}
            <NoteFormContainer notebookId={this.state.note.notebookId}/>
           </div>

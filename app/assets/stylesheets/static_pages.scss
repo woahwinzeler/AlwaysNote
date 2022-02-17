@@ -11,6 +11,12 @@
   
 }
 
+.notes-header{
+  margin: 1px;
+  margin-top: 2px;
+  position: sticky;
+}
+
 .NotebookIndexClosed{
  display: none; 
 }
@@ -391,7 +397,7 @@ ul{
 .Notes {
   width: 300px;
   overflow-y: scroll;
-  height: 90vh; 
+  height: clamp(15vh, 60vh, 90vh);
 }
 
 .NotesItem{

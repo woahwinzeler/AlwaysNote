@@ -1681,6 +1681,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, NotebookIndex);
 
     _this = _super.call(this, props);
+    _this.stylingObj = {};
     _this.state = {
       modalOpen: false,
       setModalOpen: false,
@@ -1906,6 +1907,16 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
           return null;
         }
       });
+      var notebookHeader;
+
+      if (typeof this.state.note.notebook_id !== "") {
+        for (var i = 0; i < this.props.notebooks.length; i++) {
+          if (this.props.notebooks[i].id === parseInt(this.state.note.notebook_id)) {
+            notebookHeader = this.props.notebooks[i].title;
+          }
+        }
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notesAndBooks"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1942,7 +1953,9 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         className: "notes-box"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: this.state.NoteClass
-      }, notes, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_form_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "notes-header"
+      }, notebookHeader), notes, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_form_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         notebookId: this.state.note.notebookId
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_text_editor_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         noteToOpen: this.state.noteToOpen,
@@ -2610,7 +2623,7 @@ var TagActionModal = /*#__PURE__*/function (_React$Component) {
       if (this.props.modalOpen) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "action-tag-modal"
-        }, "f"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",
           onClick: this.props.hideModal
         }));

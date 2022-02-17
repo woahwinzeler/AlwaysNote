@@ -24,7 +24,7 @@ class TagActionModal extends React.Component{
         <>
         <div className="action-tag-modal">
           {/* <div onClick={this.props.hideModal}> close modal </div> */}
-          f
+          
         </div>
         <div className="modal-screen" onClick={this.props.hideModal}></div>
         </>
