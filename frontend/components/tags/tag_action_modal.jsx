@@ -35,9 +35,15 @@ class TagActionModal extends React.Component{
   }
 
   handleSubmit(e){
-    debugger
     e.preventDefault();
     this.props.updateTag(this.state);
+    this.props.hideModal();
+  }
+
+  handleDelete(e){
+    e.preventDefault();
+    this.props.deleteTag(this.state.id);
+    this.props.hideModal();
   }
 
 
@@ -64,6 +70,7 @@ class TagActionModal extends React.Component{
                                 </div>
 
           </form>
+          <button onClick={(e) => this.handleDelete(e)}> Delete Tag</button>
         </div>
         <div className="modal-screen" onClick={this.props.hideModal}></div>
         </>

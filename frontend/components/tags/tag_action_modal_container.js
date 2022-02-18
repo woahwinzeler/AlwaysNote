@@ -9,6 +9,7 @@ const mSTP = state => ({
 
 const mDTP = dispatch => ({
   updateTag: tag => dispatch(updateTag(tag)),
+  deleteTag: id => dispatch(deleteTag(id))
 })
 
 const TagActionModalContainer = connect(mSTP, mDTP)(TagActionModal)

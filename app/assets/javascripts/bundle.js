@@ -2661,9 +2661,16 @@ var TagActionModal = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      debugger;
       e.preventDefault();
       this.props.updateTag(this.state);
+      this.props.hideModal();
+    }
+  }, {
+    key: "handleDelete",
+    value: function handleDelete(e) {
+      e.preventDefault();
+      this.props.deleteTag(this.state.id);
+      this.props.hideModal();
     }
   }, {
     key: "render",
@@ -2695,7 +2702,11 @@ var TagActionModal = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick(e) {
             return _this3.handleSubmit(e);
           }
-        }, "Update Tag")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Update Tag"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick(e) {
+            return _this3.handleDelete(e);
+          }
+        }, " Delete Tag")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",
           onClick: this.props.hideModal
         }));
@@ -2740,6 +2751,9 @@ var mDTP = function mDTP(dispatch) {
   return {
     updateTag: function updateTag(tag) {
       return dispatch(Object(_actions_tags_actions__WEBPACK_IMPORTED_MODULE_1__["updateTag"])(tag));
+    },
+    deleteTag: function deleteTag(id) {
+      return dispatch(Object(_actions_tags_actions__WEBPACK_IMPORTED_MODULE_1__["deleteTag"])(id));
     }
   };
 };
