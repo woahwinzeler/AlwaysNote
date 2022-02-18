@@ -197,7 +197,7 @@ class TagsIndex extends React.Component{
               <motion.button onClick={() => this.changeMode(tag)}>Link More Notes </motion.button>
               </div>
           </div>
-          <TagActionModal tag={this.state.tagSelected} modalOpen={this.state.modalOpen} hideModal={() => this.setState({modalOpen:false})} />
+          <TagActionModalContainer tag={tag} modalOpen={this.state.modalOpen} hideModal={() => this.setState({modalOpen:false})} />
           <NewTagModalContainer modalOpen={this.state.newTagModalOpen} hideModal={() => this.setState({newTagModalOpen:false})} selectedNoteId={this.props.selectedNoteId} />
         </div>
       </>

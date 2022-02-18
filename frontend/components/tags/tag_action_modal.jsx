@@ -8,10 +8,36 @@ class TagActionModal extends React.Component{
     super(props)
 
     this.state = {
-      color: "", 
+      id: "",
+      color: "",
       title: "",
+      note_ids: "",
+      init: false,
     }
   }  
+
+  handleInput(type) {
+    return e => {
+        this.setState({...this.state, [type]: e.currentTarget.value})
+    }
+  }
+
+  componentDidUpdate(){
+    if(!!this.props.tag && !this.state.init){
+      this.setState({
+        id: this.props.tag.id, 
+        color: this.props.tag.color, 
+        title: this.props.tag.title,
+        note_ids: this.props.tag.note_ids,
+        init: true 
+      })
+    }
+  }
+
+  handleSubmit(e){
+    e.preventDefault();
+    this.props.updateTag(this.state);
+  }
 
 
 
@@ -25,14 +51,15 @@ class TagActionModal extends React.Component{
         <div className="action-tag-modal">
           {/* <div onClick={this.props.hideModal}> close modal </div> */}
           <form >
+          <h2>{this.state.title}</h2>
           <label className="tag-color"> Choose Color {this.state.color}
-                                  <input id="color" onChange={this.handleInput("color")} type="color" required="required" />
+                                  <input id="color" onChange={this.handleInput("color")} type="color" required="required" value={this.state.color} />
                                   </label>
                                 <div>
                                     <label className="tag-title"> Tag Title 
-                                      <input onChange={this.handleInput("title")} type="text" required="required" name="label" />
+                                      <input onChange={this.handleInput("title")} type="text" required="required" value={this.state.title} name="label" />
                                     </label>
-                                    <button className="tag-button" type="submit">Create Tag</button>
+                                    <button className="tag-button" type="submit" onClick={() => this.handleSubmit()}>Update Tag</button>
                                 </div>
 
           </form>
