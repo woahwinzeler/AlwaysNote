@@ -2630,8 +2630,7 @@ var TagActionModal = /*#__PURE__*/function (_React$Component) {
       id: "",
       color: "",
       title: "",
-      note_ids: "",
-      init: false
+      note_ids: ""
     };
     return _this;
   }
@@ -2648,19 +2647,21 @@ var TagActionModal = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      if (!!this.props.tag && !this.state.init) {
-        this.setState({
-          id: this.props.tag.id,
-          color: this.props.tag.color,
-          title: this.props.tag.title,
-          note_ids: this.props.tag.note_ids,
-          init: true
-        });
+      if (!!this.props.tag && typeof this.props.tag.id !== 'undefined') {
+        if (this.state.id !== this.props.tag.id) {
+          this.setState({
+            id: this.props.tag.id,
+            color: this.props.tag.color,
+            title: this.props.tag.title,
+            note_ids: this.props.tag.note_ids
+          });
+        }
       }
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      debugger;
       e.preventDefault();
       this.props.updateTag(this.state);
     }
@@ -2691,8 +2692,8 @@ var TagActionModal = /*#__PURE__*/function (_React$Component) {
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "tag-button",
           type: "submit",
-          onClick: function onClick() {
-            return _this3.handleSubmit();
+          onClick: function onClick(e) {
+            return _this3.handleSubmit(e);
           }
         }, "Update Tag")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",

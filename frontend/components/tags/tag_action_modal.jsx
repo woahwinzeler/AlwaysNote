@@ -12,7 +12,6 @@ class TagActionModal extends React.Component{
       color: "",
       title: "",
       note_ids: "",
-      init: false,
     }
   }  
 
@@ -23,18 +22,20 @@ class TagActionModal extends React.Component{
   }
 
   componentDidUpdate(){
-    if(!!this.props.tag && !this.state.init){
-      this.setState({
-        id: this.props.tag.id, 
-        color: this.props.tag.color, 
-        title: this.props.tag.title,
-        note_ids: this.props.tag.note_ids,
-        init: true 
-      })
+    if(!!this.props.tag && typeof this.props.tag.id !== 'undefined'){
+      if(this.state.id !== this.props.tag.id){
+        this.setState({
+          id: this.props.tag.id, 
+          color: this.props.tag.color, 
+          title: this.props.tag.title,
+          note_ids: this.props.tag.note_ids,
+        });
+      }
     }
   }
 
   handleSubmit(e){
+    debugger
     e.preventDefault();
     this.props.updateTag(this.state);
   }
@@ -59,7 +60,7 @@ class TagActionModal extends React.Component{
                                     <label className="tag-title"> Tag Title 
                                       <input onChange={this.handleInput("title")} type="text" required="required" value={this.state.title} name="label" />
                                     </label>
-                                    <button className="tag-button" type="submit" onClick={() => this.handleSubmit()}>Update Tag</button>
+                                    <button className="tag-button" type="submit" onClick={(e) => this.handleSubmit(e)}>Update Tag</button>
                                 </div>
 
           </form>
