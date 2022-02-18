@@ -4,6 +4,7 @@ import NewTagModal from './new_tag_modal'
 import NewTagModalContainer from './new_tag_modal_container'
 import Collapsable from '../collapsable/collapsable'
 import {motion} from 'framer-motion'
+import TagActionModalContainer from './tag_action_modal_container'
 
 class TagsIndex extends React.Component{
   //TODO: edit tags
@@ -15,7 +16,6 @@ class TagsIndex extends React.Component{
 
     this.state = {
       modalOpen: false,
-      editMode: false,
       selectedTag: -1, 
       newTagModalOpen: false, 
       selectedNote: -1, 
@@ -76,7 +76,7 @@ class TagsIndex extends React.Component{
   }
 
   showNoteOrEngageModal(id){
-    this.getTagNotes(id);
+    this.getTagNotes(id)
   }
 
   showNote(note){
@@ -157,23 +157,32 @@ class TagsIndex extends React.Component{
 
     
 
-    let tagHeader; 
-    let tag; 
-    if(this.state.selectedTag !== -1){
-      tag = this.props.tags[this.state.selectedTag];
-      tagHeader = tag.title + "'s"
-    }
+    // let tagHeader; 
+    // let tag; 
+    // if(this.state.selectedTag > -1 && !!selectedTag){
+    //   tag = this.props.tags[this.state.selectedTag];
+    //   tagHeader = tag.title + "'s"
+    // }
 
     let buttonHtml = this.state.editMode ? "Confirm" : "Link More Notes" 
 
     let Tagheader = this.state.tagHeader;
+    let NotesHeader = "Notes";
+    let editTagButton; 
+
+    let tag = this.props.tags[this.state.selectedTag];
+
+    if(!!tag){
+      editTagButton =  <button onClick={() => this.setState({modalOpen: !this.state.modalOpen })}> Edit Tag</button>
+      NotesHeader = `${tag.title}'s Notes`
+    }
     return (
       <>
         <div className="tag-container">
         <Collapsable target="tag-index" changeClass={this.hideTags}/>
           <div className={this.state.tagClassName}>
             <button onClick={this.getAllTags}> See All Tags </button>
-            {button}
+            {editTagButton}
             <button onClick={this.showNewTagModal}> Create New Tag </button>
             <h3 className="tag-header"> {Tagheader} </h3>
             <div className="all-tags">
@@ -182,7 +191,7 @@ class TagsIndex extends React.Component{
           </div>
           <Collapsable target="tagged-notes" changeClass={this.hideNotes}/>
           <div className={this.state.notesClassName}>
-            <h3 className="tag-header" > {tagHeader} Notes </h3>
+            <h3 className="tag-header" > {NotesHeader}  </h3>
               <div className="tagged-notes-container">
               {notes}
               <motion.button onClick={() => this.changeMode(tag)}>Link More Notes </motion.button>

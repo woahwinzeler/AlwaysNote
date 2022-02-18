@@ -2633,7 +2633,24 @@ var TagActionModal = /*#__PURE__*/function (_React$Component) {
       if (this.props.modalOpen) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "action-tag-modal"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "tag-color"
+        }, " Choose Color ", this.state.color, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          id: "color",
+          onChange: this.handleInput("color"),
+          type: "color",
+          required: "required"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "tag-title"
+        }, " Tag Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          onChange: this.handleInput("title"),
+          type: "text",
+          required: "required",
+          name: "label"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "tag-button",
+          type: "submit"
+        }, "Create Tag")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-screen",
           onClick: this.props.hideModal
         }));
@@ -2647,6 +2664,43 @@ var TagActionModal = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (TagActionModal);
+
+/***/ }),
+
+/***/ "./frontend/components/tags/tag_action_modal_container.js":
+/*!****************************************************************!*\
+  !*** ./frontend/components/tags/tag_action_modal_container.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_tags_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/tags_actions */ "./frontend/actions/tags_actions.js");
+/* harmony import */ var _tag_action_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tag_action_modal */ "./frontend/components/tags/tag_action_modal.jsx");
+/* harmony import */ var _actions_note_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/note_actions */ "./frontend/actions/note_actions.js");
+
+
+
+
+
+var mSTP = function mSTP(state) {
+  return {
+    tags: state.entities.tags
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    updateTag: function updateTag(tag) {
+      return dispatch(Object(_actions_tags_actions__WEBPACK_IMPORTED_MODULE_1__["updateTag"])(tag));
+    }
+  };
+};
+
+var TagActionModalContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_tag_action_modal__WEBPACK_IMPORTED_MODULE_2__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (TagActionModalContainer);
 
 /***/ }),
 
@@ -2666,6 +2720,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _new_tag_modal_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./new_tag_modal_container */ "./frontend/components/tags/new_tag_modal_container.js");
 /* harmony import */ var _collapsable_collapsable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../collapsable/collapsable */ "./frontend/components/collapsable/collapsable.jsx");
 /* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/index.js");
+/* harmony import */ var _tag_action_modal_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tag_action_modal_container */ "./frontend/components/tags/tag_action_modal_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2695,6 +2750,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var TagsIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(TagsIndex, _React$Component);
 
@@ -2712,7 +2768,6 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       modalOpen: false,
-      editMode: false,
       selectedTag: -1,
       newTagModalOpen: false,
       selectedNote: -1,
@@ -2904,17 +2959,30 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         onClick: this.toggleEditMode
       }, " Show Tags ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.toggleEditMode
-      }, " Edit Tags ");
-      var tagHeader;
-      var tag;
-
-      if (this.state.selectedTag !== -1) {
-        tag = this.props.tags[this.state.selectedTag];
-        tagHeader = tag.title + "'s";
-      }
+      }, " Edit Tags "); // let tagHeader; 
+      // let tag; 
+      // if(this.state.selectedTag > -1 && !!selectedTag){
+      //   tag = this.props.tags[this.state.selectedTag];
+      //   tagHeader = tag.title + "'s"
+      // }
 
       var buttonHtml = this.state.editMode ? "Confirm" : "Link More Notes";
       var Tagheader = this.state.tagHeader;
+      var NotesHeader = "Notes";
+      var editTagButton;
+      var tag = this.props.tags[this.state.selectedTag];
+
+      if (!!tag) {
+        editTagButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this4.setState({
+              modalOpen: !_this4.state.modalOpen
+            });
+          }
+        }, " Edit Tag");
+        NotesHeader = "".concat(tag.title, "'s Notes");
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tag-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2924,7 +2992,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         className: this.state.tagClassName
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.getAllTags
-      }, " See All Tags "), button, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, " See All Tags "), editTagButton, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.showNewTagModal
       }, " Create New Tag "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "tag-header"
@@ -2937,7 +3005,7 @@ var TagsIndex = /*#__PURE__*/function (_React$Component) {
         className: this.state.notesClassName
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "tag-header"
-      }, " ", tagHeader, " Notes "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, " ", NotesHeader, "  "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tagged-notes-container"
       }, notes, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_5__["motion"].button, {
         onClick: function onClick() {

@@ -24,6 +24,11 @@
   
   TAGINDEX
   OnHover displays tag title 
+  NOTEINDEX -- 20 minutes
+  add Notebook header 
+
+    Stop weird spacing when linking notes,
+    fix styling on tag index
 
   TODO:
 
@@ -34,16 +39,30 @@
    TAG-GRID on Notebooks and Notes -- 
 
 
+  BEFORE HEROKU PUSH for APPROVAL 
 
   NOTEBOOKINDEX -- 30 minutes
   stop style re-render 
 
-  NOTEINDEX -- 20 minutes
-  add Notebook header 
+  EDIT TAG MODAL
+
+  NOTES PLACEHOLDER 
   
-  TAGINDEX -- 2 hours 
-  Render newly linked notes
-  Stop weird spacing when linking notes
+  BUGS
+  --reading title
+    --change controller response to null instead of undefined
+  --first note in new notebook
+  --create note then open note 
+
+  LOGIN/SIGNUP
+    style login, signup
+  
+  TAGINDEX
+  Render newly linked notes,
+
+  AFTER PUSH VERSION 
+  Refactor link 
+
 
   BUGS
   creating first note in new notebook 
@@ -60,7 +79,6 @@
 
     add github and LinkedIn 
     
-    style login, signup
 
     make a small 16-bit color canavs for the bottom left 
       --will have to set a clamp that accounts for the texteditor 
