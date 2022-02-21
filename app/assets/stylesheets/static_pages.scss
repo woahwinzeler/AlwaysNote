@@ -4,7 +4,25 @@
 :root {
   --evergreen-color:#4BA541;
 }
+.session-modal{
+  width: 65vw;
+  height: 75vh;
+  position: absolute;
+  display: center; 
+  box-shadow: 2px 1px;
+  border: 2px solid black; 
+  margin-left: 17.5vw;
+  margin-top: 12.5vh;
+  padding: 62.12px 99px 48px;
 
+}
+
+.session-form{
+  text-align: center;
+}
+.session-buttons{
+  text-align: center;
+}
 .Notebooks{
   padding: 10px;
   margin: 10px
@@ -15,12 +33,33 @@
   margin: 4px;
   position: sticky;
   padding: 10px;
+  z-index: -1;
 
 
 }
 
 .NotebookIndexClosed{
  display: none; 
+}
+.navBar-links{
+  color: rgb(223, 145, 45);
+  padding: 3px;
+  margin: 2px; 
+  font-size: small;
+}
+
+.navBar{
+  width: 100%;
+  height: 3vh;
+  background-color: rgb(108, 0, 112);
+  margin: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+.links-container{
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .title-input{
@@ -215,10 +254,39 @@ h5 {
 
 }
 
+.session-buttons{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+  align-items: space-between;
+}
+
+.login-link{
+  background-color: var(--evergreen-color);
+  color: white;
+  text-align: center;
+  border: slategray 10px groove;
+  padding: 2vh;
+  margin: 3vw; 
+}
+
 #smallButton{
   color: black; 
 }
+.bigGreenButton{
+  color: White;
+  background-color: var(--evergreen-color);
+  text-align: center;
+  border: none;
+  padding-top: 10vh; 
+  padding-bottom: 4vh;
+  margin-left: auto;
+  margin-right: auto; 
+  margin: 0.8vw;
+  font-size: large; 
 
+}
 #bigGreenButton{
   color: White;
   background-color: var(--evergreen-color);

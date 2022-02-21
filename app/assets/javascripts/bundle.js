@@ -913,6 +913,112 @@ var Main = function Main() {
 
 /***/ }),
 
+/***/ "./frontend/components/navBar/navbar.jsx":
+/*!***********************************************!*\
+  !*** ./frontend/components/navBar/navbar.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var NavBar = /*#__PURE__*/function (_React$Component) {
+  _inherits(NavBar, _React$Component);
+
+  var _super = _createSuper(NavBar);
+
+  function NavBar(props) {
+    _classCallCheck(this, NavBar);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(NavBar, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "navBar"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "links-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "navBar-links",
+        onClick: this.props.logout,
+        href: "#"
+      }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "navBar-links",
+        href: "#"
+      }, "Instructions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "links-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "navBar-links",
+        href: "https://github.com/woahwinzeler/Aa_classwork"
+      }, "GitHub"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "navBar-links",
+        href: "https://www.linkedin.com/in/owen-winzeler-1a6b22228/"
+      }, "LinkedIn")));
+    }
+  }]);
+
+  return NavBar;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (NavBar);
+
+/***/ }),
+
+/***/ "./frontend/components/navBar/navbar_container.js":
+/*!********************************************************!*\
+  !*** ./frontend/components/navBar/navbar_container.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navbar */ "./frontend/components/navBar/navbar.jsx");
+
+
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    logout: function logout() {
+      return dispatch(logoutCurrentUser());
+    }
+  };
+};
+
+var NavBarContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mDTP)(_navbar__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (NavBarContainer);
+
+/***/ }),
+
 /***/ "./frontend/components/note/note_list.jsx":
 /*!************************************************!*\
   !*** ./frontend/components/note/note_list.jsx ***!
@@ -1633,6 +1739,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tags_tags_index_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../tags/tags_index_container */ "./frontend/components/tags/tags_index_container.js");
 /* harmony import */ var _collapsable_collapsable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../collapsable/collapsable */ "./frontend/components/collapsable/collapsable.jsx");
 /* harmony import */ var _confirmationModal_confirmation_modal_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../confirmationModal/confirmation_modal_container */ "./frontend/components/confirmationModal/confirmation_modal_container.js");
+/* harmony import */ var _navBar_navbar_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../navBar/navbar_container */ "./frontend/components/navBar/navbar_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
@@ -1670,6 +1777,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(NotebookIndex, _React$Component);
 
@@ -1684,6 +1792,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     _this.stylingObj = {};
     _this.state = {
       modalOpen: false,
+      editNotebookTitle: false,
       setModalOpen: false,
       notes: [],
       noteToOpen: null,
@@ -1716,10 +1825,16 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
     _this.showNote = _this.showNote.bind(_assertThisInitialized(_this));
     _this.collapseNotebooks = _this.collapseNotebooks.bind(_assertThisInitialized(_this));
     _this.collapseNotes = _this.collapseNotes.bind(_assertThisInitialized(_this));
+    _this.updateTitle = _this.updateTitle.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(NotebookIndex, [{
+    key: "updateTitle",
+    value: function updateTitle(notebook) {
+      this.props.updateNotebook(notebook);
+    }
+  }, {
     key: "collapseNotebooks",
     value: function collapseNotebooks(cssClass) {
       this.setState({
@@ -1821,38 +1936,50 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
-    key: "render",
-    value: function render() {
+    key: "update",
+    value: function update(field) {
       var _this3 = this;
 
+      return function (e) {
+        return _this3.setState({
+          note: _objectSpread(_objectSpread({}, _this3.state.note), {}, _defineProperty({}, field, e.currentTarget.value))
+        });
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
       var notebooks = this.props.notebooks.map(function (notebook, index) {
-        if (_this3.state.addStyle) {
-          var color = _this3.getColor();
+        //want to replace lines 151 167 using this.props.style.NotebookItem, that can be changed using this.props.styleNotebookItemDefault(); 
+        if (_this4.state.addStyle) {
+          var color = _this4.getColor();
 
-          var color2 = _this3.getColor();
+          var color2 = _this4.getColor();
 
-          _this3.stylingObj[notebook.id] = {
+          _this4.stylingObj[notebook.id] = {
             background: color2
           };
-          _this3.style = {
+          _this4.style = {
             background: color
           };
-          _this3.style2 = {
+          _this4.style2 = {
             background: color2
           };
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: index,
-            style: _this3.style2
+            style: _this4.style2
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "Notebooks",
             onClick: function onClick(e) {
-              return _this3.showNotesIndex(e, _this3.style);
+              return _this4.showNotesIndex(e, _this4.style);
             },
             id: notebook.id,
-            style: _this3.style
+            style: _this4.style
           }, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
             onClick: function onClick() {
-              return _this3.deleteNotebook(notebook.id);
+              return _this4.deleteNotebook(notebook.id);
             },
             whileHover: {
               scale: 1.5
@@ -1866,17 +1993,17 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       });
       var notesArray = Object.values(this.props.notes);
       var notes = notesArray.map(function (note, index) {
-        var color = _this3.getColor();
+        var color = _this4.getColor();
 
         var style = {
           background: color
         };
 
-        if (note.notebook_id === parseInt(_this3.state.note.notebook_id)) {
-          var buttonId = _this3.state.buttonId;
+        if (note.notebook_id === parseInt(_this4.state.note.notebook_id)) {
+          var buttonId = _this4.state.buttonId;
 
-          if (typeof _this3.state.tag.note_ids !== 'undefined') {
-            if (_this3.state.tag.note_ids.includes(note.id) && _this3.state.link) {
+          if (typeof _this4.state.tag.note_ids !== 'undefined') {
+            if (_this4.state.tag.note_ids.includes(note.id) && _this4.state.link) {
               buttonId = "de-" + buttonId;
             }
           }
@@ -1886,7 +2013,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
             style: style
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
             onClick: function onClick() {
-              return _this3.handleNote(note);
+              return _this4.handleNote(note);
             },
             whileHover: {
               scale: 1.5
@@ -1897,7 +2024,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
             id: buttonId
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].div, {
             key: index,
-            onClick: _this3.showNote,
+            onClick: _this4.showNote,
             title: note.id,
             whileHover: {
               scale: 1.2
@@ -1915,7 +2042,21 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       if (typeof this.state.note.notebook_id !== "") {
         for (var i = 0; i < this.props.notebooks.length; i++) {
           if (this.props.notebooks[i].id === parseInt(this.state.note.notebook_id)) {
-            notebookHeader = this.props.notebooks[i].title;
+            notebookHeader = this.state.editNotebookTitle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+              className: "notes-header",
+              style: headerStyling,
+              onDoubleClick: function onDoubleClick() {
+                return _this4.setState({
+                  editNotebookTitle: !_this4.state.editNotebookTitle
+                });
+              }
+            }, notebookHeader, this.props.notebooks[i].title) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+              type: "text",
+              name: "title",
+              onChange: this.update('title'),
+              value: this.props.notebooks[i].title,
+              className: "title-input"
+            });
           }
         }
       }
@@ -1926,7 +2067,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         headerStyling = this.stylingObj[this.state.note.notebook_id];
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navBar_navbar_container__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notesAndBooks"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notebooks"
@@ -1954,18 +2095,15 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         changeClass: this.collapseNotes,
         forceOpen: this.state.forceNotesOpen,
         preventLoop: function preventLoop() {
-          return _this3.setState({
-            forceOpen: !_this3.state.forceOpen
+          return _this4.setState({
+            forceOpen: !_this4.state.forceOpen
           });
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "notes-box"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: this.state.NoteClass
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "notes-header",
-        style: headerStyling
-      }, notebookHeader), notes, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_form_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, notes, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_form_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         notebookId: this.state.note.notebookId
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_text_editor_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         noteToOpen: this.state.noteToOpen,
@@ -1973,28 +2111,28 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         note: this.state.note
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tags_tags_index_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
         showNote: function showNote(noteId) {
-          return _this3.setState({
+          return _this4.setState({
             noteToOpen: noteId
           });
         },
         selectedNoteId: this.state.noteToOpen,
         changeMode: function changeMode(tag) {
-          return _this3.setState({
-            link: !_this3.state.link,
+          return _this4.setState({
+            link: !_this4.state.link,
             tag: tag,
-            buttonId: !_this3.state.link ? "link-notebook-button" : "delete-notebook-button"
+            buttonId: !_this4.state.link ? "link-notebook-button" : "delete-notebook-button"
           });
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_confirmationModal_confirmation_modal_container__WEBPACK_IMPORTED_MODULE_7__["default"], {
         modalOpen: this.state.openConfirmationModal,
         hideModal: function hideModal() {
-          return _this3.setState({
+          return _this4.setState({
             openConfirmationModal: false
           });
         },
         id: this.state.deleteId,
         isNote: this.state.isNote
-      }));
+      })));
     }
   }]);
 
@@ -3209,6 +3347,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3232,6 +3371,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -3303,9 +3443,10 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "loginDemoUser",
-    value: function loginDemoUser() {
+    value: function loginDemoUser(e) {
       var _this4 = this;
 
+      e.preventDefault();
       var demoUser = {
         username: 'demo',
         email: 'demo@demo.com',
@@ -3318,19 +3459,37 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderSwitch",
     value: function renderSwitch() {
+      var _this5 = this;
+
       if (this.props.formType === 'signup') {
         //return link to login
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/login"
-        }, "Already have an account?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: this.loginDemoUser
-        }, "Login as a demo user"));
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "link-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/login",
+          className: "login-link"
+        }, "Already have an account?")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "button-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_2__["motion"].button, {
+          onClick: function onClick(e) {
+            return _this5.loginDemoUser(e);
+          },
+          whileHover: {
+            scale: 1.5
+          },
+          whileTap: {
+            scale: 0.7
+          },
+          className: "bigGreenButton"
+        }, "Login as a demo user")));
       } else {
         //return link to signup 
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/signup"
         }, "Don't have an account?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: this.loginDemoUser
+          onClick: function onClick(e) {
+            return _this5.loginDemoUser(e);
+          }
         }, "Login as a demo user"));
       }
     } //
@@ -3338,7 +3497,9 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.formType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "session-modal"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.formType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "session-form",
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Username", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -3357,7 +3518,9 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         className: "session-form-continue",
         type: "submit",
         value: "Continue"
-      }))), this.renderSwitch(), this.renderErrors());
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "session-buttons"
+      }, this.renderSwitch(), this.renderErrors()));
     }
   }]);
 

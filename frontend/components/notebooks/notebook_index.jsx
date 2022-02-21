@@ -6,6 +6,7 @@ import NoteFormContainer from './note_form_container'
 import TagsIndexContainer from '../tags/tags_index_container'
 import Collapsable from '../collapsable/collapsable'
 import ConfirmationModalContainer from '../confirmationModal/confirmation_modal_container'
+import NavBarContainer from '../navBar/navbar_container'
 
 
 class NotebookIndex extends React.Component{
@@ -16,6 +17,7 @@ class NotebookIndex extends React.Component{
 
     this.state = {
       modalOpen: false,
+      editNotebookTitle: false, 
       setModalOpen: false,
       notes: [],
       noteToOpen: null,
@@ -50,6 +52,11 @@ class NotebookIndex extends React.Component{
     this.showNote = this.showNote.bind(this)
     this.collapseNotebooks = this.collapseNotebooks.bind(this)
     this.collapseNotes = this.collapseNotes.bind(this);
+    this.updateTitle = this.updateTitle.bind(this);
+  }
+
+  updateTitle(notebook){
+    this.props.updateNotebook(notebook);
   }
 
   collapseNotebooks(cssClass){
@@ -136,9 +143,13 @@ class NotebookIndex extends React.Component{
     }
   }
 
+  update(field) {
+    return e => this.setState({note: {...this.state.note, [field]: e.currentTarget.value}});
+  }
+
   render(){
     let notebooks = this.props.notebooks.map((notebook, index) => {
-
+      //want to replace lines 151 167 using this.props.style.NotebookItem, that can be changed using this.props.styleNotebookItemDefault(); 
       if(this.state.addStyle){
         let color = this.getColor();
 
@@ -188,11 +199,15 @@ class NotebookIndex extends React.Component{
       }
     })
 
+
+
     let notebookHeader;
     if(typeof this.state.note.notebook_id !== ""){
       for(let i = 0; i < this.props.notebooks.length; i++ ){
         if(this.props.notebooks[i].id === parseInt(this.state.note.notebook_id)){
-          notebookHeader = this.props.notebooks[i].title 
+         
+          notebookHeader = this.state.editNotebookTitle ? <h3 className="notes-header" style={headerStyling} onDoubleClick={() => this.setState({editNotebookTitle: !this.state.editNotebookTitle})} >{notebookHeader}{this.props.notebooks[i].title}</h3>  :
+          <textarea type="text" name="title" onChange={this.update('title')} value={this.props.notebooks[i].title} className="title-input"/>
         }
       }
     }
@@ -203,6 +218,8 @@ class NotebookIndex extends React.Component{
     }
 
     return(
+      <>
+      <NavBarContainer />
       <div className="notesAndBooks">
         <div className="notebooks">
         <Collapsable target="NotebookIndex" changeClass={this.collapseNotebooks}> Notebooks </Collapsable>
@@ -217,7 +234,7 @@ class NotebookIndex extends React.Component{
         <Collapsable target="Notes" changeClass={this.collapseNotes} forceOpen={this.state.forceNotesOpen} preventLoop={() => this.setState({forceOpen: !this.state.forceOpen})} />
           <ul className="notes-box">
           <div className={this.state.NoteClass}>
-            <h3 className="notes-header" style={headerStyling}>{notebookHeader}</h3>
+            {/* <h3 className="notes-header" style={headerStyling} onDoubleClick={this.setState({editNotebookTitle: true})}>{notebookHeader}</h3> */}
             {notes}
            <NoteFormContainer notebookId={this.state.note.notebookId}/>
           </div>
@@ -227,6 +244,7 @@ class NotebookIndex extends React.Component{
           <TagsIndexContainer showNote={(noteId) => this.setState({noteToOpen: noteId})} selectedNoteId={this.state.noteToOpen} changeMode={(tag) => this.setState({link: !this.state.link, tag: tag, buttonId: !this.state.link  ? "link-notebook-button" : "delete-notebook-button"})}/>
           <ConfirmationModalContainer  modalOpen={this.state.openConfirmationModal} hideModal={() => this.setState({openConfirmationModal: false})} id={this.state.deleteId} isNote={this.state.isNote}/>
       </div>
+      </>
 
     )
   }

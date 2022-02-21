@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {motion} from 'framer-motion'
 
 class SessionForm extends React.Component {
   constructor(props){
@@ -51,7 +52,8 @@ class SessionForm extends React.Component {
       () => this.props.history.push('/home/notebooks'))
   }
 
-  loginDemoUser(){
+  loginDemoUser(e){
+    e.preventDefault();
     let demoUser = {
       username: 'demo',
       email: 'demo@demo.com',
@@ -65,12 +67,17 @@ class SessionForm extends React.Component {
     if (this.props.formType === 'signup'){
       //return link to login
       return (
-        <div>
-          <Link to='/login'>Already have an account?</Link>
-          <button onClick={this.loginDemoUser}>
+        <>
+          <div className="link-container">
+          <Link to='/login' className="login-link">Already have an account?</Link>
+          </div>
+          <div className="button-container">
+          <motion.button onClick={(e) => this.loginDemoUser(e)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} className="bigGreenButton">
             Login as a demo user 
-          </button>
-        </div>
+          </motion.button>
+          </div>
+        </>
+
         
       )
     } else {
@@ -78,7 +85,7 @@ class SessionForm extends React.Component {
       return (
         <div>
           <Link to='/signup'>Don't have an account?</Link>
-          <button onClick={this.loginDemoUser}>
+          <button onClick={(e) => this.loginDemoUser(e)}>
             Login as a demo user 
           </button>
         </div>
@@ -91,10 +98,7 @@ class SessionForm extends React.Component {
   //
   render(){
     return (
-    <div>
-      <header>
-
-      </header>
+    <div className="session-modal">
       <h2>{this.props.formType}</h2>
       <form className="session-form" onSubmit={this.handleSubmit}>
         <label>
@@ -113,8 +117,10 @@ class SessionForm extends React.Component {
           <input className="session-form-continue" type="submit" value="Continue"/>
         </label>
       </form>
+      <div className="session-buttons">
       {this.renderSwitch()}
       {this.renderErrors()}
+      </div>
     </div>
     )
   }
