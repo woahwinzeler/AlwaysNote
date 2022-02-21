@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 class NavBar extends React.Component{
   constructor(props){
@@ -9,7 +10,9 @@ class NavBar extends React.Component{
     return(
       <div className="navBar">
         <div className="links-container">
-          <a className="navBar-links" onClick={this.props.logout} href='#'>Logout</a>
+          <Link to="/">
+            <a className="navBar-links" onClick={this.props.logout} href='#'>Logout</a>
+          </Link>
           <a className="navBar-links" >Instructions</a>
         </div>
         <div className="links-container">
