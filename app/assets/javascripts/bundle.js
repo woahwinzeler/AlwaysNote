@@ -1297,7 +1297,7 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
       if (!!this.props.noteToOpen) {
         this.setState({
           note: {
-            id: this.props.notes[this.props.noteToOpen],
+            id: this.props.notes[this.props.noteToOpen].id,
             title: this.props.notes[this.props.noteToOpen].title,
             body: e,
             notebook_id: this.props.notes[this.props.noteToOpen].notebook_id
@@ -1308,16 +1308,19 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
           }
         });
       } else {
+        var notesArr = Object.values(this.props.notes);
         this.setState({
           note: {
-            id: this.props.notes[this.props.noteToOpen],
-            title: this.props.notes[this.props.noteToOpen].title,
+            id: notesArr[notesArr.length - 1].id,
+            title: notesArr[notesArr.length - 1].title,
             body: e,
-            notebook_id: this.props.note.notebook_id
+            notebook_id: notesArr[notesArr.length - 1].notebook_id
           }
         }, function () {
           if (_this2.userEditCount % 2 === 0 && !_this2.state.note.id) {
             _this2.props.createNote(_this2.state.note);
+          } else if (_this2.userEditCount % 2 === 0 && !!_this2.state.note.id) {
+            _this2.props.updateNote(_this2.state.note);
           }
         });
       }
@@ -1359,7 +1362,6 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
       if (this.state.note.body === undefined) {
         body = '';
       } else {
-        console.log(this.state.note.body);
         body = this.state.note.body;
       }
 
