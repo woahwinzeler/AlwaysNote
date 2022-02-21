@@ -83,18 +83,22 @@ class TextEditor extends React.Component{
       })
     } else {
       let notesArr = Object.values(this.props.notes)
-      this.setState({note: {
-        id: notesArr[notesArr.length - 1].id, 
-        title: notesArr[notesArr.length - 1].title,
-        body: e,
-        notebook_id: notesArr[notesArr.length - 1].notebook_id
-      }}, () => {
-        if(this.userEditCount % 2 === 0 && !this.state.note.id){
-          this.props.createNote(this.state.note)
-        } else if(this.userEditCount % 2 === 0 && !!this.state.note.id){
-          this.props.updateNote(this.state.note)
-        }
-      })
+      if(typeof notesArr[notesArr.length - 1] !== 'undefined'){
+        this.setState({note: {
+          id: notesArr[notesArr.length - 1].id, 
+          title: notesArr[notesArr.length - 1].title,
+          body: e,
+          notebook_id: notesArr[notesArr.length - 1].notebook_id
+        }}, () => {
+          if(this.userEditCount % 2 === 0 && !this.state.note.id){
+            this.props.createNote(this.state.note)
+          } else if(this.userEditCount % 2 === 0 && !!this.state.note.id){
+            this.props.updateNote(this.state.note)
+          }
+        })
+      } else {
+        this.setState({note: { ...this.state.note, body: e}})
+      }
     }
    
   }
