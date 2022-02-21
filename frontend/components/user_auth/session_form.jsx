@@ -68,7 +68,7 @@ class SessionForm extends React.Component {
       //return link to login
       return (
         <>
-          <div className="link-container">
+          <div>
           <Link to='/login' className="login-link">Already have an account?</Link>
           </div>
           <div className="button-container">
@@ -84,10 +84,12 @@ class SessionForm extends React.Component {
       //return link to signup 
       return (
         <div>
+          <div>
           <Link to='/signup'>Don't have an account?</Link>
-          <button onClick={(e) => this.loginDemoUser(e)}>
+          </div>
+          <motion.button onClick={(e) => this.loginDemoUser(e)} whileHover={{scale: 1.5}} whileTap={{scale: 0.7}} className="bigGreenButton">
             Login as a demo user 
-          </button>
+          </motion.button>
         </div>
       )
 
@@ -101,26 +103,24 @@ class SessionForm extends React.Component {
     <div className="session-modal">
       <h2>{this.props.formType}</h2>
       <form className="session-form" onSubmit={this.handleSubmit}>
-        <label>
+        <label className="session-item">
           Username 
-          <input type="text" value={this.state.username} onChange={this.update('username')} />
+          <input type="text" value={this.state.username} onChange={this.update('username')} className="session-input"/>
         </label>
-         <label>
+         <label className="session-item">
           Email 
-          <input type="text" value={this.state.email} onChange={this.update('email')} />
+          <input type="text" value={this.state.email} onChange={this.update('email')} className="session-input"/>
         </label>
-        <label>
+        <label className="session-item">
           Password  
-          <input type="password" value={this.state.password} onChange={this.update('password')} />
+          <input type="password" value={this.state.password} onChange={this.update('password')} className="session-input"/>
         </label>
-        <label>
+        <label className="session-item">
           <input className="session-form-continue" type="submit" value="Continue"/>
         </label>
-      </form>
-      <div className="session-buttons">
-      {this.renderSwitch()}
+        {this.renderSwitch()}
       {this.renderErrors()}
-      </div>
+      </form>
     </div>
     )
   }

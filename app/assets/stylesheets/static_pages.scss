@@ -5,13 +5,12 @@
   --evergreen-color:#4BA541;
 }
 .session-modal{
-  width: 65vw;
-  height: 75vh;
+  width: 45vw;
+  height: 60vh;
   position: absolute;
-  display: center; 
-  box-shadow: 2px 1px;
   border: 2px solid black; 
-  margin-left: 17.5vw;
+  border-radius: 5%;
+  margin-left: 23.5vw;
   margin-top: 12.5vh;
   padding: 62.12px 99px 48px;
 
@@ -19,6 +18,16 @@
 
 .session-form{
   text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.session-item{
+  padding: 4px;
+  margin: 5px;
+}
+.session-input{
+  padding: 8px;
+  margin: 16px;
 }
 .session-buttons{
   text-align: center;
@@ -263,12 +272,8 @@ h5 {
 }
 
 .login-link{
-  background-color: var(--evergreen-color);
-  color: white;
+  color: black;
   text-align: center;
-  border: slategray 10px groove;
-  padding: 2vh;
-  margin: 3vw; 
 }
 
 #smallButton{
@@ -279,10 +284,14 @@ h5 {
   background-color: var(--evergreen-color);
   text-align: center;
   border: none;
-  padding-top: 10vh; 
-  padding-bottom: 4vh;
+  margin-top: 6vh;
+  padding-top: 2vh; 
+  padding-bottom: 2vh;
   margin-left: auto;
   margin-right: auto; 
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 4%;
   margin: 0.8vw;
   font-size: large; 
 
