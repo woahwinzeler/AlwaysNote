@@ -30,58 +30,40 @@
     Stop weird spacing when linking notes,
     fix styling on tag index
 
-  TODO:
+      
+  BUGS
+  --first note in new notebook
+  --create note then open note 
+
 
   ADD NavBar
 
+  TODO:
+
+  BUGS 
+    --trying to edit/save scratchpad 
+
+
+  NOTEBOOKINDEX, TAGS INDEX, and NOTEINDEX set styling in store
   REFACTOR NOTEBOOK INDEX into seperate components 
   REFACTOR TAGS INDEX to seperate components
 
-   TAG-GRID on Notebooks and Notes -- 
-
-
-  BEFORE HEROKU PUSH for APPROVAL 
-
-  NOTEBOOKINDEX -- 30 minutes
-  stop style re-render 
 
   EDIT TAG MODAL
   -styling
   -add notebook index 
 
   NOTES PLACEHOLDER 
-  
-  BUGS
-  --first note in new notebook
-  --create note then open note 
+
   --error rendering on create note 
 
   LOGIN/SIGNUP
     style login, signup
   
   TAGINDEX
-  Render newly linked notes,
+    Render newly linked notes,
 
   
-
-
-
-  BUGS
-  creating first note in new notebook 
-
-
-  NOTEINDEX under TAGINDEX -- 2 hours
-  Scrollable menu of notes for a given tag
-  Can delete notes/tags on click of button 
-
-
-  
-
-  POST-SAMI TO-DO
-
-    add github and LinkedIn 
-    
-
     make a small 16-bit color canavs for the bottom left 
       --will have to set a clamp that accounts for the texteditor 
       --onDrag to medieate height between canvas and note/notebook

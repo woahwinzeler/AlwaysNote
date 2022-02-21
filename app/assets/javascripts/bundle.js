@@ -1293,18 +1293,34 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       this.userEditCount += 1;
-      this.setState({
-        note: {
-          id: this.props.note.id,
-          title: this.props.note.title,
-          body: e,
-          notebook_id: this.props.note.notebook_id
-        }
-      }, function () {
-        if (_this2.userEditCount % 2 === 0) {
-          _this2.props.updateNote(_this2.state.note);
-        }
-      });
+
+      if (!!this.props.noteToOpen) {
+        this.setState({
+          note: {
+            id: this.props.notes[this.props.noteToOpen],
+            title: this.props.notes[this.props.noteToOpen].title,
+            body: e,
+            notebook_id: this.props.notes[this.props.noteToOpen].notebook_id
+          }
+        }, function () {
+          if (_this2.userEditCount % 2 === 0 && !!_this2.state.note.id) {
+            _this2.props.updateNote(_this2.state.note);
+          }
+        });
+      } else {
+        this.setState({
+          note: {
+            id: this.props.notes[this.props.noteToOpen],
+            title: this.props.notes[this.props.noteToOpen].title,
+            body: e,
+            notebook_id: this.props.note.notebook_id
+          }
+        }, function () {
+          if (_this2.userEditCount % 2 === 0 && !_this2.state.note.id) {
+            _this2.props.createNote(_this2.state.note);
+          }
+        });
+      }
     }
   }, {
     key: "update",
@@ -1320,7 +1336,14 @@ var TextEditor = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleTitleSubmit",
     value: function handleTitleSubmit() {
-      this.props.updateNote(this.state.note);
+      if (this.state.note.id) {
+        this.props.updateNote(this.state.note);
+      } else {
+        var note = this.state.note;
+        note.notebook_id = this.props.notebooks[0].id;
+        this.props.createNote(this.state.note);
+      }
+
       this.setState({
         editTitle: !this.state.editTitle
       });
@@ -1402,12 +1425,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mSTP = function mSTP(_ref, ownProps) {
-  var notes = _ref.entities.notes;
+  var _ref$entities = _ref.entities,
+      notes = _ref$entities.notes,
+      notebooks = _ref$entities.notebooks;
   return {
     notes: notes,
     note: notes[ownProps.noteToOpen],
     noteId: ownProps.noteId,
-    notebookId: ownProps.notebookId
+    notebookId: ownProps.notebookId,
+    notebooks: Object.values(notebooks)
   };
 };
 
@@ -1418,6 +1444,9 @@ var mDTP = function mDTP(dispatch) {
     },
     getNote: function getNote(note) {
       return dispatch(Object(_actions_note_actions__WEBPACK_IMPORTED_MODULE_1__["getNote"])(note));
+    },
+    createNote: function createNote(note) {
+      return dispatch(Object(_actions_note_actions__WEBPACK_IMPORTED_MODULE_1__["createNote"])(note));
     }
   };
 };

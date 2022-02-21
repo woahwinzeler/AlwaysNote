@@ -70,16 +70,30 @@ class TextEditor extends React.Component{
 
   handleBody(e){
     this.userEditCount += 1; 
-    this.setState({note: {
-      id: this.props.note.id, 
-      title: this.props.note.title,
-      body: e,
-      notebook_id: this.props.note.notebook_id
-    }}, () => {
-      if (this.userEditCount % 2 === 0){
-        this.props.updateNote(this.state.note)
-      }
-    })
+    if(!!this.props.noteToOpen){
+      this.setState({note: {
+        id: this.props.notes[this.props.noteToOpen], 
+        title: this.props.notes[this.props.noteToOpen].title,
+        body: e,
+        notebook_id: this.props.notes[this.props.noteToOpen].notebook_id
+      }}, () => {
+        if (this.userEditCount % 2 === 0 && !!this.state.note.id){
+          this.props.updateNote(this.state.note)
+        }
+      })
+    } else {
+      this.setState({note: {
+        id: this.props.notes[this.props.noteToOpen], 
+        title: this.props.notes[this.props.noteToOpen].title,
+        body: e,
+        notebook_id: this.props.note.notebook_id
+      }}, () => {
+        if(this.userEditCount % 2 === 0 && !this.state.note.id){
+          this.props.createNote(this.state.note)
+        }
+      })
+    }
+   
   }
 
   update(field) {
@@ -87,7 +101,14 @@ class TextEditor extends React.Component{
   }
 
   handleTitleSubmit(){
-    this.props.updateNote(this.state.note)
+    if(this.state.note.id){
+      this.props.updateNote(this.state.note)
+    } else {
+      let note = this.state.note;
+      note.notebook_id = this.props.notebooks[0].id
+      this.props.createNote(this.state.note)
+
+    }
     this.setState({editTitle: !this.state.editTitle})
   }
 

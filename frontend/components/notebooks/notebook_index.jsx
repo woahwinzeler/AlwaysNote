@@ -84,6 +84,7 @@ class NotebookIndex extends React.Component{
   }
 
 
+
   showNotesIndex(e, style){
     let notebookId = e.currentTarget.id;
     this.setState({ulStyle: {
@@ -240,7 +241,7 @@ class NotebookIndex extends React.Component{
           </div>
           </ul>
         </div>
-          <TextEditorContainer noteToOpen={this.state.noteToOpen} notebookId={this.state.note.notebookId}  note={this.state.note}/>
+          <TextEditorContainer noteToOpen={this.state.noteToOpen} notebookId={this.state.note.notebookId}  note={this.state.note} />
           <TagsIndexContainer showNote={(noteId) => this.setState({noteToOpen: noteId})} selectedNoteId={this.state.noteToOpen} changeMode={(tag) => this.setState({link: !this.state.link, tag: tag, buttonId: !this.state.link  ? "link-notebook-button" : "delete-notebook-button"})}/>
           <ConfirmationModalContainer  modalOpen={this.state.openConfirmationModal} hideModal={() => this.setState({openConfirmationModal: false})} id={this.state.deleteId} isNote={this.state.isNote}/>
       </div>
