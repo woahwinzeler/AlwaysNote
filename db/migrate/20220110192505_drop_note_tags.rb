@@ -1,5 +1,7 @@
-class DropNoteTags < ActiveRecord::Migration[5.2]
-  def change
-    drop_table :note_tags
-  end
-end
+# class DropNoteTags < ActiveRecord::Migration[5.2]
+#   def change
+#     begin 
+#       drop_table :note_tags do 
+#     end
+#   end
+# end

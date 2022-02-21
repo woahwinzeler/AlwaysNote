@@ -1001,19 +1001,21 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navbar */ "./frontend/components/navBar/navbar.jsx");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./navbar */ "./frontend/components/navBar/navbar.jsx");
+
 
 
 
 var mDTP = function mDTP(dispatch) {
   return {
     logout: function logout() {
-      return dispatch(logoutCurrentUser());
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["logoutCurrentUser"])());
     }
   };
 };
 
-var NavBarContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mDTP)(_navbar__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var NavBarContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mDTP)(_navbar__WEBPACK_IMPORTED_MODULE_2__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (NavBarContainer);
 
 /***/ }),
