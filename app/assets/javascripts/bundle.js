@@ -971,8 +971,7 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
         onClick: this.props.logout,
         href: "#"
       }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "navBar-links",
-        href: "#"
+        className: "navBar-links"
       }, "Instructions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "links-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -1870,6 +1869,8 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "showNotesIndex",
     value: function showNotesIndex(e, style) {
+      var _this3 = this;
+
       var notebookId = e.currentTarget.id;
       this.setState({
         ulStyle: {
@@ -1879,6 +1880,8 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
           notebook_id: notebookId
         },
         forceNotesOpen: true
+      }, function () {
+        return console.log(_this3.state);
       });
       this.props.getAllNotes(notebookId);
     }
@@ -1938,48 +1941,48 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "update",
     value: function update(field) {
-      var _this3 = this;
+      var _this4 = this;
 
       return function (e) {
-        return _this3.setState({
-          note: _objectSpread(_objectSpread({}, _this3.state.note), {}, _defineProperty({}, field, e.currentTarget.value))
+        return _this4.setState({
+          note: _objectSpread(_objectSpread({}, _this4.state.note), {}, _defineProperty({}, field, e.currentTarget.value))
         });
       };
     }
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       var notebooks = this.props.notebooks.map(function (notebook, index) {
         //want to replace lines 151 167 using this.props.style.NotebookItem, that can be changed using this.props.styleNotebookItemDefault(); 
-        if (_this4.state.addStyle) {
-          var color = _this4.getColor();
+        if (_this5.state.addStyle) {
+          var color = _this5.getColor();
 
-          var color2 = _this4.getColor();
+          var color2 = _this5.getColor();
 
-          _this4.stylingObj[notebook.id] = {
+          _this5.stylingObj[notebook.id] = {
             background: color2
           };
-          _this4.style = {
+          _this5.style = {
             background: color
           };
-          _this4.style2 = {
+          _this5.style2 = {
             background: color2
           };
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: index,
-            style: _this4.style2
+            style: _this5.style2
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "Notebooks",
             onClick: function onClick(e) {
-              return _this4.showNotesIndex(e, _this4.style);
+              return _this5.showNotesIndex(e, _this5.style);
             },
             id: notebook.id,
-            style: _this4.style
+            style: _this5.style
           }, " ", notebook.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
             onClick: function onClick() {
-              return _this4.deleteNotebook(notebook.id);
+              return _this5.deleteNotebook(notebook.id);
             },
             whileHover: {
               scale: 1.5
@@ -1993,17 +1996,17 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       });
       var notesArray = Object.values(this.props.notes);
       var notes = notesArray.map(function (note, index) {
-        var color = _this4.getColor();
+        var color = _this5.getColor();
 
         var style = {
           background: color
         };
 
-        if (note.notebook_id === parseInt(_this4.state.note.notebook_id)) {
-          var buttonId = _this4.state.buttonId;
+        if (note.notebook_id === parseInt(_this5.state.note.notebook_id)) {
+          var buttonId = _this5.state.buttonId;
 
-          if (typeof _this4.state.tag.note_ids !== 'undefined') {
-            if (_this4.state.tag.note_ids.includes(note.id) && _this4.state.link) {
+          if (typeof _this5.state.tag.note_ids !== 'undefined') {
+            if (_this5.state.tag.note_ids.includes(note.id) && _this5.state.link) {
               buttonId = "de-" + buttonId;
             }
           }
@@ -2013,7 +2016,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
             style: style
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].button, {
             onClick: function onClick() {
-              return _this4.handleNote(note);
+              return _this5.handleNote(note);
             },
             whileHover: {
               scale: 1.5
@@ -2024,7 +2027,7 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
             id: buttonId
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_1__["motion"].div, {
             key: index,
-            onClick: _this4.showNote,
+            onClick: _this5.showNote,
             title: note.id,
             whileHover: {
               scale: 1.2
@@ -2046,8 +2049,8 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
               className: "notes-header",
               style: headerStyling,
               onDoubleClick: function onDoubleClick() {
-                return _this4.setState({
-                  editNotebookTitle: !_this4.state.editNotebookTitle
+                return _this5.setState({
+                  editNotebookTitle: !_this5.state.editNotebookTitle
                 });
               }
             }, notebookHeader, this.props.notebooks[i].title) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
@@ -2095,8 +2098,8 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
         changeClass: this.collapseNotes,
         forceOpen: this.state.forceNotesOpen,
         preventLoop: function preventLoop() {
-          return _this4.setState({
-            forceOpen: !_this4.state.forceOpen
+          return _this5.setState({
+            forceOpen: !_this5.state.forceOpen
           });
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
@@ -2104,29 +2107,29 @@ var NotebookIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: this.state.NoteClass
       }, notes, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_form_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        notebookId: this.state.note.notebookId
+        notebookId: this.state.note.notebook_id
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_text_editor_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         noteToOpen: this.state.noteToOpen,
         notebookId: this.state.note.notebookId,
         note: this.state.note
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tags_tags_index_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
         showNote: function showNote(noteId) {
-          return _this4.setState({
+          return _this5.setState({
             noteToOpen: noteId
           });
         },
         selectedNoteId: this.state.noteToOpen,
         changeMode: function changeMode(tag) {
-          return _this4.setState({
-            link: !_this4.state.link,
+          return _this5.setState({
+            link: !_this5.state.link,
             tag: tag,
-            buttonId: !_this4.state.link ? "link-notebook-button" : "delete-notebook-button"
+            buttonId: !_this5.state.link ? "link-notebook-button" : "delete-notebook-button"
           });
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_confirmationModal_confirmation_modal_container__WEBPACK_IMPORTED_MODULE_7__["default"], {
         modalOpen: this.state.openConfirmationModal,
         hideModal: function hideModal() {
-          return _this4.setState({
+          return _this5.setState({
             openConfirmationModal: false
           });
         },

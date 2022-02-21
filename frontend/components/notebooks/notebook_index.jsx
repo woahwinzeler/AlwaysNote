@@ -91,7 +91,7 @@ class NotebookIndex extends React.Component{
     }, 
     note: {notebook_id:  notebookId},
     forceNotesOpen: true, 
-  })
+  }, () => console.log(this.state))
     this.props.getAllNotes(notebookId)
   }
 
@@ -236,7 +236,7 @@ class NotebookIndex extends React.Component{
           <div className={this.state.NoteClass}>
             {/* <h3 className="notes-header" style={headerStyling} onDoubleClick={this.setState({editNotebookTitle: true})}>{notebookHeader}</h3> */}
             {notes}
-           <NoteFormContainer notebookId={this.state.note.notebookId}/>
+           <NoteFormContainer notebookId={this.state.note.notebook_id}/>
           </div>
           </ul>
         </div>
