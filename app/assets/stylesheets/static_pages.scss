@@ -32,10 +32,35 @@
 .session-buttons{
   text-align: center;
 }
-.Notebooks{
-  padding: 10px;
-  margin: 10px
+.notebooks{
+  height: clamp(15vh, 60vh);
   
+}
+
+.Notebooks{
+  text-align: center;
+  margin: 4px;
+  padding: 5px;
+
+}
+
+.colorSelector{
+  display: flex;
+  flex-direction: row;
+
+}
+
+
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
+.canvas{
+  width: auto;
+  height: auto;
+  display: grid;
+
 }
 
 .notes-header{
@@ -143,6 +168,13 @@ button{
   margin: 0;
 }
 
+.Canvas{
+  width: 40vw;
+  height: 35vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .tag-index{
   flex-direction: column;
   overflow-y: scroll; 
@@ -177,8 +209,10 @@ button{
   border-color: none;
   width: 2.5vh;
   height: 2.5vh; 
-  margin-top: 24px; 
-  margin-right: 12px; 
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  margin-right: 1vw;
+  margin-left: 1vw; 
 }
 
 #delete-note-button{
@@ -413,7 +447,14 @@ img {
 
 .notesAndBooks{
   display: flex;
+  // @media screen and (max-width: 415px) {
+  //   flex-direction: column;
+  // }
+  // @media screen and (min-width: 415px) {
+  //   //doing nothing
+  // }
 }
+
 
 .NotesHidden{
   display: none; 

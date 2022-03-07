@@ -592,6 +592,231 @@ var Backdrop = function Backdrop(_ref) {
 
 /***/ }),
 
+/***/ "./frontend/components/canvas/canvas.jsx":
+/*!***********************************************!*\
+  !*** ./frontend/components/canvas/canvas.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _collapsable_collapsable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../collapsable/collapsable */ "./frontend/components/collapsable/collapsable.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var Canvas = /*#__PURE__*/function (_React$Component) {
+  _inherits(Canvas, _React$Component);
+
+  var _super = _createSuper(Canvas);
+
+  function Canvas(props) {
+    var _this;
+
+    _classCallCheck(this, Canvas);
+
+    _this = _super.call(this, props); // how pixels will a square take up?
+
+    _this.resolution = 16; // how big will the canvas be in comparison to the page
+
+    _this.width = 0.38;
+    _this.height = 0.5;
+    var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    _this.colors = ["#FFFFFF", "#00FFFF", "#808080", "#000080", "#C0C0C0", "#000000", "#008000", "#808000", "#008080", "#0000FF", "#00FF00", "#800080", "#FF00FF", "#800000", "#FF0000", "#FFFF00"];
+    _this.state = {
+      color: _this.colors[2],
+      "class": "canvas",
+      width: vw,
+      height: vh,
+      canvasStyle: {
+        width: _this.resolution + "px",
+        height: _this.resolution + "px",
+        background: "#FFFFFF"
+      }
+    }; //canvas width and height
+
+    var canvasWidth = Math.max(Math.ceil(_this.state.width * _this.width / _this.resolution), 16);
+    var canvasHeight = Math.max(Math.ceil(_this.state.height * _this.height / _this.resolution), 16);
+    var colorMatrix = Array(canvasWidth).fill(Array(canvasHeight));
+
+    for (var i = 0; i < colorMatrix.length; i++) {
+      colorMatrix[i].fill(0);
+    }
+
+    console.log(colorMatrix);
+    _this.colorMatrix = colorMatrix;
+    _this.collapseCanvas = _this.collapseCanvas.bind(_assertThisInitialized(_this));
+    _this.handlePaint = _this.handlePaint.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Canvas, [{
+    key: "collapseCanvas",
+    value: function collapseCanvas(cssClass) {
+      this.setState({
+        "class": cssClass
+      });
+    }
+  }, {
+    key: "handlePaint",
+    value: function handlePaint(x, y) {
+      var colorIndex = this.colors.indexOf(this.state.color);
+      debugger;
+      console.log(this.colorMatrix);
+      console.log(x, y, colorIndex);
+      this.colorMatrix[x][y] = colorIndex;
+      console.log(this.colorMatrix);
+      this.forceUpdate();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      //checks to see if viewport changes 
+      var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0); //may need to adjust threshhold 
+
+      if (Math.abs(this.state.width - vw) + (this.state.height - vh) > 10) {
+        this.setState({
+          width: vw,
+          height: vh
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var canvasWidth = Math.ceil(this.state.width * this.width / this.resolution);
+      canvasWidth = canvasWidth > 16 ? canvasWidth : 16;
+      var canvasHeight = Math.ceil(this.state.height * this.height / this.resolution);
+      canvasHeight = canvasHeight > 16 ? canvasHeight : 16;
+      var colorSelectors = this.colors.map(function (color, index) {
+        var colorSelectorStyle = {
+          // needs to be dynamic in order to adjust the size based on viewport
+          // will set a resolution, as well as a compononetDidUpdate checking if
+          // the viewport changes 
+          width: canvasWidth + "px",
+          height: canvasHeight + "px",
+          background: color,
+          border: '4px outset'
+        };
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: index,
+          style: colorSelectorStyle,
+          onClick: function onClick() {
+            return _this2.setState({
+              color: color
+            }, function () {
+              return console.log(_this2.state);
+            });
+          }
+        });
+      });
+
+      var canvasArea = _toConsumableArray(Array(canvasWidth).keys()).map(function (index) {
+        var subArr = [];
+
+        var _loop = function _loop(j) {
+          var canvasStyle = {
+            width: canvasWidth + "px",
+            height: canvasHeight + "px",
+            background: _this2.colors[_this2.colorMatrix[index][j]]
+          };
+          var key = index.toString() + j.toString();
+          subArr.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: key,
+            style: canvasStyle,
+            onClick: function onClick() {
+              return _this2.handlePaint(index, j);
+            }
+          })); //on click needs to set the point in the matrix and set state for color list 
+        };
+
+        for (var j = 0; j < canvasHeight; j++) {
+          _loop(j);
+        }
+
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "row"
+        }, " ", subArr, " ");
+      }); // let subArr = [];
+      // for(let j = 0; j < canvasHeight; j++){
+      //   let canvasStyle = {
+      //     width:  canvasWidth + "px",
+      //     height: canvasHeight + "px",
+      //     background: this.colors[this.colorMatrix[index][j]], 
+      //   }
+      //   let key = index.toString() + j.toString()
+      //   subArr.push( <div key={key} style={canvasStyle} onClick={() => this.handlePaint(index, j)}></div>)
+      // }
+      // subArr = <div> {subArr} </div>
+      //transform viewport values stored in state divided by the resolution in state to 
+      // get number of divs to generate in a nested loop 
+
+
+      var canvasStyle = {
+        width: this.state.width * this.width,
+        height: this.state.height * this.height
+      };
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collapsable_collapsable__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        target: "canvas",
+        changeClass: this.collapseCanvas
+      }, "  "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "canvas",
+        style: canvasStyle
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "colorSelector"
+      }, colorSelectors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "canvasArea"
+      }, canvasArea)));
+    }
+  }]);
+
+  return Canvas;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Canvas);
+
+/***/ }),
+
 /***/ "./frontend/components/collapsable/collapsable.jsx":
 /*!*********************************************************!*\
   !*** ./frontend/components/collapsable/collapsable.jsx ***!
@@ -1785,6 +2010,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _collapsable_collapsable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../collapsable/collapsable */ "./frontend/components/collapsable/collapsable.jsx");
 /* harmony import */ var _confirmationModal_confirmation_modal_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../confirmationModal/confirmation_modal_container */ "./frontend/components/confirmationModal/confirmation_modal_container.js");
 /* harmony import */ var _navBar_navbar_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../navBar/navbar_container */ "./frontend/components/navBar/navbar_container.js");
+/* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../canvas/canvas */ "./frontend/components/canvas/canvas.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
@@ -1812,6 +2038,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 

@@ -39,6 +39,16 @@
   ADD NavBar
 
   TODO:
+  TODO:
+
+  TODO:
+  TODO:
+
+  TODO:
+  TODO:
+
+  TODO:
+  TODO:
 
   BUGS 
     --trying to edit/save scratchpad 
@@ -57,12 +67,21 @@
 
   --error rendering on create note 
 
+  Link new tags through notes 
+
   LOGIN/SIGNUP
     style login, signup
+  
+  BLENDER
+    -Create elephant 
   
   TAGINDEX
     Render newly linked notes,
 
+    Drag Bars 
+
+
+    scrape data to generate demo accounts
   
     make a small 16-bit color canavs for the bottom left 
       --will have to set a clamp that accounts for the texteditor 
@@ -70,4 +89,16 @@
 
     make a colorful jumping game that plays and pauses with the mouse hover and the spacebar
 
-    default note issue 
+    sell navbar header 
+
+    visaulization options
+
+
+    set redux to production in prod 
+
+
+
+
+    branch trying with styling in redux 
+
+
