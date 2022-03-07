@@ -655,7 +655,7 @@ var Canvas = /*#__PURE__*/function (_React$Component) {
 
     _this.resolution = 16; // how big will the canvas be in comparison to the page
 
-    _this.width = 0.38;
+    _this.width = 0.36;
     _this.height = 0.4;
     var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
@@ -800,7 +800,7 @@ var Canvas = /*#__PURE__*/function (_React$Component) {
         target: "canvas",
         changeClass: this.collapseCanvas
       }, "  "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "canvas",
+        className: this.state["class"],
         style: canvasStyle
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "colorSelector"

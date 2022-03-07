@@ -9,7 +9,7 @@ class Canvas extends React.Component{
       // how pixels will a square take up?
       this.resolution = 16
       // how big will the canvas be in comparison to the page
-      this.width = 0.38 
+      this.width = 0.36
       this.height = 0.4
   
 
@@ -165,7 +165,7 @@ class Canvas extends React.Component{
     return(
       <>
         <Collapsable target="canvas" changeClass={this.collapseCanvas}>  </Collapsable>
-        <div className="canvas" style={canvasStyle}>
+        <div className={this.state.class} style={canvasStyle}>
           <div className="colorSelector">
             {colorSelectors}
           </div>
