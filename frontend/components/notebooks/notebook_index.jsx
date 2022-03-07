@@ -223,30 +223,38 @@ class NotebookIndex extends React.Component{
       <>
       <NavBarContainer />
         <div className="notesAndBooks">
-          <div className="notebooks">
-          <Collapsable target="NotebookIndex" changeClass={this.collapseNotebooks}> Notebooks </Collapsable>
-            <ul className={this.state.NotebookClass} >
-              {notebooks}
-              <motion.button className="newNotebookButton" onClick={this.toggleModal}
-            whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>Create new notebook</motion.button>
-            {this.state.modalOpen && <Modal modalOpen={this.state.modalOpen} handleClose={this.toggleModal} />}
-            </ul>
-          </div>
-          <div className="NotesContainer">
-          <Collapsable target="Notes" changeClass={this.collapseNotes} forceOpen={this.state.forceNotesOpen} preventLoop={() => this.setState({forceOpen: !this.state.forceOpen})} />
-            <ul className="notes-box">
-            <div className={this.state.NoteClass}>
-              {/* <h3 className="notes-header" style={headerStyling} onDoubleClick={this.setState({editNotebookTitle: true})}>{notebookHeader}</h3> */}
-              {notes}
-            <NoteFormContainer notebookId={this.state.note.notebook_id}/>
+          <div className="leftside">
+          <div className="top-left">
+            <div className="notebooks">
+            <Collapsable target="NotebookIndex" changeClass={this.collapseNotebooks}> Notebooks </Collapsable>
+              <ul className={this.state.NotebookClass} >
+                {notebooks}
+                <motion.button className="newNotebookButton" onClick={this.toggleModal}
+              whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>Create new notebook</motion.button>
+              {this.state.modalOpen && <Modal modalOpen={this.state.modalOpen} handleClose={this.toggleModal} />}
+              </ul>
             </div>
+          <div className="NotesContainer">
+            <Collapsable target="Notes" changeClass={this.collapseNotes} forceOpen={this.state.forceNotesOpen} preventLoop={() => this.setState({forceOpen: !this.state.forceOpen})} />
+            <ul className="notes-box">
+              <div className={this.state.NoteClass}>
+                {/* <h3 className="notes-header" style={headerStyling} onDoubleClick={this.setState({editNotebookTitle: true})}>{notebookHeader}</h3> */}
+                {notes}
+                <NoteFormContainer notebookId={this.state.note.notebook_id}/>
+              </div>
             </ul>
           </div>
+          </div>
+          <div className="bottom-left">
+            <Canvas /> 
+          </div>
+          </div>
+
           <TextEditorContainer noteToOpen={this.state.noteToOpen} notebookId={this.state.note.notebookId}  note={this.state.note} />
           <TagsIndexContainer showNote={(noteId) => this.setState({noteToOpen: noteId})} selectedNoteId={this.state.noteToOpen} changeMode={(tag) => this.setState({link: !this.state.link, tag: tag, buttonId: !this.state.link  ? "link-notebook-button" : "delete-notebook-button"})}/>
           <ConfirmationModalContainer  modalOpen={this.state.openConfirmationModal} hideModal={() => this.setState({openConfirmationModal: false})} id={this.state.deleteId} isNote={this.state.isNote}/>
-          </div>
-      </>
+      </div>
+     </>
 
     )
   }

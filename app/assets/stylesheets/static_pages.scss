@@ -57,9 +57,8 @@
 }
 
 .canvas{
-  width: auto;
-  height: auto;
-  display: grid;
+  width: 38vw;
+  height: 50vh;
 
 }
 
@@ -414,6 +413,11 @@ h5 {
   padding-bottom: 20px;
  }
 
+ .leftside{
+   display: flex;
+   flex-direction: column; 
+ }
+
 img {
   width: 60%;
   height: auto;
@@ -458,6 +462,22 @@ img {
 
 .NotesHidden{
   display: none; 
+}
+
+.top-left{
+  display: flex;
+}
+
+.NotesContainer{
+  height: 50vh;
+}
+
+.notebooks{
+  height: 50vh;
+}
+
+.NotebookIndex{
+  height: 50vh;
 }
 
 .notes-box{

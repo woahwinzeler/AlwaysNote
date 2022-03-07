@@ -10,7 +10,7 @@ class Canvas extends React.Component{
       this.resolution = 16
       // how big will the canvas be in comparison to the page
       this.width = 0.38 
-      this.height = 0.5
+      this.height = 0.4
   
 
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
