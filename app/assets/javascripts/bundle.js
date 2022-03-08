@@ -712,13 +712,13 @@ var Canvas = /*#__PURE__*/function (_React$Component) {
     value: function componentDidUpdate() {
       //checks to see if viewport changes 
       var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-      var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-      var canvasWidth = Math.ceil(vw * this.width / this.resolution);
-      canvasWidth = canvasWidth > 16 ? canvasWidth : 16;
-      var canvasHeight = Math.ceil(vh * this.height / this.resolution);
-      canvasHeight = canvasHeight > 16 ? canvasHeight : 16; //may need to adjust threshhold 
+      var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0); //may need to adjust threshhold 
 
-      if (Math.abs(this.state.width - vw) + (this.state.height - vh) > 10) {
+      if (Math.abs(this.state.width - vw) + Math.abs(this.state.height - vh) > 10) {
+        var canvasWidth = Math.ceil(vw * this.width / this.resolution);
+        canvasWidth = canvasWidth > 16 ? canvasWidth : 16;
+        var canvasHeight = Math.ceil(vh * this.height / this.resolution);
+        canvasHeight = canvasHeight > 16 ? canvasHeight : 16;
         this.setState({
           width: vw,
           height: vh,
@@ -763,7 +763,7 @@ var Canvas = /*#__PURE__*/function (_React$Component) {
         for (var j = 0; j < canvasHeight; j++) {
           var _canvasStyle = {
             width: canvasWidth + "px",
-            height: canvasHeight + "px",
+            height: canvasHeight / 2 + "px",
             background: _this2.colors[_this2.state.colorMatrix[index][j]]
           }; // console.log(this.state.colorMatrix)
           // console.log(index, j)

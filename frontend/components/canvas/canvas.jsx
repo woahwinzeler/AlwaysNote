@@ -84,14 +84,13 @@ class Canvas extends React.Component{
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
-    let canvasWidth = Math.ceil((vw * this.width) / this.resolution)
-    canvasWidth = canvasWidth > 16 ? canvasWidth : 16; 
-
-    let canvasHeight = Math.ceil((vh * this.height) / this.resolution)
-    canvasHeight = canvasHeight > 16 ? canvasHeight : 16; 
-
     //may need to adjust threshhold 
-    if(Math.abs(this.state.width - vw) + (this.state.height - vh) > 10){
+    if(Math.abs(this.state.width - vw) + Math.abs(this.state.height - vh) > 10){
+      let canvasWidth = Math.ceil((vw * this.width) / this.resolution)
+      canvasWidth = canvasWidth > 16 ? canvasWidth : 16; 
+  
+      let canvasHeight = Math.ceil((vh * this.height) / this.resolution)
+      canvasHeight = canvasHeight > 16 ? canvasHeight : 16;   
       this.setState({
         width: vw, 
         height: vh, 
@@ -134,7 +133,7 @@ class Canvas extends React.Component{
       for(let j = 0; j < canvasHeight; j++){
         let canvasStyle = {
           width:  canvasWidth + "px",
-          height: canvasHeight + "px",
+          height: canvasHeight/2 + "px",
           background: this.colors[this.state.colorMatrix[index][j]], 
         }
         // console.log(this.state.colorMatrix)
