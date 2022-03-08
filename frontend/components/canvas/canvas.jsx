@@ -16,6 +16,10 @@ class Canvas extends React.Component{
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
+    let canvasWidth = Math.max(Math.ceil((vw * this.width) / this.resolution), 16)
+    let canvasHeight = Math.max(Math.ceil((vh * this.height) / this.resolution), 16);
+    let colorMatrix = Array(canvasWidth).fill(0).map(row => new Array(canvasHeight).fill(0))
+
     this.colors = [
       "#FFFFFF",
       "#00FFFF", 
@@ -41,24 +45,17 @@ class Canvas extends React.Component{
       class: "canvas",
       width: vw, 
       height: vh, 
+      canvasWidth: canvasWidth,
+      canvasHeight: canvasHeight,
       canvasStyle: {
         width: this.resolution + "px",
         height: this.resolution + "px",
         background: "#FFFFFF", 
       },
+      colorMatrix: colorMatrix,
     }
 
     //canvas width and height
-    let canvasWidth = Math.max(Math.ceil((this.state.width * this.width) / this.resolution), 16)
-    let canvasHeight = Math.max(Math.ceil((this.state.height * this.height) / this.resolution), 16);
-    let colorMatrix = Array(canvasWidth).fill(Array(canvasHeight))
-    for(let i = 0; i < colorMatrix.length; i++){
-      colorMatrix[i].fill(0)
-    }
-
-    console.log(colorMatrix)
-
-    this.colorMatrix = colorMatrix; 
    
 
     this.collapseCanvas = this.collapseCanvas.bind(this)
@@ -69,15 +66,16 @@ class Canvas extends React.Component{
     this.setState({class: cssClass})
   }
 
-  handlePaint(x, y){
-
+  handlePaint(e){
     let colorIndex = this.colors.indexOf(this.state.color)
-    debugger 
-    console.log(this.colorMatrix)
-    console.log(x, y, colorIndex)
-    this.colorMatrix[x][y] = colorIndex;
-    console.log(this.colorMatrix)
-    this.forceUpdate();
+    let dataset = e.currentTarget.dataset
+    let x = parseInt(dataset['x'])
+    let y = parseInt(dataset['y'])
+    let colorMatrix = this.state.colorMatrix;
+    console.log(colorMatrix[x][y])
+    colorMatrix[x][y] = colorIndex; 
+    console.log(colorMatrix)
+    this.setState({colorMatrix: colorMatrix}); 
 
   }
 
@@ -85,11 +83,20 @@ class Canvas extends React.Component{
     //checks to see if viewport changes 
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+
+    let canvasWidth = Math.ceil((vw * this.width) / this.resolution)
+    canvasWidth = canvasWidth > 16 ? canvasWidth : 16; 
+
+    let canvasHeight = Math.ceil((vh * this.height) / this.resolution)
+    canvasHeight = canvasHeight > 16 ? canvasHeight : 16; 
+
     //may need to adjust threshhold 
     if(Math.abs(this.state.width - vw) + (this.state.height - vh) > 10){
       this.setState({
         width: vw, 
         height: vh, 
+        canvasWidth: canvasWidth, 
+        canvasHeight: canvasHeight,
       })
     }
   }
@@ -98,11 +105,9 @@ class Canvas extends React.Component{
 
   render(){
 
-    let canvasWidth = Math.ceil((this.state.width * this.width) / this.resolution)
-    canvasWidth = canvasWidth > 16 ? canvasWidth : 16; 
+    let canvasWidth = this.state.canvasWidth;
 
-    let canvasHeight = Math.ceil((this.state.height * this.height) / this.resolution)
-    canvasHeight = canvasHeight > 16 ? canvasHeight : 16; 
+    let canvasHeight = this.state.canvasHeight;
 
 
 
@@ -125,15 +130,18 @@ class Canvas extends React.Component{
 
     let canvasArea = [...Array(canvasWidth).keys()].map(index => {
       let subArr = []
+      // this.colors[this.colorMatrix[index][j]]
       for(let j = 0; j < canvasHeight; j++){
         let canvasStyle = {
           width:  canvasWidth + "px",
           height: canvasHeight + "px",
-          background: this.colors[this.colorMatrix[index][j]], 
+          background: this.colors[this.state.colorMatrix[index][j]], 
         }
+        // console.log(this.state.colorMatrix)
+        // console.log(index, j)
 
-        let key = index.toString() + j.toString()
-        subArr.push( <div key={key} style={canvasStyle} onClick={() => this.handlePaint(index, j)}></div>)
+        let key = index.toString() + "," + j.toString()
+        subArr.push( <div key={key} style={canvasStyle} onClick={(e) => this.handlePaint(e)} data-x={index} data-y={j}></div>)
           //on click needs to set the point in the matrix and set state for color list 
       }
       return (
@@ -141,20 +149,6 @@ class Canvas extends React.Component{
       )
     })
     
-    // let subArr = [];
-    // for(let j = 0; j < canvasHeight; j++){
-    //   let canvasStyle = {
-    //     width:  canvasWidth + "px",
-    //     height: canvasHeight + "px",
-    //     background: this.colors[this.colorMatrix[index][j]], 
-    //   }
-    //   let key = index.toString() + j.toString()
-    //   subArr.push( <div key={key} style={canvasStyle} onClick={() => this.handlePaint(index, j)}></div>)
-    // }
-    // subArr = <div> {subArr} </div>
- 
-    //transform viewport values stored in state divided by the resolution in state to 
-    // get number of divs to generate in a nested loop 
 
     let canvasStyle = {
       width: this.state.width * this.width,

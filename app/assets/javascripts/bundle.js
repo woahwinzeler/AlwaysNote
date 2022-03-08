@@ -659,29 +659,27 @@ var Canvas = /*#__PURE__*/function (_React$Component) {
     _this.height = 0.4;
     var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    var canvasWidth = Math.max(Math.ceil(vw * _this.width / _this.resolution), 16);
+    var canvasHeight = Math.max(Math.ceil(vh * _this.height / _this.resolution), 16);
+    var colorMatrix = Array(canvasWidth).fill(0).map(function (row) {
+      return new Array(canvasHeight).fill(0);
+    });
     _this.colors = ["#FFFFFF", "#00FFFF", "#808080", "#000080", "#C0C0C0", "#000000", "#008000", "#808000", "#008080", "#0000FF", "#00FF00", "#800080", "#FF00FF", "#800000", "#FF0000", "#FFFF00"];
     _this.state = {
       color: _this.colors[2],
       "class": "canvas",
       width: vw,
       height: vh,
+      canvasWidth: canvasWidth,
+      canvasHeight: canvasHeight,
       canvasStyle: {
         width: _this.resolution + "px",
         height: _this.resolution + "px",
         background: "#FFFFFF"
-      }
+      },
+      colorMatrix: colorMatrix
     }; //canvas width and height
 
-    var canvasWidth = Math.max(Math.ceil(_this.state.width * _this.width / _this.resolution), 16);
-    var canvasHeight = Math.max(Math.ceil(_this.state.height * _this.height / _this.resolution), 16);
-    var colorMatrix = Array(canvasWidth).fill(Array(canvasHeight));
-
-    for (var i = 0; i < colorMatrix.length; i++) {
-      colorMatrix[i].fill(0);
-    }
-
-    console.log(colorMatrix);
-    _this.colorMatrix = colorMatrix;
     _this.collapseCanvas = _this.collapseCanvas.bind(_assertThisInitialized(_this));
     _this.handlePaint = _this.handlePaint.bind(_assertThisInitialized(_this));
     return _this;
@@ -696,26 +694,36 @@ var Canvas = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "handlePaint",
-    value: function handlePaint(x, y) {
+    value: function handlePaint(e) {
       var colorIndex = this.colors.indexOf(this.state.color);
-      debugger;
-      console.log(this.colorMatrix);
-      console.log(x, y, colorIndex);
-      this.colorMatrix[x][y] = colorIndex;
-      console.log(this.colorMatrix);
-      this.forceUpdate();
+      var dataset = e.currentTarget.dataset;
+      var x = parseInt(dataset['x']);
+      var y = parseInt(dataset['y']);
+      var colorMatrix = this.state.colorMatrix;
+      console.log(colorMatrix[x][y]);
+      colorMatrix[x][y] = colorIndex;
+      console.log(colorMatrix);
+      this.setState({
+        colorMatrix: colorMatrix
+      });
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       //checks to see if viewport changes 
       var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-      var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0); //may need to adjust threshhold 
+      var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+      var canvasWidth = Math.ceil(vw * this.width / this.resolution);
+      canvasWidth = canvasWidth > 16 ? canvasWidth : 16;
+      var canvasHeight = Math.ceil(vh * this.height / this.resolution);
+      canvasHeight = canvasHeight > 16 ? canvasHeight : 16; //may need to adjust threshhold 
 
       if (Math.abs(this.state.width - vw) + (this.state.height - vh) > 10) {
         this.setState({
           width: vw,
-          height: vh
+          height: vh,
+          canvasWidth: canvasWidth,
+          canvasHeight: canvasHeight
         });
       }
     }
@@ -724,10 +732,8 @@ var Canvas = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var canvasWidth = Math.ceil(this.state.width * this.width / this.resolution);
-      canvasWidth = canvasWidth > 16 ? canvasWidth : 16;
-      var canvasHeight = Math.ceil(this.state.height * this.height / this.resolution);
-      canvasHeight = canvasHeight > 16 ? canvasHeight : 16;
+      var canvasWidth = this.state.canvasWidth;
+      var canvasHeight = this.state.canvasHeight;
       var colorSelectors = this.colors.map(function (color, index) {
         var colorSelectorStyle = {
           // needs to be dynamic in order to adjust the size based on viewport
@@ -752,45 +758,32 @@ var Canvas = /*#__PURE__*/function (_React$Component) {
       });
 
       var canvasArea = _toConsumableArray(Array(canvasWidth).keys()).map(function (index) {
-        var subArr = [];
-
-        var _loop = function _loop(j) {
-          var canvasStyle = {
-            width: canvasWidth + "px",
-            height: canvasHeight + "px",
-            background: _this2.colors[_this2.colorMatrix[index][j]]
-          };
-          var key = index.toString() + j.toString();
-          subArr.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            key: key,
-            style: canvasStyle,
-            onClick: function onClick() {
-              return _this2.handlePaint(index, j);
-            }
-          })); //on click needs to set the point in the matrix and set state for color list 
-        };
+        var subArr = []; // this.colors[this.colorMatrix[index][j]]
 
         for (var j = 0; j < canvasHeight; j++) {
-          _loop(j);
+          var _canvasStyle = {
+            width: canvasWidth + "px",
+            height: canvasHeight + "px",
+            background: _this2.colors[_this2.state.colorMatrix[index][j]]
+          }; // console.log(this.state.colorMatrix)
+          // console.log(index, j)
+
+          var key = index.toString() + "," + j.toString();
+          subArr.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: key,
+            style: _canvasStyle,
+            onClick: function onClick(e) {
+              return _this2.handlePaint(e);
+            },
+            "data-x": index,
+            "data-y": j
+          })); //on click needs to set the point in the matrix and set state for color list 
         }
 
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "row"
         }, " ", subArr, " ");
-      }); // let subArr = [];
-      // for(let j = 0; j < canvasHeight; j++){
-      //   let canvasStyle = {
-      //     width:  canvasWidth + "px",
-      //     height: canvasHeight + "px",
-      //     background: this.colors[this.colorMatrix[index][j]], 
-      //   }
-      //   let key = index.toString() + j.toString()
-      //   subArr.push( <div key={key} style={canvasStyle} onClick={() => this.handlePaint(index, j)}></div>)
-      // }
-      // subArr = <div> {subArr} </div>
-      //transform viewport values stored in state divided by the resolution in state to 
-      // get number of divs to generate in a nested loop 
-
+      });
 
       var canvasStyle = {
         width: this.state.width * this.width,
